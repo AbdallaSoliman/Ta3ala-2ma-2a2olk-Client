@@ -7,8 +7,8 @@ import android.widget.Toast;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.LoginMvpInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
-import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiInterface;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -20,7 +20,7 @@ import retrofit2.Response;
 
 public class LoginPresenter implements LoginMvpInterface.presenter {
     LoginMvpInterface.view view;
-    private ApiInterface apiInterface;
+    private APIService apiInterface;
     private static Pattern emailNamePtrn = Pattern.compile(
             "^[\\\\w\\\\.-]+@([\\\\w\\\\-]+\\\\.)+[A-Z]{2,4}$");
     ArrayList<User> userData;
@@ -66,7 +66,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
     public User loadDataFromServer(String email, String password, final Context mcontext) {
         Toast.makeText(mcontext, "logging in", Toast.LENGTH_LONG).show();
 
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        apiInterface = ApiClient.getApiClient().create(APIService.class);
 
         final User user = new User(email, password);
         Call<User> call = apiInterface.getUser(user.getEmail() , user.getPassword());

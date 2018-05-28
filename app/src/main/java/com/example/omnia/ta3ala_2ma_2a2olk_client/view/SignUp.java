@@ -1,5 +1,6 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -37,8 +38,12 @@ public class SignUp extends AppCompatActivity implements RegisterMvpInterface.vi
                if (valid == 1) {
                    if (male.isChecked()) {
                        presenter.loadDataFromServer(email.getText().toString(), password.getText().toString(), first.getText().toString(), last.getText().toString(), male.getText().toString(), SignUp.this);
+                       Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                       startActivity(intent);
                    } else if (female.isChecked()) {
                        presenter.loadDataFromServer(email.getText().toString(), password.getText().toString(), first.getText().toString(), last.getText().toString(), female.getText().toString(), SignUp.this);
+                       Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                       startActivity(intent);
                    }
                }
            }

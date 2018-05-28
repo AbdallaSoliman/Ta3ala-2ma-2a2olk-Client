@@ -48,8 +48,8 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpInterfac
            User u1 = presenter.loadDataFromServer(email.getText().toString() , password.getText().toString() , LoginActivity.this.getApplicationContext());
 //           Toast.makeText(getApplicationContext() , u1.getLast() , Toast.LENGTH_LONG).show();
 //                 Log.i("tag",u1.getLast());
-                 Intent intent = new Intent(LoginActivity.this, Tab1Home.class);
-                 startActivity(intent);
+//                 Intent intent = new Intent(LoginActivity.this, Tab1Home.class);
+//                 startActivity(intent);
              }
 
             }

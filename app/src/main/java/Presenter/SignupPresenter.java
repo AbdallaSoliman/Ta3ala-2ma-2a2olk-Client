@@ -7,8 +7,8 @@ import android.widget.Toast;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.RegisterMvpInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
-import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiInterface;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +19,7 @@ import retrofit2.Response;
 
 public class SignupPresenter implements RegisterMvpInterface.presenter {
      RegisterMvpInterface.view view;
-    private ApiInterface apiInterface;
+    private APIService apiInterface;
 
     public SignupPresenter(RegisterMvpInterface.view view) {
         this.view = view;
@@ -50,7 +50,7 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
     public void loadDataFromServer(String email, String password, String first, String last, String gender, final Context mcontext) {
         Toast.makeText(mcontext, "Signing up", Toast.LENGTH_LONG).show();
         final User user = new User(first, last , password , email , "user" ,gender , 1);
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        apiInterface = ApiClient.getApiClient().create(APIService.class);
         Call<User> call = apiInterface.registerUser(user);
         call.enqueue(new Callback<User>() {
             @Override
