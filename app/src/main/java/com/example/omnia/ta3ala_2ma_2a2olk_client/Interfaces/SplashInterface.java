@@ -9,6 +9,7 @@ public interface SplashInterface {
     interface view{
 
         void finishActivity();
+        void checksharredpreference();
      }
 
      interface presenter {

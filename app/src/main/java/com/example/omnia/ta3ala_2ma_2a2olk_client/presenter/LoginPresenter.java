@@ -36,7 +36,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
     String email1;
     String type;
     String gender;
-    int enabled ;
+    Boolean enabled ;
     String customerService;
     String taaUser ;
     User myuser ;
@@ -69,11 +69,17 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
     @Override
     public User loadDataFromServer(String email, String password, final Context mcontext) {
         Toast.makeText(mcontext, "logging in", Toast.LENGTH_LONG).show();
+        SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = tokenDetails.edit();
+        SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
+        String token = manager.getString(tokenDetails, "persontoken", "no");
+        Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
 
         apiInterface = ApiClient.getApiClient().create(APIService.class);
 
         final User user = new User(email, password);
-        Call<User> call = apiInterface.getUser(user.getEmail() , user.getPassword());
+        Call<User> call = apiInterface.loginUser("application/json", token, user);
+
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -104,14 +110,13 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                 SharedPreferences.Editor editor = pref.edit();
                 SharredPreferenceManager m1 = new SharredPreferenceManager(mcontext);
                 m1.setString(pref , myuser.getEmail() , "email");
-
-
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(mcontext,"failed", Toast.LENGTH_LONG).show();
-                Log.e("error2", t.toString());
+                Toast.makeText(mcontext, "Login failed ", Toast.LENGTH_LONG).show();
+                String message = t.getMessage();
+                Log.d("failure", message);
             }
         });
 

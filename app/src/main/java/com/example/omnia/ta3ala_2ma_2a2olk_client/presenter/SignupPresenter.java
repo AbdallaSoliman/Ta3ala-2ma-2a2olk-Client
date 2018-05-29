@@ -23,14 +23,13 @@ import retrofit2.Response;
 import static android.content.Context.MODE_PRIVATE;
 
 public class SignupPresenter implements RegisterMvpInterface.presenter {
-     RegisterMvpInterface.view view;
+    RegisterMvpInterface.view view;
     private APIService apiInterface;
 
     public SignupPresenter(RegisterMvpInterface.view view) {
         this.view = view;
 
     }
-
 
 
     @Override
@@ -48,56 +47,39 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
             view.registerStatus(2);
             return 0;
         }
-        return 1 ;
+        return 1;
     }
 
     @Override
     public void loadDataFromServer(String email, String password, String first, String last, String gender, final Context mcontext) {
         Toast.makeText(mcontext, "Signing up", Toast.LENGTH_LONG).show();
-        final User user = new User(first, last , password , email , "user" ,gender , 1);
+        final User user = new User(first, last, password, email, "user", gender, true);
 
         SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor= tokenDetails.edit();
+        SharedPreferences.Editor editor = tokenDetails.edit();
         SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
-       String token = manager.getString(tokenDetails ,"persontoken","no");
-        Toast.makeText(mcontext,token , Toast.LENGTH_LONG).show();
+        String token = manager.getString(tokenDetails, "persontoken", "no");
+        Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
 
         apiInterface = ApiClient.getApiClient().create(APIService.class);
-//        Call<User> call = apiInterface.registerUser(user , token);
-//        call.enqueue(new Callback<User>() {
-//            @Override
-//            public void onResponse(Call<User> call, Response<User> response) {
-//                Toast.makeText(mcontext , "Register succesful " , Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<User> call, Throwable t) {
-//                Toast.makeText(mcontext , "Register failed " , Toast.LENGTH_LONG).show();
-//                Log.e("error1", t.toString());
-//
-//            }
-//        });
-        Call<User> call = apiInterface.registerUser("application/json",token,user);
+        Call<User> call = apiInterface.registerUser("application/json", token, user);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.body()!=null){
-                    Toast.makeText(mcontext , "Register succesful " , Toast.LENGTH_LONG).show();
-
+                if (response.isSuccessful()) {
+                    Toast.makeText(mcontext, "Register succesful ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mcontext, response.body().getEmail(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                           Toast.makeText(mcontext , "Register failed " , Toast.LENGTH_LONG).show();
+                Toast.makeText(mcontext, "Register failed ", Toast.LENGTH_LONG).show();
+                String message = t.getMessage();
+                Log.d("failure", message);
 
             }
         });
-
-
-
-
-
 
 
     }

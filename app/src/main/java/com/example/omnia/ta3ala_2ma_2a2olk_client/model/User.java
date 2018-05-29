@@ -22,7 +22,7 @@ public class User {
     @SerializedName("gender")
     private String gender;
     @SerializedName("enabled")
-    private int enabled ;
+    private Boolean enabled ;
     @SerializedName("customerService")
     private String customerService;
     @SerializedName("taaUser")
@@ -33,7 +33,7 @@ public class User {
         this.email = email;
     }
 
-    public User(String first, String last, String password, String email, String type, String gender, int enabled) {
+    public User(String first, String last, String password, String email, String type, String gender, Boolean enabled) {
         this.first = first;
         this.last = last;
         this.password = password;
@@ -107,11 +107,11 @@ public class User {
         this.gender = gender;
     }
 
-    public int getEnabled() {
+    public Boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(int enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 

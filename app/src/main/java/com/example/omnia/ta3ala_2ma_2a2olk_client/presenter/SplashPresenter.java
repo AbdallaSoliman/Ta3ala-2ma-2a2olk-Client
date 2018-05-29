@@ -50,9 +50,10 @@ public class SplashPresenter implements SplashInterface.presenter {
                   String tokenvalue = "Bearer "+tocken;
                   m1.setString(pref,"persontoken",tokenvalue);
                   Toast.makeText(mcontext,tokenvalue,Toast.LENGTH_LONG).show();
-                  Intent intent = new Intent(mcontext, MainActivity.class);
-                  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                  mcontext.startActivity(intent);
+                  view.checksharredpreference();
+//                  Intent intent = new Intent(mcontext, LoginActivity.class);
+//                  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                  mcontext.startActivity(intent);
                   view.finishActivity();
 
               }else {

@@ -28,8 +28,8 @@ public interface APIService {
     @GET("places")
     Call<MainCategory> getCategories();
 
-    @GET("/getPerson")
-    Call<User> getUser(@Query("email") String email, @Query("password") String password);
+//    @GET("/getPerson")
+//    Call<User> getUser(@Query("email") String email, @Query("password") String password);
 
 //    @POST("/getPerson")
 //    Call<User> registerUser(@Body User login);
@@ -38,7 +38,10 @@ public interface APIService {
     Call<TockenReturn> getTocken(@Header("Content-Type") String content_type, @Body Tocken tocken);
 
     @POST("/Person")
-   Call<User> registerUser(@Header("Content-Type") String content_type, @Header("Authorization") String token , @Body User tocken);
+    Call<User> registerUser(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User tocken);
+
+    @POST("/Person/Login")
+    Call<User> loginUser(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User user);
 
 
 }
