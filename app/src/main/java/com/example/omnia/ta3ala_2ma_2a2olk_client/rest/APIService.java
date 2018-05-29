@@ -31,10 +31,14 @@ public interface APIService {
     @GET("/getPerson")
     Call<User> getUser(@Query("email") String email, @Query("password") String password);
 
-    @POST("/getPerson")
-    Call<User> registerUser(@Body User login);
+//    @POST("/getPerson")
+//    Call<User> registerUser(@Body User login);
 
     @POST("/auth")
     Call<TockenReturn> getTocken(@Header("Content-Type") String content_type, @Body Tocken tocken);
+
+    @POST("/Person")
+   Call<User> registerUser(@Header("Content-Type") String content_type, @Header("Authorization") String token , @Body User tocken);
+
 
 }
