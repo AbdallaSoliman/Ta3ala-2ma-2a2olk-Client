@@ -1,4 +1,4 @@
-package Presenter;
+package com.example.omnia.ta3ala_2ma_2a2olk_client.presenter;
 
 import android.content.Context;
 import android.util.Log;

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.omnia.ta3ala_2ma_2a2olk_client">
- <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,6 +30,7 @@
             android:name=".view.SignUp"
             android:label="Signup"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.AddQuestion"></activity>
     </application>
 
 </manifest>

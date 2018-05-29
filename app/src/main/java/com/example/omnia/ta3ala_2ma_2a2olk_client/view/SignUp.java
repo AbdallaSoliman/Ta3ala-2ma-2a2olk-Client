@@ -8,12 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.*;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.RegisterMvpInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 
-import Presenter.SignupPresenter;
-
 public class SignUp extends AppCompatActivity implements RegisterMvpInterface.view {
+
     EditText email , password , first , last ;
     RadioButton male , female ;
     Button signup;

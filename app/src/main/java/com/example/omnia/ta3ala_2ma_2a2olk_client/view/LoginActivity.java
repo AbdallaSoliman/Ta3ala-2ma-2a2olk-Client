@@ -7,12 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.LoginMvpInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
-
-import Presenter.LoginPresenter;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.*;
 
 
 public class LoginActivity extends AppCompatActivity implements LoginMvpInterface.view {
@@ -54,9 +52,6 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpInterfac
 
             }
         });
-
-
-
     }
 
 
