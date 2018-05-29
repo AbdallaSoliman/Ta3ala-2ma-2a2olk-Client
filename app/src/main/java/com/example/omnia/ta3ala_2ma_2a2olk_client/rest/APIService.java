@@ -6,11 +6,14 @@ package com.example.omnia.ta3ala_2ma_2a2olk_client.rest;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategory;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -30,5 +33,8 @@ public interface APIService {
 
     @POST("/getPerson")
     Call<User> registerUser(@Body User login);
+
+    @POST("/auth")
+    Call<TockenReturn> getTocken(@Header("Content-Type") String content_type, @Body Tocken tocken);
 
 }

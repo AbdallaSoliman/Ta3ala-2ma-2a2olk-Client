@@ -1,11 +1,13 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.presenter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.LoginMvpInterface;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
@@ -17,6 +19,8 @@ import java.util.regex.Pattern;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class LoginPresenter implements LoginMvpInterface.presenter {
     LoginMvpInterface.view view;
@@ -96,6 +100,11 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                  myuser.setGender(gender);
                  myuser.setTaaUser(taaUser);
                  Log.i("Test", myuser.getLast());
+                SharedPreferences pref = mcontext.getSharedPreferences("LoginPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                SharredPreferenceManager m1 = new SharredPreferenceManager(mcontext);
+                m1.setString(pref , myuser.getEmail() , "email");
+
 
             }
 
