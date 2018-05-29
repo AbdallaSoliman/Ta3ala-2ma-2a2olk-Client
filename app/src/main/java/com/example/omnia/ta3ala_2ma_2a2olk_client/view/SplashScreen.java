@@ -1,12 +1,9 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.view;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.SplashInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
@@ -22,8 +19,11 @@ public class SplashScreen extends AppCompatActivity implements SplashInterface.v
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         presenter = new SplashPresenter(this);
-       presenter.loadTockenFromServer(getApplicationContext());
-
+        presenter.loadTockenFromServer(getApplicationContext());
     }
 
+    @Override
+    public void finishActivity() {
+        finish();
+    }
 }

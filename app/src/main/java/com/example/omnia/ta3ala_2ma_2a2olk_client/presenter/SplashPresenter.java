@@ -14,6 +14,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.view.LoginActivity;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.view.SplashScreen;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,7 +36,7 @@ public class SplashPresenter implements SplashInterface.presenter {
         service = ApiClient.getApiClient().create(APIService.class);
 
         Call<TockenReturn> call = service.getTocken("application/json",tocken1);
-      call.enqueue(new Callback<TockenReturn>() {
+        call.enqueue(new Callback<TockenReturn>() {
           @Override
           public void onResponse(Call<TockenReturn> call, Response<TockenReturn> response) {
               Toast.makeText(mcontext, "in success method", Toast.LENGTH_LONG).show();
@@ -50,7 +51,10 @@ public class SplashPresenter implements SplashInterface.presenter {
                   m1.setString(pref,"persontoken",tokenvalue);
                   Toast.makeText(mcontext,tokenvalue,Toast.LENGTH_LONG).show();
                   Intent intent = new Intent(mcontext, LoginActivity.class);
+                  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                   mcontext.startActivity(intent);
+                  view.finishActivity();
+
               }else {
                   Toast.makeText(mcontext, "Il Token Fady", Toast.LENGTH_LONG).show();
 
