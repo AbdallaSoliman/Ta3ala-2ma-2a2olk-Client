@@ -10,12 +10,9 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.SplashInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
-import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.view.LoginActivity;
-import com.example.omnia.ta3ala_2ma_2a2olk_client.view.SplashScreen;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
