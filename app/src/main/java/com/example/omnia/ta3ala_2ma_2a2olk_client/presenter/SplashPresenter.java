@@ -13,6 +13,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.view.LoginActivity;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.view.MainActivity;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.view.SignUp;
 
 import retrofit2.Call;
@@ -49,7 +50,7 @@ public class SplashPresenter implements SplashInterface.presenter {
                   String tokenvalue = "Bearer "+tocken;
                   m1.setString(pref,"persontoken",tokenvalue);
                   Toast.makeText(mcontext,tokenvalue,Toast.LENGTH_LONG).show();
-                  Intent intent = new Intent(mcontext, SignUp.class);
+                  Intent intent = new Intent(mcontext, MainActivity.class);
                   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                   mcontext.startActivity(intent);
                   view.finishActivity();
