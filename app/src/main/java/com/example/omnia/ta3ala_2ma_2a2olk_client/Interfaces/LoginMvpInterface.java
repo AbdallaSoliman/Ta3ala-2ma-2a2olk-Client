@@ -9,13 +9,14 @@ public interface LoginMvpInterface {
 
     interface view {
         void registerStatus(int key);
+        void questionActivity();
 
     }
 
 
    interface presenter {
         int checkInput(String email, String password);
-        User loadDataFromServer(String email, String password, Context mcontext);
+        void loadDataFromServer(String username, String password, Context mcontext);
    }
 
 

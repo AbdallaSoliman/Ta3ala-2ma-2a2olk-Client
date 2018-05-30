@@ -40,8 +40,10 @@ public interface APIService {
     @POST("/Person")
     Call<User> registerUser(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User tocken);
 
+    @POST("/auth")
+    Call<TockenReturn> loginUser(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body Tocken user);
     @POST("/Person/Login")
-    Call<User> loginUser(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User user);
+    Call<User> loginUserWithMail(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User user);
 
 
 }

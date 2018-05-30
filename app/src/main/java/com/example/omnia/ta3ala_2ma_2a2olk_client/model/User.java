@@ -27,13 +27,18 @@ public class User {
     private String customerService;
     @SerializedName("taaUser")
     private String taaUser;
+    @SerializedName("username")
+    private String username;
 
-    public User(String password, String email) {
-        this.password = password;
-        this.email = email;
+    public User() {
     }
 
-    public User(String first, String last, String password, String email, String type, String gender, Boolean enabled) {
+    public User(String password, String username) {
+        this.password = password;
+        this.username = username;
+    }
+
+    public User(String first, String last, String password, String email, String type, String gender, Boolean enabled , String username) {
         this.first = first;
         this.last = last;
         this.password = password;
@@ -41,6 +46,15 @@ public class User {
         this.type = type;
         this.gender = gender;
         this.enabled = enabled;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getPersonId() {

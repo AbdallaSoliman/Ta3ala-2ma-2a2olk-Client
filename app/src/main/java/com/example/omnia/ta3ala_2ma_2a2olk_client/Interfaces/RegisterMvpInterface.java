@@ -11,8 +11,8 @@ public interface RegisterMvpInterface {
 
 
     interface presenter{
-        int checkInput(String email, String password, String first, String last);
-        void loadDataFromServer(String email, String password, String first, String last, String gender, Context mcontext);
+        int checkInput(String username , String email, String password, String first, String last);
+        void loadDataFromServer(String username , String email, String password, String first, String last, String gender, Context mcontext);
 
     }
 

@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -69,9 +70,10 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = userDetails.edit();
                 SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
-                String email = manager.getString(userDetails, "email", "null");
-                Toast.makeText(getApplicationContext(), "email is " + email, Toast.LENGTH_LONG).show();
-                if (email.equals("null")) {
+                String email = manager.getString(userDetails, "email", "no");
+               // Toast.makeText(getApplicationContext(), "email is " + email, Toast.LENGTH_LONG).show();
+                Log.e("prefMail",email);
+                if (email.equals("no")) {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);

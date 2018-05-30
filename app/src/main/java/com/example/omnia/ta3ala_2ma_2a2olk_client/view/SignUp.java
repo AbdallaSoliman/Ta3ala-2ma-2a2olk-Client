@@ -14,7 +14,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 
 public class SignUp extends AppCompatActivity implements RegisterMvpInterface.view {
 
-    EditText email , password , first , last ;
+    EditText email , password , first , last , username ;
     RadioButton male , female ;
     Button signup;
     SignupPresenter presenter;
@@ -31,17 +31,18 @@ public class SignUp extends AppCompatActivity implements RegisterMvpInterface.vi
        male = (RadioButton) findViewById(R.id.rdmale);
        female = (RadioButton) findViewById(R.id.rdfemale);
        signup = (Button) findViewById(R.id.btnSignup);
+       username = (EditText) findViewById(R.id.txtUserName);
        signup.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               int valid = presenter.checkInput(email.getText().toString(), password.getText().toString(), first.getText().toString(), last.getText().toString());
+               int valid = presenter.checkInput(username.getText().toString() , email.getText().toString(), password.getText().toString(), first.getText().toString(), last.getText().toString());
                if (valid == 1) {
                    if (male.isChecked()) {
-                       presenter.loadDataFromServer(email.getText().toString(), password.getText().toString(), first.getText().toString(), last.getText().toString(), male.getText().toString(), SignUp.this);
+                       presenter.loadDataFromServer(username.getText().toString() , email.getText().toString(), password.getText().toString(), first.getText().toString(), last.getText().toString(), male.getText().toString(), SignUp.this);
                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                        startActivity(intent);
                    } else if (female.isChecked()) {
-                       presenter.loadDataFromServer(email.getText().toString(), password.getText().toString(), first.getText().toString(), last.getText().toString(), female.getText().toString(), SignUp.this);
+                       presenter.loadDataFromServer(username.getText().toString() , email.getText().toString(), password.getText().toString(), first.getText().toString(), last.getText().toString(), female.getText().toString(), SignUp.this);
                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                        startActivity(intent);
                    }

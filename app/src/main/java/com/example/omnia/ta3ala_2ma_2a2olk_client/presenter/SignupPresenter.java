@@ -33,7 +33,7 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
 
 
     @Override
-    public int checkInput(String email, String password, String first, String last) {
+    public int checkInput(String username , String email, String password, String first, String last) {
         Boolean status = validateEmail(email);
         Log.i("tag", status.toString());
         if (!status) {
@@ -43,7 +43,7 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
         } else if (password.length() < 6) {
             view.registerStatus(1);
             return 0;
-        } else if (email.isEmpty() || password.isEmpty() || first.isEmpty() || last.isEmpty()) {
+        } else if (email.isEmpty() || password.isEmpty() || first.isEmpty() || last.isEmpty()|| username.isEmpty()) {
             view.registerStatus(2);
             return 0;
         }
@@ -51,9 +51,9 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
     }
 
     @Override
-    public void loadDataFromServer(String email, String password, String first, String last, String gender, final Context mcontext) {
+    public void loadDataFromServer(String username , String email, String password, String first, String last, String gender, final Context mcontext) {
         Toast.makeText(mcontext, "Signing up", Toast.LENGTH_LONG).show();
-        final User user = new User(first, last, password, email, "user", gender, true);
+        final User user = new User(first, last, password, email, "user", gender, true , username);
 
         SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = tokenDetails.edit();
