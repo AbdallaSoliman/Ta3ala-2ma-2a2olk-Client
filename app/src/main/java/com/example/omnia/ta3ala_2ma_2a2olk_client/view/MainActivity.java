@@ -1,6 +1,8 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +16,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,8 +64,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-                Intent intent = new Intent(getApplicationContext(), AddQuestion.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(), AddQuestion.class);
+//                startActivity(intent);
+                SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = userDetails.edit();
+                SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
+                String email = manager.getString(userDetails, "email", "null");
+                Toast.makeText(getApplicationContext(), "email is " + email, Toast.LENGTH_LONG).show();
+                if (email.equals("null")) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(MainActivity.this, AddQuestion.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
             }
         });
 

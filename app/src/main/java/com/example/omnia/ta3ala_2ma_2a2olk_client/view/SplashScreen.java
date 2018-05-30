@@ -33,19 +33,23 @@ public class SplashScreen extends AppCompatActivity implements SplashInterface.v
 
     @Override
     public void checksharredpreference() {
-        SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = userDetails.edit();
-        SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
-        String email = manager.getString(userDetails, "email", "null");
-        Toast.makeText(getApplicationContext(), "email is "+email, Toast.LENGTH_LONG).show();
-        if (email.equals("null")){
-            Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-        }else {
-            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+//        SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = userDetails.edit();
+//        SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
+//        String email = manager.getString(userDetails, "email", "null");
+//        Toast.makeText(getApplicationContext(), "email is "+email, Toast.LENGTH_LONG).show();
+//        if (email.equals("null")){
+//            Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(intent);
+//        }else {
+//            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+        Intent intent = new Intent(SplashScreen.this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }
+
+       // }
     }
 }
