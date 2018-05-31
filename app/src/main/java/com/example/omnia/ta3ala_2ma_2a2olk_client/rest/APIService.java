@@ -16,10 +16,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface APIService {
-
 
     @Headers({"Content-Type: application/json"})
     @POST("/getQuestion")
@@ -27,12 +25,6 @@ public interface APIService {
 
     @GET("places")
     Call<MainCategory> getCategories();
-
-//    @GET("/getPerson")
-//    Call<User> getUser(@Query("email") String email, @Query("password") String password);
-
-//    @POST("/getPerson")
-//    Call<User> registerUser(@Body User login);
 
     @POST("/auth")
     Call<TockenReturn> getTocken(@Header("Content-Type") String content_type, @Body Tocken tocken);
@@ -44,6 +36,10 @@ public interface APIService {
     Call<TockenReturn> loginUser(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body Tocken user);
     @POST("/Person/Login")
     Call<User> loginUserWithMail(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User user);
+
+    //@Headers({"Content-Type: application/json"})
+    @GET("/MainCategories/3")
+    Call<MainCategory> getCompanies(@Header("Content-Type") String content_type , @Header("Authorization") String token);
 
 
 }

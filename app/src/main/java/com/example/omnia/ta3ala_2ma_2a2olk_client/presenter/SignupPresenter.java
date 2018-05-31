@@ -6,7 +6,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
-
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.RegisterMvpInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
@@ -56,7 +55,6 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
         final User user = new User(first, last, password, email, "user", gender, true , username);
 
         SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = tokenDetails.edit();
         SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
         String token = manager.getString(tokenDetails, "persontoken", "no");
         Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();

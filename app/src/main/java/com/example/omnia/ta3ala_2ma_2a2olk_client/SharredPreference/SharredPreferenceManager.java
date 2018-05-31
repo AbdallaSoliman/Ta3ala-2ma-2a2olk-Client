@@ -10,7 +10,6 @@ public class SharredPreferenceManager {
         mContext = context;
     }
 
-
     public SharedPreferences getSharedPreferences(String key){
         return mContext.getSharedPreferences(key, mContext.MODE_PRIVATE);
     }
