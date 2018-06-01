@@ -1,5 +1,10 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.model;
 
+
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
@@ -8,9 +13,18 @@ import java.io.Serializable;
 
 public class SubCategory implements Serializable {
 
+    @SerializedName("subCatId")
+    @Expose
     private Integer subCatId;
+    @SerializedName("subCatName")
+    @Expose
     private String subCatName;
+    @SerializedName("description")
+    @Expose
     private String description;
+    @SerializedName("imgUrl")
+    @Expose
+    private Object imgUrl;
 
     public Integer getSubCatId() {
         return subCatId;
@@ -35,5 +49,13 @@ public class SubCategory implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-}
 
+    public Object getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(Object imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+}

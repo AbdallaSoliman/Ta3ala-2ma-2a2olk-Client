@@ -46,6 +46,7 @@ public class Tab2CustomerService extends Fragment {
         SharedPreferences pref = this.getActivity().getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         shM = new SharredPreferenceManager(this.getActivity());
         String token = shM.getString(pref, "persontoken", "error");
+        Log.i("token", token);
         // get data
         tSP.getCompaniesPresenter(token);
     }
@@ -67,8 +68,9 @@ public class Tab2CustomerService extends Fragment {
 
                 // open new acticity to show questions
                 Intent intent=new Intent(getActivity(),CompanyQuestionsList.class);
+                String id=String.valueOf(companies.get(position).getSubCatId());
+                intent.putExtra("companyId",id);
                 startActivity(intent);
-                Log.i("list", position+"");
             }
         });
 

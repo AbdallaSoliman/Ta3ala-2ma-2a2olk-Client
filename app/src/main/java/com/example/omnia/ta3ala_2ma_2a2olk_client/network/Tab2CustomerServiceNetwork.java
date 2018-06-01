@@ -25,8 +25,6 @@ public class Tab2CustomerServiceNetwork {
 
     List<SubCategory> companies=new ArrayList<>();
     Tab2CustomerServiceInterface presenterREFR;
-   // Tab2CustomerService ss=new Tab2CustomerService();
-
 
     public Tab2CustomerServiceNetwork(Tab2CustomerServiceInterface presenterREFR) {
         this.presenterREFR = presenterREFR;
@@ -41,14 +39,12 @@ public class Tab2CustomerServiceNetwork {
             @Override
             public void onResponse(Call<MainCategory> call, Response<MainCategory> response) {
 
-                Log.i("omnia", "onResponse: ");
                 companies.addAll(response.body().getSubCatCollection());
                 presenterREFR.setCompaniesList(companies);
                }
 
             @Override
             public void onFailure(Call<MainCategory> call, Throwable t) {
-                Log.i("omnia", "onfailer: ");
             }
         });
     }

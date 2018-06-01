@@ -22,7 +22,7 @@ public class Question {
     private String body;
     @SerializedName("image")
     @Expose
-    private Object image;
+    private String image;
     @SerializedName("audio")
     @Expose
     private Object audio;
@@ -43,19 +43,16 @@ public class Question {
     private Object notifi;
     @SerializedName("questionDate")
     @Expose
-    private Object questionDate;
+    private String questionDate;
     @SerializedName("closed")
     @Expose
     private Object closed;
-    @SerializedName("idQuestion")
-    @Expose
-    private Object idQuestion;
     @SerializedName("subCatCollection")
     @Expose
-    private List<Object> subCatCollection = null;
-    @SerializedName("taaUserCollection")
+    private List<SubCategory> subCatCollection = null;
+    @SerializedName("personRateCollection")
     @Expose
-    private List<Object> taaUserCollection = null;
+    private List<Object> personRateCollection = null;
     @SerializedName("personId")
     @Expose
     private Object personId;
@@ -87,11 +84,11 @@ public class Question {
         this.body = body;
     }
 
-    public Object getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Object image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -143,11 +140,11 @@ public class Question {
         this.notifi = notifi;
     }
 
-    public Object getQuestionDate() {
+    public String getQuestionDate() {
         return questionDate;
     }
 
-    public void setQuestionDate(Object questionDate) {
+    public void setQuestionDate(String questionDate) {
         this.questionDate = questionDate;
     }
 
@@ -159,28 +156,20 @@ public class Question {
         this.closed = closed;
     }
 
-    public Object getIdQuestion() {
-        return idQuestion;
-    }
-
-    public void setIdQuestion(Object idQuestion) {
-        this.idQuestion = idQuestion;
-    }
-
-    public List<Object> getSubCatCollection() {
+    public List<SubCategory> getSubCatCollection() {
         return subCatCollection;
     }
 
-    public void setSubCatCollection(List<Object> subCatCollection) {
+    public void setSubCatCollection(List<SubCategory> subCatCollection) {
         this.subCatCollection = subCatCollection;
     }
 
-    public List<Object> getTaaUserCollection() {
-        return taaUserCollection;
+    public List<Object> getPersonRateCollection() {
+        return personRateCollection;
     }
 
-    public void setTaaUserCollection(List<Object> taaUserCollection) {
-        this.taaUserCollection = taaUserCollection;
+    public void setPersonRateCollection(List<Object> personRateCollection) {
+        this.personRateCollection = personRateCollection;
     }
 
     public Object getPersonId() {
