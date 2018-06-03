@@ -34,6 +34,7 @@ public class Tab2CustomerService extends Fragment {
     ListView listView;
 
     public void setCompanies(List<SubCategory> cList){
+        this.companies.clear();
         this.companies.addAll(cList);
         adapter.notifyDataSetChanged();
     }
@@ -41,6 +42,7 @@ public class Tab2CustomerService extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("lifeCycle", "onCreate: ");
 
         tSP=new Tab2CustomerServicePresenter(this);
         SharedPreferences pref = this.getActivity().getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
@@ -48,11 +50,13 @@ public class Tab2CustomerService extends Fragment {
         String token = shM.getString(pref, "persontoken", "error");
         Log.i("token", token);
         // get data
-        tSP.getCompaniesPresenter(token);
+       // tSP.getCompaniesPresenter(token);
     }
 
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Log.i("lifeCycle", "onCreateView: ");
 
         View rootView = inflater.inflate(R.layout.tab2, container, false);
 
@@ -77,4 +81,21 @@ public class Tab2CustomerService extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser) {
+            getData();
+        } else {
+
+        }
+    }
+
+    public void getData(){
+
+        SharedPreferences pref = this.getActivity().getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
+        shM = new SharredPreferenceManager(this.getActivity());
+        String token = shM.getString(pref, "persontoken", "error");
+        tSP.getCompaniesPresenter(token);
+    }
 }
