@@ -1,3 +1,7 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,15 +12,25 @@
     tools:context="com.example.omnia.ta3ala_2ma_2a2olk_client.view.Tab1Home">
 
     <TextView
-        android:text="tab1 "
-        android:id="@+id/section_label1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="85dp"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="-26sp"
+        android:text="Categories"
+        android:textAlignment="center"
+        android:textColor="#00a88f"
+
+        android:textSize="40dp"
+        android:textStyle="bold" />
+
+    <ExpandableListView
+        android:id="@+id/myexpandablelistview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:groupIndicator="@null" />
 
 </LinearLayout>
+</ScrollView>

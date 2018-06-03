@@ -40,11 +40,11 @@ public class SplashPresenter implements SplashInterface.presenter {
         SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
         String token = manager.getString(tokenDetails, "persontoken", "no");
         Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
-        if (token != "no") {
-            Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
-           view.checksharredpreference();
-            view.finishActivity();
-        } else {
+//        if (token != "no") {
+//            Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
+//           view.checksharredpreference();
+//            view.finishActivity();
+//        } else {
             Call<TockenReturn> call = service.getTocken("application/json", tocken1);
             call.enqueue(new Callback<TockenReturn>() {
                 @Override
@@ -75,6 +75,6 @@ public class SplashPresenter implements SplashInterface.presenter {
                 }
             });
         }
-    }
+ //   }
 
 }

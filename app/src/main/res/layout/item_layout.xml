@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="55dip">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="-26sp"
+        android:text="."
+        android:layout_marginLeft="30dp"
+        android:textColor="#0055a5"
+        android:textSize="50sp" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/item"-->
+        <!--android:layout_width="360dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:textStyle="italic" />-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:id="@+id/item"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif-light"
+        android:textStyle="normal"
+        android:textColor="#0055a5"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="-16sp"
+        android:text="Chemistry"
+
+        />
+
+</LinearLayout>

@@ -128,11 +128,9 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                 Toast.makeText(mcontext, "success", Toast.LENGTH_LONG).show();
                 if (response.isSuccessful()) {
                     myuser = response.body();
-                    Toast.makeText(mcontext, "userdata" + response.body().toString(), Toast.LENGTH_LONG).show();
                     Log.e("testData", response.body().toString());
                     Log.e("testUser", "user"+user.getEmail());
                     personId = response.body().getPersonId();
-           //     image = response.body().getImage();
                 first = response.body().getFirst();
                 last = response.body().getLast();
                 password1 = response.body().getPassword();
@@ -145,24 +143,18 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                 myuser.setCustomerService(customerService);
                 myuser.setEnabled(enabled);
                 myuser.setPersonId(personId);
-              //  myuser.setImage(image);
                 myuser.setFirst(first);
                 myuser.setLast(last);
                 myuser.setType(type);
                 myuser.setGender(gender);
              //   myuser.setTaaUser(taaUser);
               Log.e("Test","email"+ myuser.getEmail());
-                Toast.makeText(mcontext, "email"+myuser.getEmail(), Toast.LENGTH_LONG).show();
-//                SharedPreferences pref = mcontext.getSharedPreferences("LoginPref", MODE_PRIVATE);
-//                SharedPreferences.Editor editor = pref.edit();
-//                SharredPreferenceManager m1 = new SharredPreferenceManager(mcontext);
-               String mail = myuser.getEmail();
-//                m1.setString(pref, mail, "email");
                     SharedPreferences pref = mcontext.getSharedPreferences("LoginPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
-                    editor.putString(myuser.getEmail(), "email");
+                    editor.putString("email",myuser.getEmail());
+                    Log.e("Hamada",myuser.getEmail());
                     editor.commit();
-                Log.e("userMail",pref.getString("email","mafeesh"));
+                    Log.e("userMail",pref.getString("email","MFESH"));
                 }else {
                     Toast.makeText(mcontext, "Empty Response", Toast.LENGTH_LONG).show();
                 }
