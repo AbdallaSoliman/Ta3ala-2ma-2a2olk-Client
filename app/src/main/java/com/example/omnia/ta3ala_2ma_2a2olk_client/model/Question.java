@@ -55,10 +55,10 @@ public class Question {
     private List<Object> personRateCollection = null;
     @SerializedName("personId")
     @Expose
-    private Object personId;
+    private PersonId personId;
     @SerializedName("answersCollection")
     @Expose
-    private List<Object> answersCollection = null;
+    private List<Answer> answersCollection = null;
 
     public Integer getQuestionId() {
         return questionId;
@@ -172,19 +172,19 @@ public class Question {
         this.personRateCollection = personRateCollection;
     }
 
-    public Object getPersonId() {
+    public PersonId getPersonId() {
         return personId;
     }
 
-    public void setPersonId(Object personId) {
+    public void setPersonId(PersonId personId) {
         this.personId = personId;
     }
 
-    public List<Object> getAnswersCollection() {
+    public List<Answer> getAnswersCollection() {
         return answersCollection;
     }
 
-    public void setAnswersCollection(List<Object> answersCollection) {
+    public void setAnswersCollection(List<Answer> answersCollection) {
         this.answersCollection = answersCollection;
     }
 

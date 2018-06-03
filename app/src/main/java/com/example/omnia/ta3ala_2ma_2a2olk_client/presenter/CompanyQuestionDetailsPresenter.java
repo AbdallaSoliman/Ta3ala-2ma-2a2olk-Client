@@ -1,9 +1,12 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.presenter;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.CompanyQuestionDetailsInterface;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.network.CompanyQuestionDetailsNetwork;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.view.CompanyQuestionDetails;
+
+import java.util.List;
 
 /**
  * Created by omnia on 6/1/2018.
@@ -22,8 +25,8 @@ public class CompanyQuestionDetailsPresenter implements CompanyQuestionDetailsIn
         cQDNetwork.getQuestionDetailsNetwork(Qid,token);
     }
 
-    public void setCompanyQuetionDetailsPresenter(Question q){
-        cQDetails.setQuestionDetails(q);
+    public void setCompanyQuetionDetailsPresenter(Question q, List<Answer> answers){
+        cQDetails.setQuestionDetails(q,answers);
     }
 
 }

@@ -35,9 +35,11 @@ public class CompanyQuestionsListNetwork {
             @Override
             public void onResponse(Call<CompanyQuestionForTitleList> call, Response<CompanyQuestionForTitleList> response) {
 
-                List<CompanyQuestionForTitle> questionsForTitle = response.body().getQuestions();
-                cListPresener.setCompanyQuetionListPresenter(questionsForTitle);
-              }
+                if(response.body()!=null) {
+                    List<CompanyQuestionForTitle> questionsForTitle = response.body().getQuestions();
+                    cListPresener.setCompanyQuetionListPresenter(questionsForTitle);
+                }
+                }
 
             @Override
             public void onFailure(Call<CompanyQuestionForTitleList> call, Throwable t) {

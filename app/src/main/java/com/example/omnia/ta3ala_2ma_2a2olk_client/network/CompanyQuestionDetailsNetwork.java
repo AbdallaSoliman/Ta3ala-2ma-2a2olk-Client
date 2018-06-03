@@ -4,11 +4,14 @@ import android.util.Log;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.ComapnyQuestionListInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.CompanyQuestionDetailsInterface;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitle;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitleList;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +39,8 @@ public class CompanyQuestionDetailsNetwork {
             public void onResponse(Call<Question> call, Response<Question> response) {
 
                 Question q = response.body();
-                cListPresener.setCompanyQuetionDetailsPresenter(q);
+                List<Answer> s=response.body().getAnswersCollection();
+                cListPresener.setCompanyQuetionDetailsPresenter(q,s);
 
              }
 
