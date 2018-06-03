@@ -2,6 +2,7 @@ package com.example.omnia.ta3ala_2ma_2a2olk_client.adaptor;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,6 +16,9 @@ import com.bumptech.glide.Glide;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
+
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -50,7 +54,16 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
                 .load(answer.getPersonId().getImage())
                 .into(holder.personImage);
 
+        String auerEmail=answers.get(position).getPersonId().getEmail();
         String email=getUserOffAppEmail();
+        if(!email.equals(auerEmail)){
+            holder.editImageView.setVisibility(View.GONE);
+            holder.editTextView.setVisibility(View.GONE);
+            holder.deleteImageView.setVisibility(View.GONE);
+            holder.deleteTextView.setVisibility(View.GONE);
+            holder.horizontalLine1.setVisibility(View.GONE);
+            holder.horizontalLine2.setVisibility(View.GONE);
+        }
         Log.i("emailo", email);
 
     }
@@ -64,12 +77,22 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
 
         public TextView answer,personName;
         public ImageView personImage;
+        public ImageView editImageView,deleteImageView;
+        public TextView editTextView,deleteTextView;
+        public View horizontalLine1,horizontalLine2;
 
         public ViewHolder(View view) {
             super(view);
             answer=(TextView)view.findViewById(R.id.answerId);
             personName=(TextView)view.findViewById(R.id.personName);
             personImage=(ImageView) view.findViewById(R.id.personImage);
+            editImageView=(ImageView)view.findViewById(R.id.editimage);
+            editTextView=(TextView)view.findViewById(R.id.edittext);
+            deleteImageView=(ImageView)view.findViewById(R.id.deleteimage);
+            deleteTextView=(TextView)view.findViewById(R.id.deletetext);
+            horizontalLine1=(View)view.findViewById(R.id.view1);
+            horizontalLine2=(View)view.findViewById(R.id.view2);
+          //  answer.setOnClickListener(View);
         }
     }
 

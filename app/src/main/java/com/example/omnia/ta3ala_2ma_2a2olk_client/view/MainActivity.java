@@ -152,8 +152,11 @@ public class MainActivity extends AppCompatActivity {
                     Tab2CustomerService tab2=new Tab2CustomerService();
                     return tab2;
                 case 2:
-                    Tab3Profile tab3=new Tab3Profile();
+                    Tab3Categories tab3=new Tab3Categories();
                     return tab3;
+                case 3:
+                    Tab4Places tab4=new Tab4Places();
+                    return tab4;
                 default:
                     return null;
             }
@@ -162,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
     }
     private void searchViewCode() {

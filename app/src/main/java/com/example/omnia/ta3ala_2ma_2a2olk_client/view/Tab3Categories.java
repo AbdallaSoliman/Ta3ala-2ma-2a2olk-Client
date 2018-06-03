@@ -1,7 +1,7 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.view;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 
 /**
- * Created by omnia on 5/28/2018.
+ * Created by omnia on 6/3/2018.
  */
 
-public class Tab3Profile extends Fragment {
+public class Tab3Categories extends android.support.v4.app.Fragment{
 
-    public Tab3Profile(){}
+    public Tab3Categories(){}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,4 +28,3 @@ public class Tab3Profile extends Fragment {
         return rootView;
     }
 }
-

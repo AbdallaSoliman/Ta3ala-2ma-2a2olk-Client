@@ -8,7 +8,7 @@
     tools:context="com.example.omnia.ta3ala_2ma_2a2olk_client.view.Tab4Places">
 
     <TextView
-        android:text="tab3 categories"
+        android:text="tab4 places"
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

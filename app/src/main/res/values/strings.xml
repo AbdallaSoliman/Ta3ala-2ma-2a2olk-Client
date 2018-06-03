@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Ta3ala-2ma-2a2olk-Client</string>
-    <string name="tab_text_1">Home</string>
+    <string name="tab_text_1">News Feeds</string>
     <string name="tab_text_2">Customer Service</string>
-    <string name="tab_text_3">Profile</string>
+    <string name="tab_text_3">Categories</string>
+    <string name="tab_text_4">Places</string>
     <string name="action_settings">Log Out</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
