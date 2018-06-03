@@ -6,7 +6,6 @@ import android.icu.text.UnicodeSetSpanner;
 import android.util.Log;
 import android.widget.Toast;
 
-
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.LoginMvpInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
