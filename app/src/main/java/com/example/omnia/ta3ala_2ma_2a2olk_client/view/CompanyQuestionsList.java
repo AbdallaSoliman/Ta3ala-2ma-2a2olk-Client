@@ -24,6 +24,7 @@ import java.util.List;
 
 public class CompanyQuestionsList extends AppCompatActivity {
 
+    String id;
       private RecyclerView recyclerView;
       private CompanyQuestionAdaptor mAdapter;
       SharredPreferenceManager shM;
@@ -43,7 +44,7 @@ public class CompanyQuestionsList extends AppCompatActivity {
         cQPresenter=new CompanyQuestionsListPresenter(this);
 
         Intent intent = getIntent();
-        String id = intent.getStringExtra("companyId");
+        id = intent.getStringExtra("companyId");
 
         // get token from sharedpref
         SharedPreferences pref = this.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
@@ -79,5 +80,44 @@ public class CompanyQuestionsList extends AppCompatActivity {
         }));
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        cQPresenter=new CompanyQuestionsListPresenter(this);
+
+         // get token from sharedpref
+        SharedPreferences pref = this.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
+        shM = new SharredPreferenceManager(this);
+        final String token = shM.getString(pref, "persontoken", "error");
+        cQPresenter.getCompaniesQuestionsPresenter(id,token);
+
+        // recycleview
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        questionForTitlesList=new ArrayList<>();
+        mAdapter = new CompanyQuestionAdaptor(questionForTitlesList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(mAdapter);
+
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+
+            @Override
+            public void onClick(View view, int position) {
+
+                Intent intent2=new Intent(CompanyQuestionsList.this,CompanyQuestionDetails.class);
+                intent2.putExtra("questionID",String.valueOf(questionForTitlesList.get(position).getQuestionId()));
+                startActivity(intent2);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+    }
 }
 

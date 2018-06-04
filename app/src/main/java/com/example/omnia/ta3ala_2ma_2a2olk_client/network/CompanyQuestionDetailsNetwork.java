@@ -49,4 +49,24 @@ public class CompanyQuestionDetailsNetwork {
             }
         });
     }
+
+    public void deleteQuestionNetwork(String questionId,String token){
+
+        Log.i("ddd", "deleteQuestionNetwork: ");
+        APIService apiService =
+                ApiClient.getApiClient().create(APIService.class);
+        Call<String> call = apiService.deleteQuestion(questionId, token);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                // response.body();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+            }
+        });
+
+    }
 }
