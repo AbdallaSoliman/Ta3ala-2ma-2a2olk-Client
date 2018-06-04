@@ -20,5 +20,11 @@
         app:layout_constraintTop_toTopOf="@+id/constraintLayout"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1" />
+    <ExpandableListView
+        android:id="@+id/myexpandablelistview2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:groupIndicator="@null" />
+
 
 </android.support.constraint.ConstraintLayout>

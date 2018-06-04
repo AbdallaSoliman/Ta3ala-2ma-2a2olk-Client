@@ -3,11 +3,13 @@ package com.example.omnia.ta3ala_2ma_2a2olk_client.presenter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.hardware.camera2.TotalCaptureResult;
 import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.PlacesInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.TabHomeInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
@@ -16,7 +18,6 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SubCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
-import com.example.omnia.ta3ala_2ma_2a2olk_client.view.Tab1Home;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,15 +27,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-public class HomePresenter implements TabHomeInterface.presenter , ExpandableListView.OnChildClickListener {
+public class PlacesPresenter implements PlacesInterface.presenter, ExpandableListView.OnChildClickListener {
     MyBaseExpandableListAdapter myBaseExpandableListAdapter;
     ExpandableListView myExpandableListView;
     List<String> myListForGroup;
     HashMap<String, List<String>> myMapForChild;
-    HashMap<String, List<String>> categoriesMap;
-    HashMap<String, List<Integer>> categoriesMapId;
-
+    HashMap<String, List<String>> placesMap;
+    HashMap<String, List<Integer>> placesMapId;
 
     private APIService apiInterface;
     List<com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories> getCategories;
@@ -43,10 +42,11 @@ public class HomePresenter implements TabHomeInterface.presenter , ExpandableLis
 
     int mainNumber, subNumber;
 
-    TabHomeInterface.view view;
     Activity activity;
 
-    public HomePresenter(TabHomeInterface.view view , Activity activity) {
+    PlacesInterface.view view;
+
+    public PlacesPresenter(PlacesInterface.view view, Activity activity) {
         this.view = view;
         this.activity = activity;
     }
@@ -59,13 +59,14 @@ public class HomePresenter implements TabHomeInterface.presenter , ExpandableLis
         SharredPreferenceManager manager = new SharredPreferenceManager(mContext.getApplicationContext());
         String token = manager.getString(tokenDetails, "persontoken", "no");
         Log.e("subcat", "sub" + token);
-        Call<List<MainCategories>> call = apiInterface.mainCategories(token);
+        Call<List<com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories>> call = apiInterface.mainCategories(token);
         call.enqueue(new Callback<List<MainCategories>>() {
             @Override
             public void onResponse(Call<List<MainCategories>> call, Response<List<MainCategories>> response) {
                 if (response.isSuccessful()) {
                     getCategories = response.body();
-                    for (int y = 0; y < 1; y++) {
+                    for (int y = 0; y < 2; y++) {
+                        MainCategories.clear();
                         categories = getCategories.get(y).getSubCatCollection();
                         HashMap<String, List<String>> hashMap = new HashMap<>();
                         HashMap<String, List<Integer>> hashId = new HashMap<>();
@@ -86,17 +87,16 @@ public class HomePresenter implements TabHomeInterface.presenter , ExpandableLis
                                 }
                             }
                         }
-                        if (y == 0) {
-                            categoriesMap = hashMap;
-                            categoriesMapId = hashId;
-
+                        if (y == 1) {
+                            placesMap = hashMap;
+                            placesMapId = hashId;
                         }
                     }
                 }
-                myBaseExpandableListAdapter = new MyBaseExpandableListAdapter(mContext, MainCategories, categoriesMap, categoriesMapId);
-                myExpandableListView = (ExpandableListView) activity.findViewById(R.id.myexpandablelistview);
+                myBaseExpandableListAdapter = new MyBaseExpandableListAdapter(mContext, MainCategories, placesMap, placesMapId);
+                myExpandableListView = (ExpandableListView) activity.findViewById(R.id.myexpandablelistview2);
                 myExpandableListView.setAdapter(myBaseExpandableListAdapter);
-                myExpandableListView.setOnChildClickListener(HomePresenter.this);
+                myExpandableListView.setOnChildClickListener(PlacesPresenter.this);
             }
 
             @Override
@@ -107,15 +107,13 @@ public class HomePresenter implements TabHomeInterface.presenter , ExpandableLis
             }
         });
 
-
     }
 
     @Override
     public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
         mainNumber = i;
         subNumber = i1;
-        Log.e("mytag","value is "+(categoriesMapId.get(MainCategories.get(i))).get(i1));
+        Log.e("mytag", "value is " + (placesMapId.get(MainCategories.get(i))).get(i1));
         return true;
     }
-
 }
