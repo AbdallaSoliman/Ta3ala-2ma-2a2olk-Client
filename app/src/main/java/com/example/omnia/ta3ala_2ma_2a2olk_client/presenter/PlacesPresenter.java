@@ -117,11 +117,11 @@ Context mContext;
         mainNumber = i;
         subNumber = i1;
         Log.e("mytag", "value is " + (placesMapId.get(MainCategories.get(i))).get(i1));
-        int id = placesMapId.get(MainCategories.get(i)).get(i1);
+        String id =String.valueOf(placesMapId.get(MainCategories.get(i)).get(i1));
         transferToIntent(mContext , id);
         return true;
     }
-    private void transferToIntent(Context mContext, int id) {
+    private void transferToIntent(Context mContext, String id) {
         Intent intent = new Intent(mContext, CompanyQuestionsList.class);
         intent.putExtra("companyId",id);
         mContext.startActivity(intent);
