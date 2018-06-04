@@ -56,7 +56,7 @@ public class Tab1Home extends Fragment implements TabHomeInterface.view {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1, container, false);
         myExpandableListView = (ExpandableListView) rootView.findViewById(R.id.myexpandablelistview);
-        presenter = new HomePresenter(this , getActivity());
+        presenter = new HomePresenter(this , getActivity() , getContext());
        presenter.initData(getActivity());
         return rootView;
     }

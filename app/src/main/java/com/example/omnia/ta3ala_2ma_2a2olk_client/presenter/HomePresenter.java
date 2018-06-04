@@ -2,6 +2,7 @@ package com.example.omnia.ta3ala_2ma_2a2olk_client.presenter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SubCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.view.CompanyQuestionDetails;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.view.CompanyQuestionsList;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.view.Tab1Home;
 
 import java.util.ArrayList;
@@ -45,10 +48,12 @@ public class HomePresenter implements TabHomeInterface.presenter , ExpandableLis
 
     TabHomeInterface.view view;
     Activity activity;
+    Context mContext;
 
-    public HomePresenter(TabHomeInterface.view view , Activity activity) {
+    public HomePresenter(TabHomeInterface.view view , Activity activity , Context mContext) {
         this.view = view;
         this.activity = activity;
+        this.mContext = mContext;
     }
 
     @Override
@@ -115,7 +120,15 @@ public class HomePresenter implements TabHomeInterface.presenter , ExpandableLis
         mainNumber = i;
         subNumber = i1;
         Log.e("mytag","value is "+(categoriesMapId.get(MainCategories.get(i))).get(i1));
+        int id = categoriesMapId.get(MainCategories.get(i)).get(i1);
+         transferToIntent(mContext , id);
         return true;
+    }
+
+    private void transferToIntent(Context mContext, int id) {
+        Intent intent = new Intent(mContext, CompanyQuestionsList.class);
+        intent.putExtra("companyId",id);
+        mContext.startActivity(intent);
     }
 
 }
