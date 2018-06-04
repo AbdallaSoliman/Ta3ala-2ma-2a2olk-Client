@@ -5,14 +5,13 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.squareup.picasso.Picasso;
 
@@ -21,12 +20,12 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> listGroup;
     private HashMap<String, List<String>> listChild;
-
-    public MyBaseExpandableListAdapter(Context c, List<String> lg,
-                                       HashMap<String, List<String>> lc) {
+    HashMap<String , List<Integer>> id;
+    public MyBaseExpandableListAdapter(Context c, List<String> lg, HashMap<String, List<String>> lc , HashMap<String , List<Integer>> id) {
         context = c;
         listGroup = lg;
         listChild = lc;
+        this.id=id;
     }
 
     @Override
@@ -40,20 +39,16 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition,
-                             boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            LayoutInflater infalInflater =
-                    (LayoutInflater)context
-                            .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.item_layout, null);
         }
 
-        TextView textViewItem =
-                (TextView)convertView.findViewById(R.id.item);
+        TextView textViewItem = (TextView) convertView.findViewById(R.id.item);
 
-        String text = (String)getChild(groupPosition, childPosition);
+        String text = (String) getChild(groupPosition, childPosition);
 
         textViewItem.setText(text);
         return convertView;
@@ -80,44 +75,41 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int groupPosition,
-                             boolean isExpanded, View convertView,
-                             ViewGroup parent) {
+    public View getGroupView(int groupPosition, final boolean isExpanded, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater)context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.group_layout, null);
         }
 
-        String textGroup = (String)getGroup(groupPosition);
+        String textGroup = (String) getGroup(groupPosition);
 
         //get application resource/drawable not in Activity class, using context
         Resources contextResources = context.getResources();
         //Drawable groupDrawable = contextResources.getDrawable(R.drawable.ic_launcher);
         //Set ImageView
-        ImageView groupImage = (ImageView)convertView.findViewById(R.id.ivGroupIndicator);
-        ImageView groupIcon = (ImageView)convertView.findViewById(R.id.groupimage);
+        ImageView groupImage = (ImageView) convertView.findViewById(R.id.ivGroupIndicator);
+        ImageView groupIcon = (ImageView) convertView.findViewById(R.id.groupimage);
+
         //groupImage.setImageDrawable(groupDrawable);
-        switch((String)getGroup(groupPosition))
-        {
-            case "Group A":
-                //groupImage set correct image
-                Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(groupIcon);
-                break;
-            case "Group B":
-                //groupImage set correct image
-                Picasso.get().load("https://res.cloudinary.com/demo/image/upload/sample.jpg").into(groupIcon);
-
-                break;
-            case "Group C":
-                //groupImage set correct image
-                break;
-        }
+//        switch ((String) getGroup(groupPosition)) {
+//            case "Group A":
+//                //groupImage set correct image
+//                Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(groupIcon);
+//                break;
+//            case "Group B":
+//                //groupImage set correct image
+//                Picasso.get().load("https://res.cloudinary.com/demo/image/upload/sample.jpg").into(groupIcon);
+//
+//                break;
+//            case "Group C":
+//                //groupImage set correct image
+//                break;
+//        }
+        Picasso.get().load("https://cdn.zeplin.io/5b0c00ae2223cbb958ed28a6/assets/56150dd7-c820-48d7-a251-d12be417e9f9.png").into(groupIcon);
         groupImage.setSelected(isExpanded);
-        TextView textViewGroup = (TextView)convertView.findViewById(R.id.group);
+        TextView textViewGroup = (TextView) convertView.findViewById(R.id.group);
         textViewGroup.setText(textGroup);
-
         return convertView;
     }
 
@@ -130,5 +122,4 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
-
 }

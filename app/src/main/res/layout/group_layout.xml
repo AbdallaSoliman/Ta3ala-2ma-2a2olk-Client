@@ -35,13 +35,13 @@
                 android:lineSpacingExtra="-26sp"
                 android:text="Electronics">
             </TextView>
-            <TextView
-                android:id="@+id/Description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="98 Questions">
-            </TextView>
+            <!--<TextView-->
+                <!--android:id="@+id/Description"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="98 Questions">-->
+            <!--</TextView>-->
         </LinearLayout>
         <ImageView
             android:id="@+id/ivGroupIndicator"
