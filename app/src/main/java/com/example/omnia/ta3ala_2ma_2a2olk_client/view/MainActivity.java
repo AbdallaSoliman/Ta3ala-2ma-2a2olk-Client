@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
     MaterialSearchView searchView;
+    MenuItem logout;
     Toolbar toolbar;
 
     @Override
@@ -96,8 +97,21 @@ public class MainActivity extends AppCompatActivity {
        // getMenuInflater().inflate(R.menu.menu_main, menu);
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem item = menu.findItem(R.id.action_search);
+         logout = menu.findItem(R.id.action_logout);
         searchView.setMenuItem(item);
+        logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                SharedPreferences preferences = getSharedPreferences("LoginPref", 0);
+                SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
+                manager.remove(preferences,"email");
+                Toast.makeText(getApplicationContext(),"Log out Successful",Toast.LENGTH_LONG).show();
+                Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
+                getApplication().startActivity(myIntent);
 
+                return false;
+            }
+        });
         return true;
     }
 

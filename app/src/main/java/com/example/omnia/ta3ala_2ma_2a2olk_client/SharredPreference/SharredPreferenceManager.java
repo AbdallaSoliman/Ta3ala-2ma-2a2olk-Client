@@ -21,6 +21,9 @@ public class SharredPreferenceManager {
     public String getString(SharedPreferences prefs, String key, String defaultValue){
         return prefs.getString(key, defaultValue);
     }
+    public void remove(SharedPreferences prefs, String key){
+        prefs.edit().remove(key).commit();
+    }
 
 
 }

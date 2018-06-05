@@ -5,6 +5,18 @@
         android:id="@+id/action_search"
         android:orderInCategory="100"
         android:icon="@drawable/search"
-        app:showAsAction="ifRoom"
+        app:showAsAction="collapseActionView"
         android:title="search" />
+    <item
+        android:id="@+id/action_profile"
+        android:orderInCategory="100"
+        android:icon="@drawable/search"
+        app:showAsAction="collapseActionView"
+        android:title="Profile" />
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="100"
+        android:icon="@drawable/search"
+        app:showAsAction="collapseActionView"
+        android:title="Log out" />
 </menu>

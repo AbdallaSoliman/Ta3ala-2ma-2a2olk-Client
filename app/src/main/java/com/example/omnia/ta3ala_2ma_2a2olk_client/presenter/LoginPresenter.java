@@ -60,7 +60,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
 //            view.registerStatus(0);
 //            return 0;
 //        } else
-        if (password.length() >5) {
+        if (password.length() <6) {
             view.registerStatus(1);
             return 0;
         } else if (email.isEmpty() || password.isEmpty()) {
