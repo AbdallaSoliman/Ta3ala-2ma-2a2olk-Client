@@ -71,6 +71,10 @@ public interface APIService {
     @DELETE("/Question/{question_id}")
     Call<String> deleteQuestion(@Path(value = "question_id", encoded = true) String questionId, @Header("Authorization") String token);
 
+    @Headers({"Content-Type: application/json"})
+    @PUT("/Question")
+    Call<String> editQuestion(@Body Question question, @Header("Authorization") String token);
+
 
     // ahmed hesham
     @GET("MainCategories?size=1000")

@@ -40,7 +40,6 @@ public class Tab1Home extends Fragment implements TabHomeInterface.view {
     ExpandableListView myExpandableListView;
     HomePresenter presenter ;
 
-
     int mainNumber, subNumber;
 
     public Tab1Home() {
@@ -57,7 +56,7 @@ public class Tab1Home extends Fragment implements TabHomeInterface.view {
         View rootView = inflater.inflate(R.layout.tab1, container, false);
         myExpandableListView = (ExpandableListView) rootView.findViewById(R.id.myexpandablelistview);
         presenter = new HomePresenter(this , getActivity() , getContext());
-       presenter.initData(getActivity());
+        presenter.initData(getActivity());
         return rootView;
     }
 }

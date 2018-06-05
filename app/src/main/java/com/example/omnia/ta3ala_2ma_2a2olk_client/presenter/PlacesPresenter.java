@@ -45,7 +45,7 @@ public class PlacesPresenter implements PlacesInterface.presenter, ExpandableLis
     int mainNumber, subNumber;
 
     Activity activity;
-Context mContext;
+    Context mContext;
     PlacesInterface.view view;
 
     public PlacesPresenter(PlacesInterface.view view, Activity activity ,Context mContext) {

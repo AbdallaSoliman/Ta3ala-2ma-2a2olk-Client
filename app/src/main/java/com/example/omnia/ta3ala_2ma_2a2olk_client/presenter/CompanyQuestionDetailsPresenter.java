@@ -32,5 +32,8 @@ public class CompanyQuestionDetailsPresenter implements CompanyQuestionDetailsIn
     public void deleteQuestionPresenter(String questionId,String token){
         cQDNetwork.deleteQuestionNetwork(questionId,token);
     }
+    public void editQuestionPresenter(Question question,String token){
+        cQDNetwork.editQuestionNetwork(question,token);
+    }
 
 }

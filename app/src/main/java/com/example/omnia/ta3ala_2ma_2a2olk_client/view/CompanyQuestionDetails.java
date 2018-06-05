@@ -13,8 +13,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
@@ -112,17 +115,20 @@ public class CompanyQuestionDetails extends AppCompatActivity {
             }
         });
 
+        editTextView=(TextView)findViewById(R.id.editText);
+        editImageView=(ImageView)findViewById(R.id.editImage);
+
         editImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                showEditDialog(question);
             }
         });
 
         editTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                showEditDialog(question);
             }
         });
 
@@ -148,7 +154,73 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         alertDialog.show();
     }
 
-    public void showEditDialog(){
+    public void showEditDialog(final Question question){
+
+        final  View view1=getLayoutInflater().inflate(R.layout.question_edit_dialog,null);
+        final EditText titleEditText=(EditText)view1.findViewById(R.id.editQuestionTitle);
+        final EditText bodyEditText=(EditText)view1.findViewById(R.id.editQuestionBody);
+      //  final Button saveButton=(Button)view1.findViewById(R.id.saveChanges);
+        titleEditText.setText(question.getTitle());
+        bodyEditText.setText(question.getBody());
+
+        final AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        dialog.setTitle("Edit Question");
+        dialog.setView(view1)
+
+                .setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+//                        if(titleEditText.getText().toString().trim().isEmpty()){
+//                          titleEditText.setError("please enter data");
+//                        }
+//                        else if (bodyEditText.getText().toString().trim().isEmpty()){
+//                            bodyEditText.setError("please enter data");
+//                        }
+//                        else{
+//                            titleTextView.setText(titleEditText.getText().toString());
+//                            bodyTextView.setText(bodyEditText.getText().toString());
+//                            question.setTitle(titleEditText.getText().toString());
+//                            question.setBody(bodyEditText.getText().toString());
+//                            String token=getToken();
+//                            cQDPresenter.editQuestionPresenter(question,token);
+//
+//                        }
+
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false);
+        final AlertDialog alert=dialog.create();
+        alert.show();
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(titleEditText.getText().toString().trim().isEmpty()){
+                    titleEditText.setError("please enter data");
+                }
+                else if (bodyEditText.getText().toString().trim().isEmpty()){
+                    bodyEditText.setError("please enter data");
+                }
+                else{
+                    titleTextView.setText(titleEditText.getText().toString());
+                    bodyTextView.setText(bodyEditText.getText().toString());
+                    question.setTitle(titleEditText.getText().toString());
+                    question.setBody(bodyEditText.getText().toString());
+                    String token=getToken();
+                    cQDPresenter.editQuestionPresenter(question,token);
+                    alert.dismiss();
+                }
+
+            }
+        });
+
+
 
     }
 
