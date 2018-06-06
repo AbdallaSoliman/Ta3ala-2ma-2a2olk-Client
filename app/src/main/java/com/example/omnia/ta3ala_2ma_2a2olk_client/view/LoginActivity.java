@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpInterfac
                  Log.e("usernameA" , user.getUsername());
                  Log.e("passwordA" , user.getPassword());
                  User u1 = presenter.loadUser(getApplicationContext(),token,user);
+                 //finish();
              }
 
             }
@@ -82,10 +83,13 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpInterfac
     }
 
     @Override
-    public void questionActivity() {
-        Intent intent = new Intent(LoginActivity.this, AddQuestion.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-
+    public void questionActivity(String email) {
+        if (email.equals("user")) {
+            Intent intent = new Intent(LoginActivity.this, AddQuestion.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }else {
+            Toast.makeText(getApplicationContext(),"Login Error",Toast.LENGTH_LONG).show();
+        }
     }
 }

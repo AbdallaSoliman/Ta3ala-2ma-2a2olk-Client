@@ -49,6 +49,19 @@ public class User {
         this.username = username;
     }
 
+    public User(int personId, String image, String first, String last, String password, String email, String type, String gender, Boolean enabled, String username) {
+        this.personId = personId;
+        this.image = image;
+        this.first = first;
+        this.last = last;
+        this.password = password;
+        this.email = email;
+        this.type = type;
+        this.gender = gender;
+        this.enabled = enabled;
+        this.username = username;
+    }
+
     public String getUsername() {
         return username;
     }

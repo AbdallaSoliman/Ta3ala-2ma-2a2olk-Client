@@ -9,7 +9,7 @@ public interface LoginMvpInterface {
 
     interface view {
         void registerStatus(int key);
-        void questionActivity();
+        void questionActivity(String email);
 
     }
 

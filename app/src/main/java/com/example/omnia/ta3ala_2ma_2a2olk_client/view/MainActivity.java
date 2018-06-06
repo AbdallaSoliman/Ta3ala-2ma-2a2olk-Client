@@ -99,6 +99,16 @@ public class MainActivity extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.action_search);
          logout = menu.findItem(R.id.action_logout);
         searchView.setMenuItem(item);
+        MenuItem profile = menu.findItem(R.id.action_profile);
+        profile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent myIntent = new Intent(MainActivity.this, ProfileScreen.class);
+                myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplication().startActivity(myIntent);
+                return false;
+            }
+        });
         logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -107,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 manager.remove(preferences,"email");
                 Toast.makeText(getApplicationContext(),"Log out Successful",Toast.LENGTH_LONG).show();
                 Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
+                myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplication().startActivity(myIntent);
 
                 return false;

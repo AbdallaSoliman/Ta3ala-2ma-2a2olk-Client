@@ -41,6 +41,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
     Boolean enabled;
     String customerService;
     String taaUser;
+    //String image;
     User myuser;
     User myuser2;
 
@@ -52,14 +53,6 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
 
     @Override
     public int checkInput(String email, String password) {
-
-//        Boolean status = validateEmail(email);
-//        Log.i("tag", status.toString());
-//        if (!status) {
-//            Log.i("tag2", status.toString());
-//            view.registerStatus(0);
-//            return 0;
-//        } else
         if (password.length() <6) {
             view.registerStatus(1);
             return 0;
@@ -137,6 +130,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                 type = response.body().getType();
                 gender = response.body().getGender();
                 enabled = response.body().getEnabled();
+                image = response.body().getImage();
                 customerService = response.body().getCustomerService();
                 taaUser = response.body().getTaaUser();
                 myuser.setCustomerService(customerService);
@@ -146,18 +140,39 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                 myuser.setLast(last);
                 myuser.setType(type);
                 myuser.setGender(gender);
+                myuser.setImage(image);
              //   myuser.setTaaUser(taaUser);
               Log.e("Test","email"+ myuser.getEmail());
                     SharedPreferences pref = mcontext.getSharedPreferences("LoginPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("email",myuser.getEmail());
+                    editor.putString("id" ,String.valueOf( myuser.getPersonId()));
+                    editor.putString("first",myuser.getFirst());
+                    editor.putString("last",myuser.getLast());
+                    editor.putString("username" ,myuser.getUsername());
+                    editor.putString("password",myuser.getPassword());
+                    editor.putString("gender",myuser.getGender());
+                    editor.putString("image",myuser.getImage());
                     Log.e("Hamada",myuser.getEmail());
                     editor.commit();
-                    Log.e("userMail",pref.getString("email","MFESH"));
+                    Log.e("userData",pref.getString("email","MFESH"));
+                    Log.e("userData", pref.getString("id","MFEESH"));
+                    Log.e("userData",pref.getString("first","MFESH"));
+                    Log.e("userData",pref.getString("last","MFESH"));
+                    Log.e("userData",pref.getString("username","MFESH"));
+                    Log.e("userData",pref.getString("password","MFESH"));
+                    Log.e("userData",pref.getString("gender","MFESH"));
+                    Log.e("userData",pref.getString("image","MFESH"));
+                    if ((pref.getString("first","MFESH").equals("MFESH"))){
+                        Toast.makeText(mcontext,pref.getString("first","MFESH"),Toast.LENGTH_LONG).show(); }
+                        else {
+                        view.questionActivity(myuser.getType());
+                        Toast.makeText(mcontext,pref.getString("first","MFESH")+"login",Toast.LENGTH_LONG).show();
+                    }
                 }else {
                     Toast.makeText(mcontext, "Empty Response", Toast.LENGTH_LONG).show();
                 }
-                view.questionActivity();
+
             }
 
             @Override

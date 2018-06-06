@@ -9,6 +9,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitleL
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategory;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResonse;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
@@ -74,11 +75,12 @@ public interface APIService {
     @Headers({"Content-Type: application/json"})
     @PUT("/Question")
     Call<String> editQuestion(@Body Question question, @Header("Authorization") String token);
-
-
     // ahmed hesham
     @GET("MainCategories?size=1000")
     Call<List<MainCategories>> mainCategories (@Header("Authorization") String token);
+    @PUT("/Person")
+    Call<String> updateUser(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User user);
+
 
 }
 
