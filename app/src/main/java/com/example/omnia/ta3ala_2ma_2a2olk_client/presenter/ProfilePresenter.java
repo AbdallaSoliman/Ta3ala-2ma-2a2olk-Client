@@ -38,17 +38,22 @@ public class ProfilePresenter implements ProfileInterface.presenter{
         Log.e("subcat", "sub" + token);
         User user = new User(id , image , firstname, lastname , password ,email , "user",gender , true,username );
         apiInterface = ApiClient.getApiClient().create(APIService.class);
-        retrofit2.Call<String> call = apiInterface.updateUser("application/json", token, user);
-        call.enqueue(new Callback<String>() {
+        retrofit2.Call<ServerResonse> call = apiInterface.updateUser("application/json", token, user);
+        call.enqueue(new Callback<ServerResonse>() {
             @Override
-            public void onResponse(retrofit2.Call<String> call, Response<String> response) {
-                if (response.isSuccessful()){
-                    Toast.makeText(mContext,response.body().toString()+"",Toast.LENGTH_LONG).show();
+            public void onResponse(retrofit2.Call<ServerResonse> call, Response<ServerResonse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        String result = response.body().getMessage().toString();
+                        if (result.length() > 0) {
+                            Toast.makeText(mContext, result + "", Toast.LENGTH_LONG).show();
+                        }
+                    }
                 }
             }
 
             @Override
-            public void onFailure(retrofit2.Call<String> call, Throwable t) {
+            public void onFailure(retrofit2.Call<ServerResonse> call, Throwable t) {
                 Toast.makeText(mContext,"Error",Toast.LENGTH_LONG).show();
                 String message = t.getMessage();
                 Log.d("failuress", message);

@@ -98,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem item = menu.findItem(R.id.action_search);
          logout = menu.findItem(R.id.action_logout);
+       SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+      SharredPreferenceManager  manager = new SharredPreferenceManager(getApplicationContext());
+     String id =  manager.getString(userDetails,"id","0");
+      if (id.equals("0")) {
+          logout.setVisible(false);
+      }
         searchView.setMenuItem(item);
         MenuItem profile = menu.findItem(R.id.action_profile);
         profile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -115,8 +121,9 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences preferences = getSharedPreferences("LoginPref", 0);
                 SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
                 manager.remove(preferences,"email");
+                manager.remove(preferences,"id");
                 Toast.makeText(getApplicationContext(),"Log out Successful",Toast.LENGTH_LONG).show();
-                Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent myIntent = new Intent(MainActivity.this, MainActivity.class);
                 myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplication().startActivity(myIntent);
 

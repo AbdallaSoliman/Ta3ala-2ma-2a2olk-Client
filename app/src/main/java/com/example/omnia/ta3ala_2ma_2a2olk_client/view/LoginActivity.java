@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpInterfac
                  User user = new User(username.getText().toString(), password.getText().toString());
                  Log.e("usernameA" , user.getUsername());
                  Log.e("passwordA" , user.getPassword());
-                 User u1 = presenter.loadUser(getApplicationContext(),token,user);
+                  presenter.loadDataFromServer(username.getText().toString(),password.getText().toString(),getApplicationContext());
                  //finish();
              }
 

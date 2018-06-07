@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.LoginMvpInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tauser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
@@ -15,6 +16,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,7 +42,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
     String gender;
     Boolean enabled;
     String customerService;
-    String taaUser;
+    Tauser taaUser;
     //String image;
     User myuser;
     User myuser2;
@@ -64,7 +66,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
     }
 
     @Override
-    public void loadDataFromServer(String username, String password, final Context mcontext) {
+    public void loadDataFromServer(final String username, final String password, final Context mcontext) {
         myuser2 = new User(password ,username);
         Log.e("myuser2name", password);
         Log.e("myuser2Password",username);
@@ -87,9 +89,13 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                     SharredPreferenceManager m1 = new SharredPreferenceManager(mcontext);
                     String tokenvalue = "Bearer " + response.body().getTocken().toString();
                     m1.setString(pref, "persontoken", tokenvalue);
+                    User user = new User(username,password);
+                    loadUser(mcontext,tokenvalue,user);
                     Toast.makeText(mcontext, tokenvalue, Toast.LENGTH_LONG).show();
+
                 } else {
                     Toast.makeText(mcontext, "no response ....", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mcontext, "FAILED TO LOGIN", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -113,6 +119,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
         apiInterface = ApiClient.getApiClient().create(APIService.class);
          Toast.makeText(mcontext , user.getPassword()+"username" , Toast.LENGTH_LONG).show();
          Log.e("username" , user.getPassword());
+         Log.i("tocken",token);
         Call<User> call = apiInterface.loginUserWithMail("application/json" ,token , user);
         call.enqueue(new Callback<User>() {
             @Override
@@ -153,7 +160,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                     editor.putString("password",myuser.getPassword());
                     editor.putString("gender",myuser.getGender());
                     editor.putString("image",myuser.getImage());
-                    Log.e("Hamada",myuser.getEmail());
+                    Log.e("Hamada",myuser.getEmail()+"mail");
                     editor.commit();
                     Log.e("userData",pref.getString("email","MFESH"));
                     Log.e("userData", pref.getString("id","MFEESH"));

@@ -79,8 +79,9 @@ public interface APIService {
     @GET("MainCategories?size=1000")
     Call<List<MainCategories>> mainCategories (@Header("Authorization") String token);
     @PUT("/Person")
-    Call<String> updateUser(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User user);
-
+    Call<ServerResonse> updateUser(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User user);
+    @POST("/TaaUser")
+    Call<ServerResonse> addTaUser (@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User user);
 
 }
 

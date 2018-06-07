@@ -8,9 +8,11 @@ import android.widget.Toast;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.RegisterMvpInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResonse;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.view.LoginActivity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -66,7 +68,11 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(mcontext, "Register succesful ", Toast.LENGTH_LONG).show();
+                    int id = response.body().getPersonId();
+                    registerTaUser(id , mcontext);
                     Toast.makeText(mcontext, response.body().getEmail(), Toast.LENGTH_LONG).show();
+                  //  int id = response.body().getPersonId();
+                    Log.i("id",id+"");
                 }
             }
 
@@ -79,6 +85,32 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
             }
         });
 
+
+    }
+
+    private void registerTaUser(int id , Context mcontext) {
+        SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
+        SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
+        String token = manager.getString(tokenDetails, "persontoken", "no");
+        apiInterface = ApiClient.getApiClient().create(APIService.class);
+        User tauser = new User();
+        tauser.setPersonId(id);
+        Log.i("il-id",+id+"");
+       Call<ServerResonse> call = apiInterface.addTaUser("application/json",token,tauser);
+       call.enqueue(new Callback<ServerResonse>() {
+           @Override
+           public void onResponse(Call<ServerResonse> call, Response<ServerResonse> response) {
+               if (response.isSuccessful()){
+                   Log.i("user response" ,response.body().getMessage().toString()+"");
+               }
+           }
+
+           @Override
+           public void onFailure(Call<ServerResonse> call, Throwable t) {
+               Log.i("user response" ,"failed");
+
+           }
+       });
 
     }
 

@@ -2,33 +2,39 @@ package com.example.omnia.ta3ala_2ma_2a2olk_client.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class User {
 
 
     @SerializedName("personId")
-    private int personId ;
+    private int personId;
     @SerializedName("image")
     private String image;
     @SerializedName("first")
-    private String first ;
+    private String first;
     @SerializedName("last")
-    private String last ;
+    private String last;
     @SerializedName("password")
-    private String password ;
+    private String password;
     @SerializedName("email")
-    private String email ;
+    private String email;
     @SerializedName("type")
     private String type;
     @SerializedName("gender")
     private String gender;
     @SerializedName("enabled")
-    private Boolean enabled ;
+    private Boolean enabled;
     @SerializedName("customerService")
     private String customerService;
-    @SerializedName("taaUser")
-    private String taaUser;
+    //    @SerializedName("taaUser")
+//    private String taaUser;
     @SerializedName("username")
     private String username;
+    @SerializedName("taaUser")
+    private Tauser taaUser;
+
+
 
     public User() {
     }
@@ -38,7 +44,7 @@ public class User {
         this.username = username;
     }
 
-    public User(String first, String last, String password, String email, String type, String gender, Boolean enabled , String username) {
+    public User(String first, String last, String password, String email, String type, String gender, Boolean enabled, String username) {
         this.first = first;
         this.last = last;
         this.password = password;
@@ -60,6 +66,14 @@ public class User {
         this.gender = gender;
         this.enabled = enabled;
         this.username = username;
+    }
+
+    public Tauser getTaaUser() {
+        return taaUser;
+    }
+
+    public void setTaaUser(Tauser taaUser) {
+        this.taaUser = taaUser;
     }
 
     public String getUsername() {
@@ -150,11 +164,5 @@ public class User {
         this.customerService = customerService;
     }
 
-    public String getTaaUser() {
-        return taaUser;
-    }
 
-    public void setTaaUser(String taaUser) {
-        this.taaUser = taaUser;
-    }
 }
