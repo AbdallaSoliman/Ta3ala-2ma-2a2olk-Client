@@ -18,7 +18,9 @@ import com.bumptech.glide.Glide;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.QuestionAnswerAdapotorPresenter;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.view.CompanyQuestionDetails;
 
 import java.util.List;
 
@@ -30,11 +32,16 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
 
     private List<Answer> answers;
     Context mcContext;
+    CompanyQuestionDetails ii;
+    Answer answer;
 
-    public QuestionAnswersAdaptoe(List<Answer> qd,Context c){
+
+    public QuestionAnswersAdaptoe(List<Answer> qd,Context c,CompanyQuestionDetails s){
         this.answers=qd;
         this.mcContext=c;
+        ii=s;
     }
+
 
     @NonNull
     @Override
@@ -181,8 +188,11 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
                     public void onClick(DialogInterface dialog, int which) {
                         // edit this ansewer from database and recycleview
                         String editAnswer =answerEditText.getText().toString();
-                        answers.get(answerPosition).setAnswer(editAnswer);
                         Answer answer=answers.get(answerPosition);
+                        answer.setAnswer(editAnswer);
+                        Question qq=ii.getQuestion();
+                        answer.setQuestionId(qq.getQuestionId());
+                        Log.i("qq", qq.getQuestionId().toString());
                         editAnswer(answer);
                         notifyDataSetChanged();
                       }

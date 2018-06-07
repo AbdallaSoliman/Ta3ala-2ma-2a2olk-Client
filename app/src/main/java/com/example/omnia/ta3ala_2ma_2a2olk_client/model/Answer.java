@@ -3,11 +3,13 @@ package com.example.omnia.ta3ala_2ma_2a2olk_client.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by omnia on 6/2/2018.
  */
 
-public class Answer {
+public class Answer implements Serializable {
 
     @SerializedName("answersId")
     @Expose
@@ -39,6 +41,10 @@ public class Answer {
     @SerializedName("personId")
     @Expose
     private PersonId personId;
+
+    @SerializedName("questionId")
+    @Expose
+    private  int questionId;
 
     public Integer getAnswersId() {
         return answersId;
@@ -120,4 +126,11 @@ public class Answer {
         this.personId = personId;
     }
 
+    public int getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
+    }
 }

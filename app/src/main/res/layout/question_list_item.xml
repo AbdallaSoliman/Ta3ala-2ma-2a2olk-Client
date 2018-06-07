@@ -31,9 +31,11 @@
     <TextView
         android:id="@+id/QACount"
         android:textColor="#00a88f"
+        android:gravity="center"
         android:layout_below="@id/QTitle"
         android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
+        android:background="@drawable/rounded_rectangle"
         android:layout_height="wrap_content" />
 
 </RelativeLayout>

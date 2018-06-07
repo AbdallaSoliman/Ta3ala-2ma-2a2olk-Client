@@ -75,6 +75,11 @@ public interface APIService {
     @Headers({"Content-Type: application/json"})
     @PUT("/Question")
     Call<String> editQuestion(@Body Question question, @Header("Authorization") String token);
+
+    @Headers({"Content-Type: application/json"})
+    @POST("/Answers")
+    Call<String> saveAnswer(@Body Answer answer, @Header("Authorization") String token);
+
     // ahmed hesham
     @GET("MainCategories?size=1000")
     Call<List<MainCategories>> mainCategories (@Header("Authorization") String token);

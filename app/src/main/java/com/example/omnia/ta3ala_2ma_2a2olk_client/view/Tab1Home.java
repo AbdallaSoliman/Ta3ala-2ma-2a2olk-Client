@@ -36,7 +36,8 @@ import retrofit2.Response;
  */
 
 public class Tab1Home extends Fragment implements TabHomeInterface.view {
-   MyBaseExpandableListAdapter myBaseExpandableListAdapter;
+
+    MyBaseExpandableListAdapter myBaseExpandableListAdapter;
     ExpandableListView myExpandableListView;
     HomePresenter presenter ;
 

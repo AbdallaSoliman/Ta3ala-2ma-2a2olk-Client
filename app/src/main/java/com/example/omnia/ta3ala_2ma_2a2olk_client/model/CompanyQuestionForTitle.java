@@ -7,7 +7,9 @@ package com.example.omnia.ta3ala_2ma_2a2olk_client.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CompanyQuestionForTitle {
+import java.io.Serializable;
+
+public class CompanyQuestionForTitle implements Serializable {
 
     @SerializedName("questionId")
     @Expose
@@ -20,7 +22,7 @@ public class CompanyQuestionForTitle {
     private Integer numOfAns;
     @SerializedName("verified")
     @Expose
-    private Object verified;
+    private int verified;
     @SerializedName("questionDate")
     @Expose
     private String questionDate;
@@ -49,11 +51,11 @@ public class CompanyQuestionForTitle {
         this.numOfAns = numOfAns;
     }
 
-    public Object getVerified() {
+    public int getVerified() {
         return verified;
     }
 
-    public void setVerified(Object verified) {
+    public void setVerified(int verified) {
         this.verified = verified;
     }
 

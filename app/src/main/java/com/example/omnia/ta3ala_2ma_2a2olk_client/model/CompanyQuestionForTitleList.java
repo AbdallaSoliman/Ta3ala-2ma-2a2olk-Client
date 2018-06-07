@@ -3,11 +3,12 @@ package com.example.omnia.ta3ala_2ma_2a2olk_client.model;
 /**
  * Created by omnia on 6/1/2018.
  */
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CompanyQuestionForTitleList {
+public class CompanyQuestionForTitleList implements Serializable {
 
     @SerializedName("questions")
     @Expose

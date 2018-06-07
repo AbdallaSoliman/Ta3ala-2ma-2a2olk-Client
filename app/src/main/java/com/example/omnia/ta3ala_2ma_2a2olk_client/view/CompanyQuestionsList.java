@@ -9,29 +9,34 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.Test2Listener;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.adaptor.CompanyQuestionAdaptor;
-import com.example.omnia.ta3ala_2ma_2a2olk_client.adaptor.RecyclerTouchListener;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitle;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.CompanyQuestionsListPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompanyQuestionsList extends AppCompatActivity {
+public class CompanyQuestionsList extends AppCompatActivity implements Test2Listener {
 
-    String id;
+      String id;
       private RecyclerView recyclerView;
       private CompanyQuestionAdaptor mAdapter;
       SharredPreferenceManager shM;
       CompanyQuestionsListPresenter cQPresenter;
       private List<CompanyQuestionForTitle> questionForTitlesList;
 
-      public void setCompaniesQuestionList(List<CompanyQuestionForTitle> qftlist){
+    // for back button on action bar
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
+
+    public void setCompaniesQuestionList(List<CompanyQuestionForTitle> qftlist){
           this.questionForTitlesList.addAll(qftlist);
           mAdapter.notifyDataSetChanged();
       }
@@ -40,6 +45,9 @@ public class CompanyQuestionsList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_questions_list);
+
+        // for back arrow
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         cQPresenter=new CompanyQuestionsListPresenter(this);
 
@@ -55,29 +63,13 @@ public class CompanyQuestionsList extends AppCompatActivity {
         // recycleview
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         questionForTitlesList=new ArrayList<>();
-        mAdapter = new CompanyQuestionAdaptor(questionForTitlesList);
+        mAdapter = new CompanyQuestionAdaptor(questionForTitlesList,this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(mAdapter);
 
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
-
-            @Override
-            public void onClick(View view, int position) {
-
-                Intent intent2=new Intent(CompanyQuestionsList.this,CompanyQuestionDetails.class);
-                intent2.putExtra("questionID",String.valueOf(questionForTitlesList.get(position).getQuestionId()));
-                startActivity(intent2);
-               }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
     }
 
     @Override
@@ -95,29 +87,19 @@ public class CompanyQuestionsList extends AppCompatActivity {
         // recycleview
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         questionForTitlesList=new ArrayList<>();
-        mAdapter = new CompanyQuestionAdaptor(questionForTitlesList);
+        mAdapter = new CompanyQuestionAdaptor(questionForTitlesList,this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(mAdapter);
+    }
 
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
-
-            @Override
-            public void onClick(View view, int position) {
-
-                Intent intent2=new Intent(CompanyQuestionsList.this,CompanyQuestionDetails.class);
-                intent2.putExtra("questionID",String.valueOf(questionForTitlesList.get(position).getQuestionId()));
-                startActivity(intent2);
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
+    @Override
+    public void onClick(int po) {
+        Intent intent2=new Intent(CompanyQuestionsList.this,CompanyQuestionDetails.class);
+        intent2.putExtra("questionID",String.valueOf(questionForTitlesList.get(po).getQuestionId()));
+        startActivity(intent2);
     }
 }
 
