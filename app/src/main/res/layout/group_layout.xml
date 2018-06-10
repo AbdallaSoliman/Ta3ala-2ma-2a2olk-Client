@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="80dp"
     android:background="#f0fcff"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -19,30 +20,36 @@
         <LinearLayout
             android:id="@+id/linearLayout1"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="1dp">
 
             <TextView
                 android:id="@+id/group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="2"
                 android:fontFamily="sans-serif"
-                android:textStyle="normal"
-                android:textColor="#0055a5"
                 android:letterSpacing="0.01"
                 android:lineSpacingExtra="-26sp"
-                android:text="Electronics">
-            </TextView>
-            <!--<TextView-->
-                <!--android:id="@+id/Description"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:text="98 Questions">-->
-            <!--</TextView>-->
+                android:text="Electronics"
+                android:textColor="#0055a5"
+                android:textSize="18sp"
+                android:textStyle="normal"></TextView>
+
+            <TextView
+                android:id="@+id/Description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="98 Questions"></TextView>
         </LinearLayout>
+
         <ImageView
             android:id="@+id/ivGroupIndicator"
             android:layout_width="30dp"

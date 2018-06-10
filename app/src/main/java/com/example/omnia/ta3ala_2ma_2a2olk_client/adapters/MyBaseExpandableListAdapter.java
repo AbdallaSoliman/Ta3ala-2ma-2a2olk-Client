@@ -12,6 +12,8 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.TabHomeInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.squareup.picasso.Picasso;
 
@@ -21,11 +23,13 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
     private List<String> listGroup;
     private HashMap<String, List<String>> listChild;
     HashMap<String , List<Integer>> id;
-    public MyBaseExpandableListAdapter(Context c, List<String> lg, HashMap<String, List<String>> lc , HashMap<String , List<Integer>> id) {
+    private List<String> LogoUrl;
+    public MyBaseExpandableListAdapter(Context c, List<String> lg, HashMap<String, List<String>> lc , HashMap<String , List<Integer>> id , List<String>LogoUrl) {
         context = c;
         listGroup = lg;
         listChild = lc;
         this.id=id;
+        this.LogoUrl = LogoUrl;
     }
 
     @Override
@@ -47,9 +51,7 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView textViewItem = (TextView) convertView.findViewById(R.id.item);
-
         String text = (String) getChild(groupPosition, childPosition);
-
         textViewItem.setText(text);
         return convertView;
     }
@@ -58,10 +60,13 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
     public int getChildrenCount(int groupPosition) {
         return listChild.get(listGroup.get(groupPosition)).size();
     }
-
     @Override
     public Object getGroup(int groupPosition) {
         return listGroup.get(groupPosition);
+    }
+    //@Override
+    public Object getimage(int groupPosition) {
+        return LogoUrl.get(groupPosition);
     }
 
     @Override
@@ -83,12 +88,12 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         String textGroup = (String) getGroup(groupPosition);
-
         //get application resource/drawable not in Activity class, using context
         Resources contextResources = context.getResources();
         //Drawable groupDrawable = contextResources.getDrawable(R.drawable.ic_launcher);
         //Set ImageView
         ImageView groupImage = (ImageView) convertView.findViewById(R.id.ivGroupIndicator);
+        String imagepos = (String) getimage(groupPosition);
         ImageView groupIcon = (ImageView) convertView.findViewById(R.id.groupimage);
 
         //groupImage.setImageDrawable(groupDrawable);
@@ -106,7 +111,8 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
 //                //groupImage set correct image
 //                break;
 //        }
-        Picasso.get().load("https://cdn.zeplin.io/5b0c00ae2223cbb958ed28a6/assets/56150dd7-c820-48d7-a251-d12be417e9f9.png").into(groupIcon);
+            Picasso.get().load(imagepos).resize(50,50).placeholder(R.drawable.loading).error(R.drawable.loading).into(groupIcon);
+       // Picasso.get().load("https://cdn.zeplin.io/5b0c00ae2223cbb958ed28a6/assets/56150dd7-c820-48d7-a251-d12be417e9f9.png").into(groupIcon);
         groupImage.setSelected(isExpanded);
         TextView textViewGroup = (TextView) convertView.findViewById(R.id.group);
         textViewGroup.setText(textGroup);

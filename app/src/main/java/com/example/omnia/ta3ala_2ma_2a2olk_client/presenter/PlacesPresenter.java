@@ -41,7 +41,7 @@ public class PlacesPresenter implements PlacesInterface.presenter, ExpandableLis
     List<com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories> getCategories;
     List<SubCategories> categories;
     List<String> MainCategories = new ArrayList<>();
-
+List<String> url= new ArrayList<>();
     int mainNumber, subNumber;
 
     Activity activity;
@@ -82,6 +82,7 @@ public class PlacesPresenter implements PlacesInterface.presenter, ExpandableLis
                                     hashMap.get(subCategory.getSubCatName()).add(subCategory.getDescription());
                                     hashId.get(subCategory.getSubCatName()).add(subCategory.getSubCatId());
                                     MainCategories.add(subCategory.getSubCatName());
+                                    url.add(subCategory.getImgUrl());
                                 }
                             } else {
                                 if (subCategory.getDescription() != null) {
@@ -96,7 +97,7 @@ public class PlacesPresenter implements PlacesInterface.presenter, ExpandableLis
                         }
                     }
                 }
-                myBaseExpandableListAdapter = new MyBaseExpandableListAdapter(mContext, MainCategories, placesMap, placesMapId);
+                myBaseExpandableListAdapter = new MyBaseExpandableListAdapter(mContext, MainCategories, placesMap, placesMapId,url);
                 myExpandableListView = (ExpandableListView) activity.findViewById(R.id.myexpandablelistview2);
                 myExpandableListView.setAdapter(myBaseExpandableListAdapter);
                 myExpandableListView.setOnChildClickListener(PlacesPresenter.this);

@@ -6,6 +6,15 @@ public class SubCategories implements Serializable {
     private Integer subCatId;
     private String subCatName;
     private String description;
+    private String imgUrl;
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     public Integer getSubCatId() {
         return subCatId;

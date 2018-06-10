@@ -43,6 +43,7 @@ public class HomePresenter implements TabHomeInterface.presenter , ExpandableLis
     List<com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories> getCategories;
     List<SubCategories> categories;
     List<String> MainCategories = new ArrayList<>();
+    List<String> LogoUrl = new ArrayList<>();
 
     int mainNumber, subNumber;
 
@@ -83,6 +84,7 @@ public class HomePresenter implements TabHomeInterface.presenter , ExpandableLis
                                     hashMap.get(subCategory.getSubCatName()).add(subCategory.getDescription());
                                     hashId.get(subCategory.getSubCatName()).add(subCategory.getSubCatId());
                                     MainCategories.add(subCategory.getSubCatName());
+                                    LogoUrl.add(subCategory.getImgUrl());
                                 }
                             } else {
                                 if (subCategory.getDescription() != null) {
@@ -98,10 +100,13 @@ public class HomePresenter implements TabHomeInterface.presenter , ExpandableLis
                         }
                     }
                 }
-                myBaseExpandableListAdapter = new MyBaseExpandableListAdapter(mContext, MainCategories, categoriesMap, categoriesMapId);
+                myBaseExpandableListAdapter = new MyBaseExpandableListAdapter(mContext, MainCategories, categoriesMap, categoriesMapId ,LogoUrl);
                 myExpandableListView = (ExpandableListView) activity.findViewById(R.id.myexpandablelistview);
                 myExpandableListView.setAdapter(myBaseExpandableListAdapter);
                 myExpandableListView.setOnChildClickListener(HomePresenter.this);
+                for (int i=0; i<LogoUrl.size();i++){
+                    Log.i("url",LogoUrl.get(i)+"");
+                }
             }
 
             @Override

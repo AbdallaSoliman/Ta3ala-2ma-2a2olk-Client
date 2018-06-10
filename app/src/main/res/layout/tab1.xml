@@ -7,6 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
+    android:background="#f0fcff"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.omnia.ta3ala_2ma_2a2olk_client.view.Tab1Home">
@@ -22,7 +23,6 @@
         android:text="Categories"
         android:textAlignment="center"
         android:textColor="#00a88f"
-
         android:textSize="40dp"
         android:textStyle="bold" />
 
