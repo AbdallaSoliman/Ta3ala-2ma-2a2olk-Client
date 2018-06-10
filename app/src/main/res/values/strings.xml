@@ -14,4 +14,9 @@
         <item>Man Fashion</item>
         <item>Electronics Appliances</item>
     </string-array>
+    <string name="country_prompt">Choose a Governorate</string>
+    <string-array name="country_arrays">
+        <item>Cairo</item>
+        <item>Alexandria</item>
+    </string-array>
 </resources>

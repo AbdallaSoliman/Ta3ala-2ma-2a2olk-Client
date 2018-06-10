@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.ProfileInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResonse;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tauser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
@@ -57,6 +58,35 @@ public class ProfilePresenter implements ProfileInterface.presenter{
                 Toast.makeText(mContext,"Error",Toast.LENGTH_LONG).show();
                 String message = t.getMessage();
                 Log.d("failuress", message);
+            }
+        });
+    }
+
+    @Override
+    public void addLocation(final Context mContext, String city, String district , int id) {
+        SharedPreferences tokenDetails = mContext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
+        SharredPreferenceManager manager = new SharredPreferenceManager(mContext);
+        String token = manager.getString(tokenDetails, "persontoken", "no");
+        apiInterface = ApiClient.getApiClient().create(APIService.class);
+        Tauser tauser = new Tauser();
+        tauser.setPersonId(id);
+        tauser.setCity(city);
+        tauser.setDistrict(district);
+        Log.i("il-id",+id+"");
+        retrofit2.Call<ServerResonse> call = apiInterface.addTaUserdata("application/json",token,tauser);
+        call.enqueue(new Callback<ServerResonse>() {
+            @Override
+            public void onResponse(retrofit2.Call<ServerResonse> call, Response<ServerResonse> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(mContext,"Updated Successful",Toast.LENGTH_LONG).show();
+                    Log.i("user response" ,response.body().getMessage().toString()+"");
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<ServerResonse> call, Throwable t) {
+                Log.i("user response" ,"failed");
+
             }
         });
     }

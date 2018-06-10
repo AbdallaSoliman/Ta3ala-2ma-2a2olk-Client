@@ -10,6 +10,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategory;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResonse;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tauser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
@@ -87,6 +88,8 @@ public interface APIService {
     Call<ServerResonse> updateUser(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User user);
     @POST("/TaaUser")
     Call<ServerResonse> addTaUser (@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User user);
+    @POST("/TaaUser")
+    Call<ServerResonse> addTaUserdata (@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body Tauser user);
 
 }
 

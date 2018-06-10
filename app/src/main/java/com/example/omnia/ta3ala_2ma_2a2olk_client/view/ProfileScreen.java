@@ -14,9 +14,13 @@ import android.text.Editable;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +33,8 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import databasepkg.FirebaseDatabaseDAO;
 import databasepkg.SaveImageCallBack;
@@ -41,6 +47,8 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
     String emails, usernames, firstnames, lastnames, genders, image, password;
     String idstr;
     int id;
+    Button update;
+    private Spinner spinner1, spinner2;
     ProfilePresenter presenter;
     private Uri filePath;
     File imageFile;
@@ -53,6 +61,8 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_profile_screen);
         presenter = new ProfilePresenter(this);
         profile = (ImageView) findViewById(R.id.profileimg);
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
         profile.setOnClickListener(this);
         editusername = (ImageView) findViewById(R.id.editusername);
         editpassword = (ImageView) findViewById(R.id.editpass);
@@ -61,6 +71,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
         firstname = (TextView) findViewById(R.id.firstname);
         lastname = (TextView) findViewById(R.id.lastname);
         gender = (TextView) findViewById(R.id.gender);
+        update = (Button) findViewById(R.id.btnupdate);
         userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
         manager = new SharredPreferenceManager(getApplicationContext());
         emails = manager.getString(userDetails, "email", "no");
@@ -75,7 +86,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
         gender.setText(genders);
         idstr = manager.getString(userDetails, "id", "0");
         id = Integer.parseInt(idstr);
-        if (id==0){
+        if (id == 0) {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(ProfileScreen.this);
             builder1.setMessage("You Need To Login To view Your Profile..........");
             builder1.setCancelable(true);
@@ -93,7 +104,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Intent intent = new Intent(ProfileScreen.this, MainActivity.class);
-                            intent.putExtra("companyId",id);
+                            intent.putExtra("companyId", id);
                             getApplicationContext().startActivity(intent);
                         }
                     });
@@ -172,7 +183,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(getApplicationContext(), "Your Password Doesn't Match", Toast.LENGTH_LONG).show();
 
                         }
-                   //     Toast.makeText(getApplicationContext(), YouEditTextValue, Toast.LENGTH_LONG).show();
+                        //     Toast.makeText(getApplicationContext(), YouEditTextValue, Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -185,7 +196,95 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
             }
         });
 
+        //  addItemsOnSpinner2();
+        // addAction();
+        SharedPreferences tokenDetails = getSharedPreferences("select", Context.MODE_PRIVATE);
+        int selected = tokenDetails.getInt("country", 0);
+        spinner1.setSelection(selected);
+        //     spinner2.setSelection(3);
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String sp1 = String.valueOf(spinner1.getSelectedItem());
+                int selectedcat = spinner1.getSelectedItemPosition();
+                SharedPreferences pref = getSharedPreferences("select", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putInt("country", selectedcat);
+                editor.commit();
+                Log.i("selectedcat", selectedcat + "");
+                // Toast.makeText(this, sp1, Toast.LENGTH_SHORT).show();
+                if (sp1.contentEquals("Cairo")) {
+                    List<String> list = new ArrayList<String>();
+                    list.add("Maadi");
+                    list.add("october");
+                    list.add("Giza");
+                    ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(ProfileScreen.this,
+                            android.R.layout.simple_spinner_item, list);
+                    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    dataAdapter.notifyDataSetChanged();
+                    spinner2.setAdapter(dataAdapter);
+                    spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            SharedPreferences pref = getSharedPreferences("select", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            int subcat = spinner2.getSelectedItemPosition();
+                            editor.putInt("scountry", subcat);
+                            editor.commit();
+                        }
 
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+                    int sub = pref.getInt("scountry", 0);
+                    spinner2.setSelection(sub);
+                }
+                if (sp1.contentEquals("Alexandria")) {
+                    List<String> list = new ArrayList<String>();
+                    list.add("Victoria");
+                    list.add("Smouha");
+                    list.add("Miami");
+                    ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(ProfileScreen.this,
+                            android.R.layout.simple_spinner_item, list);
+                    dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    dataAdapter2.notifyDataSetChanged();
+                    spinner2.setAdapter(dataAdapter2);
+                    spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            int subcat = spinner2.getSelectedItemPosition();
+                            Log.i("sub2", subcat + "");
+                            SharedPreferences pref = getSharedPreferences("select", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putInt("scountry", subcat);
+                            editor.commit();
+                            Log.i("subcat", subcat + "");
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+                    int sub = pref.getInt("scountry", 0);
+                    spinner2.setSelection(sub);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             String city =  String.valueOf(spinner1.getSelectedItem());
+             String district = String.valueOf(spinner2.getSelectedItem());
+             presenter.addLocation(getApplicationContext() , city , district , id);
+            }
+        });
     }
 
 

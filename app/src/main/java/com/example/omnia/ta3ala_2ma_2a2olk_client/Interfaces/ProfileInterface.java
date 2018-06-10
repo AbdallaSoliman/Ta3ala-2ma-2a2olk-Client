@@ -9,6 +9,7 @@ public interface ProfileInterface {
 
     interface presenter {
         void updateUsername(Context mContext ,String email, String username, String firstname, String lastname, String gender ,int id ,String image , String password);
+        void addLocation(Context mContext , String country , String district , int id);
     }
 
 
