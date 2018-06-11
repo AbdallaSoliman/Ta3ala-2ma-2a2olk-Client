@@ -46,9 +46,18 @@ public class SplashScreen extends AppCompatActivity implements SplashInterface.v
 //            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
 //            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //            startActivity(intent);
-        Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+
+//abdalla start
+        if(true){
+            Intent intent = new Intent(SplashScreen.this, SliderMainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+        }else {
+            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+//abdalla end
 
        // }
     }

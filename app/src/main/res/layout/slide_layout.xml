@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/AppTheme.slider"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/whitebackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="55dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/slider_layout_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/slidImageView"
+            android:layout_width="141dp"
+            android:layout_height="156dp"
+            android:layout_marginEnd="58dp"
+            android:layout_marginStart="57dp"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/cake"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/slidHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="82dp"
+            android:layout_marginStart="82dp"
+            android:layout_marginTop="34dp"
+            android:fontFamily="@font/candal"
+            android:gravity="center_horizontal"
+            android:textColor="#0055a5"
+            android:textSize="28.3sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/slidImageView"
+            tools:text="مرحبا بك" />
+
+        <TextView
+            android:id="@+id/slideBody"
+            android:layout_width="194.3dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="28dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="17dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="center_horizontal"
+            android:text="أهلا بك في تطبيق «تعالي أما أقولك » لتبادل الخبرات والرد علي جميع الاستفسارات في مختلف المجالات"
+            android:textColor="#989898"
+            android:textSize="16.7sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/slidHeader" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="7.3dp"
+            android:background="@drawable/slider_green_rectangle"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

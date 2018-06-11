@@ -6,6 +6,8 @@
     <color name="startblue">#ADD8E6</color>
     <color name="endblue">#8AACB8</color>
     <color name="graylight">#D3D3D3</color>
-
-
+    <color name="slideDotActive">#00a88f</color>
+    <color name="slideDotdisActive">#bbbbbb</color>
+    <color name="slidebarPrimary">#f0fcff</color>
+    <color name="slidebarAccent">#00a88f</color>
 </resources>

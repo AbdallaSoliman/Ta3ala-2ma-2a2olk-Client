@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\omnia\AndroidStudioProjects\Ta3ala2ma2a2olkClient\Ta3ala-2ma-2a2olk-Client.iml" filepath="C:\Users\omnia\AndroidStudioProjects\Ta3ala2ma2a2olkClient\Ta3ala-2ma-2a2olk-Client.iml" />
-      <module fileurl="file://C:\Users\omnia\AndroidStudioProjects\Ta3ala2ma2a2olkClient\Ta3ala-2ma-2a2olk-Client2.iml" filepath="C:\Users\omnia\AndroidStudioProjects\Ta3ala2ma2a2olkClient\Ta3ala-2ma-2a2olk-Client2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Ta3ala2ma2a2olkClient.iml" filepath="$PROJECT_DIR$/Ta3ala2ma2a2olkClient.iml" />
-      <module fileurl="file://C:\Users\HeshamMuhammed\AndroidStudioProjects\Ta3ala-2ma-2a2olk-Client\Ta3ala2ma2a2olkClient.iml" filepath="C:\Users\HeshamMuhammed\AndroidStudioProjects\Ta3ala-2ma-2a2olk-Client\Ta3ala2ma2a2olkClient.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
