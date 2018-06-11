@@ -106,5 +106,10 @@ public interface APIService {
     @POST("/TaaUser")
     Call<ServerResonse> addTaUserdata (@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body Tauser user);
 
+
+    // hesham muhammed
+
+    @POST("Question")
+    Call<Question> addQuestion (@Body Question question , @Header("Authorization") String token);
 }
 

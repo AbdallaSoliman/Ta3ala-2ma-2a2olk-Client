@@ -61,32 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//                Intent intent = new Intent(getApplicationContext(), AddQuestion.class);
-//                startActivity(intent);
-                SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = userDetails.edit();
-                SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
-                String email = manager.getString(userDetails, "email", "no");
-               // Toast.makeText(getApplicationContext(), "email is " + email, Toast.LENGTH_LONG).show();
-                Log.e("prefMail",email);
-                if (email.equals("no")) {
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(MainActivity.this, AddQuestion.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }
-            }
-        });
          searchViewCode();
     }
 
