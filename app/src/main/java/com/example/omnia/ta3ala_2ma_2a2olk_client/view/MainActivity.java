@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -61,23 +60,22 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-         searchViewCode();
+        searchViewCode();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-       // getMenuInflater().inflate(R.menu.menu_main, menu);
+        // getMenuInflater().inflate(R.menu.menu_main, menu);
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem item = menu.findItem(R.id.action_search);
-         logout = menu.findItem(R.id.action_logout);
-       SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
-      SharredPreferenceManager  manager = new SharredPreferenceManager(getApplicationContext());
-     String id =  manager.getString(userDetails,"id","0");
-      if (id.equals("0")) {
-          logout.setVisible(false);
-      }
+        logout = menu.findItem(R.id.action_logout);
+        SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+        SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
+        String id = manager.getString(userDetails, "id", "0");
+        if (id.equals("0")) {
+            logout.setVisible(false);
+        }
         searchView.setMenuItem(item);
         MenuItem profile = menu.findItem(R.id.action_profile);
         profile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -94,9 +92,9 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 SharedPreferences preferences = getSharedPreferences("LoginPref", 0);
                 SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
-                manager.remove(preferences,"email");
-                manager.remove(preferences,"id");
-                Toast.makeText(getApplicationContext(),"Log out Successful",Toast.LENGTH_LONG).show();
+                manager.remove(preferences, "email");
+                manager.remove(preferences, "id");
+                Toast.makeText(getApplicationContext(), "Log out Successful", Toast.LENGTH_LONG).show();
                 Intent myIntent = new Intent(MainActivity.this, MainActivity.class);
                 myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplication().startActivity(myIntent);
@@ -125,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
     @Override
     public void onBackPressed() {
         if (searchView.isSearchOpen()) {
@@ -150,18 +149,17 @@ public class MainActivity extends AppCompatActivity {
             // return the current tab
 
             switch (position) {
-
                 case 0:
-                    Tab1Home tab1=new Tab1Home();
+                    Tab1NewsFeeds tab1 = new Tab1NewsFeeds();
                     return tab1;
                 case 1:
-                    Tab2CustomerService tab2=new Tab2CustomerService();
+                    Tab2CustomerService tab2 = new Tab2CustomerService();
                     return tab2;
                 case 2:
-                    Tab3Categories tab3=new Tab3Categories();
+                    Tab3Categories tab3 = new Tab3Categories();
                     return tab3;
                 case 3:
-                    Tab4Places tab4=new Tab4Places();
+                    Tab4Places tab4 = new Tab4Places();
                     return tab4;
                 default:
                     return null;
@@ -174,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
             return 4;
         }
     }
+
     private void searchViewCode() {
         searchView = (MaterialSearchView) findViewById(R.id.search_view);
         searchView.setSuggestions(getResources().getStringArray(R.array.query_suggestions));

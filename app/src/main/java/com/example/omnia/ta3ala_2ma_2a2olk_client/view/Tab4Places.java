@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.PlacesInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
-import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.HomePresenter;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.PlacesPresenter;
 
 /**
@@ -18,6 +17,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.PlacesPresenter;
  */
 
 public class Tab4Places extends Fragment implements PlacesInterface.view {
+
     ExpandableListView myExpandableListView;
     PlacesPresenter presenter ;
 

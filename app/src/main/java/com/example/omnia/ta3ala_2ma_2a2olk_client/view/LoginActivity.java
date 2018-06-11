@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpInterfac
            presenter.loadDataFromServer(username.getText().toString() , password.getText().toString() , LoginActivity.this.getApplicationContext());
 //           Toast.makeText(getApplicationContext() , u1.getLast() , Toast.LENGTH_LONG).show();
 //                 Log.i("tag",u1.getLast());
-//                 Intent intent = new Intent(LoginActivity.this, Tab1Home.class);
+//                 Intent intent = new Intent(LoginActivity.this, Tab3Categories.class);
 //                 startActivity(intent);
                  SharedPreferences tokenDetails = getApplicationContext().getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
                  SharedPreferences.Editor editor = tokenDetails.edit();

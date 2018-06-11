@@ -17,9 +17,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SubCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
-import com.example.omnia.ta3ala_2ma_2a2olk_client.view.CompanyQuestionDetails;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.view.CompanyQuestionsList;
-import com.example.omnia.ta3ala_2ma_2a2olk_client.view.Tab1Home;
 
 import java.util.ArrayList;
 import java.util.HashMap;
