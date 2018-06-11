@@ -8,16 +8,16 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
@@ -27,12 +27,13 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.adaptor.QuestionAnswersAdaptoe
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.PersonId;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.CompanyQuestionDetailsPresenter;
 
-import org.w3c.dom.Text;
-
-import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CompanyQuestionDetails extends AppCompatActivity {
@@ -40,20 +41,21 @@ public class CompanyQuestionDetails extends AppCompatActivity {
     SharredPreferenceManager shM;
     CompanyQuestionDetailsPresenter cQDPresenter;
     Question question;
-    TextView titleTextView,bodyTextView;
-    TextView personNameTextView,deleteTextView;
-    ImageView deleteImageView,personImageView;
+    TextView titleTextView, bodyTextView;
+    TextView personNameTextView, editTextView, deleteTextView,reportTextView;
+    ImageView deleteImageView, personImageView, editImageView,reportImageView;
     List<Answer> questionAnswers;
     PersonId person;
     RecyclerView recyclerView;
     QuestionAnswersAdaptoe madaptor;
     String id;
-    TextView editTextView;
-    ImageView editImageView;
+    TextView rateCount;
+    LinearLayout rateLayout;
+    Button upRate, downRate;
 
     // for back button on action bar
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return true;
     }
@@ -70,10 +72,16 @@ public class CompanyQuestionDetails extends AppCompatActivity {
                     .load(person.getImage())
                     .into(personImageView);
         }
+
+        rateCount.setText(String.valueOf(question.getRate()));
+        if (checkLangouge(question.getTitle()) != true) {
+            Log.i("aa", "arabic ");
+            rateLayout.setGravity(Gravity.CENTER);
+        }
         madaptor.notifyDataSetChanged();
     }
 
-    public void afterAddAnswer(Answer newAnswer){
+    public void afterAddAnswer(Answer newAnswer) {
         questionAnswers.add(newAnswer);
         madaptor.notifyDataSetChanged();
     }
@@ -86,20 +94,16 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         // for back arrow
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Intent intent = getIntent();
+        id = intent.getStringExtra("questionID");
+        cQDPresenter = new CompanyQuestionDetailsPresenter(this);
+        cQDPresenter.getQuestionDetailsPresenter(id, getToken());
+
         questionAnswers = new ArrayList<>();
         titleTextView = (TextView) findViewById(R.id.qTitle);
         bodyTextView = (TextView) findViewById(R.id.qBody);
         personNameTextView = (TextView) findViewById(R.id.personeName);
         personImageView = (ImageView) findViewById(R.id.personImage);
-
-        cQDPresenter = new CompanyQuestionDetailsPresenter(this);
-
-        final String token = getToken();
-
-        Intent intent = getIntent();
-        id = intent.getStringExtra("questionID");
-
-        cQDPresenter.getQuestionDetailsPresenter(id, token);
 
         // recycleview
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -112,31 +116,26 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         // delete&edit
         deleteTextView = (TextView) findViewById(R.id.deleteText);
         deleteImageView = (ImageView) findViewById(R.id.deleteImage);
-
         deleteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDeleteDialog();
             }
         });
-
         deleteTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDeleteDialog();
             }
         });
-
         editTextView = (TextView) findViewById(R.id.editText);
         editImageView = (ImageView) findViewById(R.id.editImage);
-
         editImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showEditDialog(question);
             }
         });
-
         editTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,9 +143,48 @@ public class CompanyQuestionDetails extends AppCompatActivity {
             }
         });
 
+        rateCount = (TextView) findViewById(R.id.rateCount);
+        rateLayout = (LinearLayout) findViewById(R.id.rateLayout);
+
+        upRate = (Button) findViewById(R.id.upRate);
+        downRate = (Button) findViewById(R.id.downRate);
+        upRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cQDPresenter.questionUpRatePresenter(String.valueOf(question.getQuestionId()),getToken());
+                int rate=question.getRate()+1;
+                rateCount.setText(String.valueOf(rate));
+            }
+        });
+        downRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cQDPresenter.questionDownRatePresenter(String.valueOf(question.getQuestionId()),getToken());
+                int rate=question.getRate()-1;
+                rateCount.setText(String.valueOf(rate));
+            }
+        });
+
+        reportTextView=(TextView)findViewById(R.id.reportText);
+        reportImageView=(ImageView)findViewById(R.id.reportImage);
+
+        reportImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reportDialog();
+            }
+        });
+        reportTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reportDialog();
+            }
+        });
+
+
     }
 
-    public void onRestart(){
+    public void onRestart() {
         super.onRestart();
 
         questionAnswers = new ArrayList<>();
@@ -157,12 +195,10 @@ public class CompanyQuestionDetails extends AppCompatActivity {
 
         cQDPresenter = new CompanyQuestionDetailsPresenter(this);
 
-        final String token = getToken();
-
         Intent intent = getIntent();
         id = intent.getStringExtra("questionID");
 
-        cQDPresenter.getQuestionDetailsPresenter(id, token);
+        cQDPresenter.getQuestionDetailsPresenter(id, getToken());
 
         // recycleview
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -207,6 +243,12 @@ public class CompanyQuestionDetails extends AppCompatActivity {
             }
         });
 
+        rateCount = (TextView) findViewById(R.id.rateCount);
+        rateLayout = (LinearLayout) findViewById(R.id.rateLayout);
+
+        upRate = (Button) findViewById(R.id.upRate);
+        downRate = (Button) findViewById(R.id.downRate);
+
     }
 
     public void showDeleteDialog() {
@@ -216,8 +258,9 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        cQDPresenter.deleteQuestionPresenter(id, getToken());
-                        //  Intent i=new Intent(dialog.getClass(),);
+                        // make q object deleted
+                        question.setIsdeleted(1);
+                        cQDPresenter.deleteQuestionPresenter(question, getToken());
                         finish();
                     }
                 });
@@ -293,5 +336,84 @@ public class CompanyQuestionDetails extends AppCompatActivity {
     public Question getQuestion() {
         return question;
     }
+
+    public void reportDialog(){
+
+        final View view1 = getLayoutInflater().inflate(R.layout.question_report_dialog, null);
+        final EditText reportTitleEditText = (EditText) view1.findViewById(R.id.reportTitle);
+        final EditText reportBodyEditText=(EditText)view1.findViewById(R.id.reportBody);
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Question Report");
+        dialog.setView(view1)
+
+                .setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false);
+        final AlertDialog alert = dialog.create();
+        alert.show();
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (reportTitleEditText.getText().toString().trim().isEmpty()) {
+                    reportTitleEditText.setError("please enter data");
+                }
+                else if(reportBodyEditText.getText().toString().trim().isEmpty()){
+                    reportBodyEditText.setError("please enter data");
+                }
+                else {
+                    Report report=new Report();
+                    report.setTitle(reportTitleEditText.getText().toString());
+                    report.setMsg(reportBodyEditText.getText().toString());
+                    report.setChecked(question.getQuestionId());
+                    // get date
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
+                     String currentDate = mdformat.format(calendar.getTime());
+                    report.setReportDate(currentDate);
+                    Log.i("datee", currentDate);
+                    report.setType("question");
+                    // get person id from sharedpref
+                    PersonId person=new PersonId();
+                    SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+                    SharredPreferenceManager manager =new SharredPreferenceManager(getApplicationContext());
+                    String  idstr = manager.getString(userDetails, "id", "0");
+                    person.setPersonId(Integer.parseInt(idstr));
+                    report.setPersonId(person);
+
+                    cQDPresenter.reportQuestionPresenter(report, getToken());
+                    alert.dismiss();
+                }
+            }
+        });
+
+    }
+
+    public boolean checkLangouge(String title) {
+        String arr[] = title.split("");
+        String firstWord = arr[0];
+        boolean result = isProbablyArabic(firstWord);
+        return result;
+    }
+
+    public static boolean isProbablyArabic(String stitle) {
+        for (int i = 0; i < stitle.length(); ) {
+            int c = stitle.codePointAt(i);
+            if (c >= 0x0600 && c <= 0x06E0)
+                return true;
+            i += Character.charCount(c);
+        }
+        return false;
+    }
+
 
 }

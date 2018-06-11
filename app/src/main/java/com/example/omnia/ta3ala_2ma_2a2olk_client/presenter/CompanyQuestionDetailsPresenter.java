@@ -3,6 +3,7 @@ package com.example.omnia.ta3ala_2ma_2a2olk_client.presenter;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.CompanyQuestionDetailsInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.network.CompanyQuestionDetailsNetwork;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.view.CompanyQuestionDetails;
 
@@ -29,11 +30,23 @@ public class CompanyQuestionDetailsPresenter implements CompanyQuestionDetailsIn
         cQDetails.setQuestionDetails(q,answers);
     }
 
-    public void deleteQuestionPresenter(String questionId,String token){
-        cQDNetwork.deleteQuestionNetwork(questionId,token);
+    public void deleteQuestionPresenter(Question q,String token){
+        cQDNetwork.deleteQuestionNetwork(q,token);
     }
     public void editQuestionPresenter(Question question,String token){
         cQDNetwork.editQuestionNetwork(question,token);
+    }
+
+    public void questionUpRatePresenter(String question_id,String  token){
+        cQDNetwork.questionUpRateNetwork(question_id,token);
+    }
+
+    public void questionDownRatePresenter(String question_id, String token){
+        cQDNetwork.questionDownRateNetwork(question_id,token);
+    }
+
+    public void reportQuestionPresenter(Report report,String token){
+       cQDNetwork.reportQuestionNetwork(report,token);
     }
 
 }

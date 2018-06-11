@@ -9,6 +9,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitleL
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategory;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResonse;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tauser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
@@ -70,8 +71,8 @@ public interface APIService {
     Call<String> editAnswer(@Body Answer answer, @Header("Authorization") String token);
 
     @Headers({"Content-Type: application/json"})
-    @DELETE("/Question/{question_id}")
-    Call<String> deleteQuestion(@Path(value = "question_id", encoded = true) String questionId, @Header("Authorization") String token);
+    @PUT("/Question")
+    Call<String> deleteQuestion(@Body Question q, @Header("Authorization") String token);
 
     @Headers({"Content-Type: application/json"})
     @PUT("/Question")
@@ -80,6 +81,20 @@ public interface APIService {
     @Headers({"Content-Type: application/json"})
     @POST("/Answers")
     Call<String> saveAnswer(@Body Answer answer, @Header("Authorization") String token);
+
+    @Headers({"Content-Type: application/json"})
+    @GET("/QuestionRateUp/{question_id}")
+    Call<String> questionUpRate(@Path(value = "question_id", encoded = true) String questionId, @Header("Authorization") String token);
+
+    @Headers({"Content-Type: application/json"})
+    @GET("/QuestionRateDown/{question_id}")
+    Call<String> questionDownRate(@Path(value = "question_id", encoded = true) String questionId, @Header("Authorization") String token);
+
+    @Headers({"Content-Type: application/json"})
+    @POST("/Report")
+    Call<String> reportQuestion(@Body Report report, @Header("Authorization") String token);
+
+
 
     // ahmed hesham
     @GET("MainCategories?size=1000")

@@ -93,16 +93,27 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
             @Override
             public void onClick(View view) {
                 showEditDialog(position);
-
             }
         });
         holder.editTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showEditDialog(position);
+            }
+        });
+        holder.reportImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
             }
         });
+        holder.reportTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 
     @Override
@@ -114,8 +125,8 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
 
         public TextView answer,personName;
         public ImageView personImage;
-        public ImageView editImageView,deleteImageView;
-        public TextView editTextView,deleteTextView;
+        public ImageView editImageView,deleteImageView,reportImageView;
+        public TextView editTextView,deleteTextView,reportTextView;
         public View horizontalLine1,horizontalLine2;
 
         public ViewHolder(View view) {
@@ -127,6 +138,8 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
             editTextView=(TextView)view.findViewById(R.id.edittext);
             deleteImageView=(ImageView)view.findViewById(R.id.deleteimage);
             deleteTextView=(TextView)view.findViewById(R.id.deletetext);
+            reportImageView=(ImageView)view.findViewById(R.id.reportImage);
+            reportTextView=(TextView)view.findViewById(R.id.reportText);
             horizontalLine1=(View)view.findViewById(R.id.view1);
             horizontalLine2=(View)view.findViewById(R.id.view2);
         }

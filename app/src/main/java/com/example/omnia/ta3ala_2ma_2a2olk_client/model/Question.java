@@ -32,13 +32,13 @@ public class Question implements Serializable {
     private Object video;
     @SerializedName("rate")
     @Expose
-    private Object rate;
+    private int rate;
     @SerializedName("verified")
     @Expose
     private int verified;
     @SerializedName("isdeleted")
     @Expose
-    private Object isdeleted;
+    private int isdeleted;
     @SerializedName("notifi")
     @Expose
     private Object notifi;
@@ -109,11 +109,11 @@ public class Question implements Serializable {
         this.video = video;
     }
 
-    public Object getRate() {
+    public int getRate() {
         return rate;
     }
 
-    public void setRate(Object rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
 
@@ -125,11 +125,11 @@ public class Question implements Serializable {
         this.verified = verified;
     }
 
-    public Object getIsdeleted() {
+    public int getIsdeleted() {
         return isdeleted;
     }
 
-    public void setIsdeleted(Object isdeleted) {
+    public void setIsdeleted(int isdeleted) {
         this.isdeleted = isdeleted;
     }
 

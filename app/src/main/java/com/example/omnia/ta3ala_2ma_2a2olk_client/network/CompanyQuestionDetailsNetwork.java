@@ -8,6 +8,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitle;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitleList;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
 
@@ -25,11 +26,11 @@ public class CompanyQuestionDetailsNetwork {
 
     CompanyQuestionDetailsInterface cListPresener;
 
-    public CompanyQuestionDetailsNetwork(CompanyQuestionDetailsInterface cql){
-        this.cListPresener=cql;
+    public CompanyQuestionDetailsNetwork(CompanyQuestionDetailsInterface cql) {
+        this.cListPresener = cql;
     }
 
-    public void getQuestionDetailsNetwork(String Qid,String token){
+    public void getQuestionDetailsNetwork(String Qid, String token) {
 
         APIService apiService =
                 ApiClient.getApiClient().create(APIService.class);
@@ -39,10 +40,10 @@ public class CompanyQuestionDetailsNetwork {
             public void onResponse(Call<Question> call, Response<Question> response) {
 
                 Question q = response.body();
-                List<Answer> s=response.body().getAnswersCollection();
-                cListPresener.setCompanyQuetionDetailsPresenter(q,s);
+                List<Answer> s = response.body().getAnswersCollection();
+                cListPresener.setCompanyQuetionDetailsPresenter(q, s);
 
-             }
+            }
 
             @Override
             public void onFailure(Call<Question> call, Throwable t) {
@@ -50,11 +51,11 @@ public class CompanyQuestionDetailsNetwork {
         });
     }
 
-    public void deleteQuestionNetwork(String questionId,String token){
+    public void deleteQuestionNetwork(Question q, String token) {
 
         APIService apiService =
                 ApiClient.getApiClient().create(APIService.class);
-        Call<String> call = apiService.deleteQuestion(questionId, token);
+        Call<String> call = apiService.deleteQuestion(q, token);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -66,10 +67,9 @@ public class CompanyQuestionDetailsNetwork {
             public void onFailure(Call<String> call, Throwable t) {
             }
         });
-
     }
 
-    public void editQuestionNetwork(Question question,String token){
+    public void editQuestionNetwork(Question question, String token) {
 
         APIService apiService =
                 ApiClient.getApiClient().create(APIService.class);
@@ -81,6 +81,56 @@ public class CompanyQuestionDetailsNetwork {
                 // response.body();
             }
 
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+            }
+        });
+    }
+
+    public void questionUpRateNetwork(String question_id, String token) {
+
+        APIService apiService =
+                ApiClient.getApiClient().create(APIService.class);
+        Call<String> call = apiService.questionUpRate(question_id, token);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                Log.i("dd", "onResponse: ");
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+            }
+        });
+    }
+
+    public void questionDownRateNetwork(String question_id, String token){
+
+        APIService apiService =
+                ApiClient.getApiClient().create(APIService.class);
+        Call<String> call = apiService.questionDownRate(question_id, token);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                Log.i("dd", "onResponse: ");
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+            }
+        });
+    }
+
+    public void reportQuestionNetwork(Report report,String token){
+        APIService apiService =
+                ApiClient.getApiClient().create(APIService.class);
+        Call<String> call = apiService.reportQuestion(report, token);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                Log.i("ll", "onResponse: ");
+            }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
             }

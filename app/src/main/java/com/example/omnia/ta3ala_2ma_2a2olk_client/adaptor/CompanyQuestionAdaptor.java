@@ -43,7 +43,7 @@ public class CompanyQuestionAdaptor extends RecyclerView.Adapter<CompanyQuestion
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.setitemPosition(position);
-        
+
 
         CompanyQuestionForTitle companyQuestionsData = questionsData.get(position);
         holder.Qtitle.setText(companyQuestionsData.getTitle());
