@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,10 +19,14 @@ import com.bumptech.glide.Glide;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.PersonId;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.QuestionAnswerAdapotorPresenter;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.view.CompanyQuestionDetails;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -34,14 +39,13 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
     Context mcContext;
     CompanyQuestionDetails ii;
     Answer answer;
-
+    QuestionAnswerAdapotorPresenter qAAPresenter=new QuestionAnswerAdapotorPresenter();
 
     public QuestionAnswersAdaptoe(List<Answer> qd,Context c,CompanyQuestionDetails s){
         this.answers=qd;
         this.mcContext=c;
         ii=s;
     }
-
 
     @NonNull
     @Override
@@ -54,7 +58,7 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(final @NonNull ViewHolder holder, final int position) {
         final Answer answer = answers.get(position);
         holder.answer.setText(answer.getAnswer());
         holder.personName.setText(answer.getPersonId().getFirst()+" "+answer.getPersonId().getLast());
@@ -65,6 +69,7 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         String userEmail=answers.get(position).getPersonId().getEmail();
         String email=getUserOffAppEmail();
 
+        holder.answerRateCount.setText(String.valueOf(answers.get(position).getRate()));
 //        if(!email.equals(auerEmail)){
 //            holder.editImageView.setVisibility(View.GONE);
 //            holder.editTextView.setVisibility(View.GONE);
@@ -104,16 +109,31 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         holder.reportImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                showReportDialog(position);
             }
         });
         holder.reportTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                showReportDialog(position);
             }
         });
 
+        holder.answerUpRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.answerRateCount.setText(String.valueOf(answers.get(position).getRate()+1));
+                qAAPresenter.answerRateUpPresenter(String.valueOf(answers.get(position).getAnswersId()),getToken());
+            }
+        });
+        holder.answerDownRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.answerRateCount.setText(String.valueOf(answers.get(position).getRate()-1));
+                qAAPresenter.answerRateDownPresenter(String.valueOf(answers.get(position).getAnswersId()),getToken());
+
+            }
+        });
     }
 
     @Override
@@ -128,6 +148,9 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         public ImageView editImageView,deleteImageView,reportImageView;
         public TextView editTextView,deleteTextView,reportTextView;
         public View horizontalLine1,horizontalLine2;
+        public Button answerUpRate,answerDownRate;
+        public TextView answerRateCount;
+
 
         public ViewHolder(View view) {
             super(view);
@@ -142,6 +165,11 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
             reportTextView=(TextView)view.findViewById(R.id.reportText);
             horizontalLine1=(View)view.findViewById(R.id.view1);
             horizontalLine2=(View)view.findViewById(R.id.view2);
+
+            answerUpRate=(Button)view.findViewById(R.id.AupRate);
+            answerDownRate=(Button)view.findViewById(R.id.AdownRate);
+            answerRateCount=(TextView)view.findViewById(R.id.ArateCount);
+
         }
     }
 
@@ -179,7 +207,6 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
     public void deleteAnswer(int answerId){
         final String token = getToken();
         // send request to delete data
-        QuestionAnswerAdapotorPresenter qAAPresenter=new QuestionAnswerAdapotorPresenter();
         qAAPresenter.deleteAnswerPresenter(answerId,token);
         notifyDataSetChanged();
     }
@@ -225,8 +252,73 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         qAAPresenter.editAnswerPresenter(answer,token);
     }
 
+    public void showReportDialog(final int position){
+
+        LayoutInflater linflater = (LayoutInflater) mcContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final  View view1=linflater.inflate(R.layout.question_report_dialog,null);
+
+        final EditText reportTitleEditText = (EditText) view1.findViewById(R.id.reportTitle);
+        final EditText reportBodyEditText=(EditText)view1.findViewById(R.id.reportBody);
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(mcContext);
+        dialog.setTitle("Answer Report");
+        dialog.setView(view1)
+
+                .setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false);
+        final AlertDialog alert = dialog.create();
+        alert.show();
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (reportTitleEditText.getText().toString().trim().isEmpty()) {
+                    reportTitleEditText.setError("please enter data");
+                }
+                else if(reportBodyEditText.getText().toString().trim().isEmpty()){
+                    reportBodyEditText.setError("please enter data");
+                }
+                else {
+                    Report report=new Report();
+                    report.setTitle(reportTitleEditText.getText().toString());
+                    report.setMsg(reportBodyEditText.getText().toString());
+                    report.setChecked(answers.get(position).getAnswersId());
+                    // get date
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
+                    String currentDate = mdformat.format(calendar.getTime());
+                    report.setReportDate(currentDate);
+                    report.setType("answer");
+                    // get person id from sharedpref
+                    PersonId person=new PersonId();
+                    person.setPersonId(Integer.parseInt(getPersonId()));
+                    report.setPersonId(person);
+                    qAAPresenter.reportAnswerPresenter(report, getToken());
+                    alert.dismiss();
+                }
+            }
+        });
+    }
+
+    public String getPersonId(){
+        SharedPreferences userDetails = mcContext.getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+        SharredPreferenceManager manager =new SharredPreferenceManager(mcContext);
+        String  idstr = manager.getString(userDetails, "id", "0");
+        return idstr;
+    }
+
     public String getToken(){
-         SharedPreferences pref = mcContext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
+        SharedPreferences pref = mcContext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharredPreferenceManager shM = new SharredPreferenceManager(mcContext);
         final String token = shM.getString(pref, "persontoken", "error");
         return token;

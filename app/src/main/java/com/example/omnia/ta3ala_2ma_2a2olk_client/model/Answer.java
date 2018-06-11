@@ -19,7 +19,7 @@ public class Answer implements Serializable {
     private String answer;
     @SerializedName("rate")
     @Expose
-    private Integer rate;
+    private int rate;
     @SerializedName("isdeleted")
     @Expose
     private Object isdeleted;
@@ -62,11 +62,11 @@ public class Answer implements Serializable {
         this.answer = answer;
     }
 
-    public Integer getRate() {
+    public int getRate() {
         return rate;
     }
 
-    public void setRate(Integer rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
 

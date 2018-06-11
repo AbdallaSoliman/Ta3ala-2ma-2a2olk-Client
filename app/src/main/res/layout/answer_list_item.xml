@@ -6,6 +6,38 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/rateLayout"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/AupRate"
+            android:layout_width="20dp"
+            android:layout_height="15dp"
+            android:background="@drawable/uprate"/>
+        <TextView
+            android:id="@+id/ArateCount"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/AdownRate"
+            android:background="@drawable/downrate"
+            android:layout_width="20dp"
+            android:layout_height="15dp" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/answerId"
         android:layout_width="match_parent"
@@ -15,6 +47,7 @@
         android:layout_marginTop="10dp"
         android:background="#ffffff" />
 
+    </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

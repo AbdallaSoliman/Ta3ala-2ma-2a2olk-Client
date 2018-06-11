@@ -94,6 +94,17 @@ public interface APIService {
     @POST("/Report")
     Call<String> reportQuestion(@Body Report report, @Header("Authorization") String token);
 
+    @Headers({"Content-Type: application/json"})
+    @POST("/Report")
+    Call<String> reportAnswer(@Body Report report, @Header("Authorization") String token);
+
+    @Headers({"Content-Type: application/json"})
+    @GET("/AnswerRateUp/{answer_id}")
+    Call<String> answerUpRate(@Path(value = "answer_id", encoded = true) String answerId, @Header("Authorization") String token);
+
+    @Headers({"Content-Type: application/json"})
+    @GET("/AnswerRateDown/{answer_id}")
+    Call<String> answerDownRate(@Path(value = "answer_id", encoded = true) String answerId, @Header("Authorization") String token);
 
 
     // ahmed hesham

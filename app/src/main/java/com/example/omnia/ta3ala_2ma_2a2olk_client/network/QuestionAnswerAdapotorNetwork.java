@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitle;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitleList;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
 
@@ -58,5 +59,60 @@ public class QuestionAnswerAdapotorNetwork {
             public void onFailure(Call<String> call, Throwable t) {
             }
         });
+    }
+
+    public void reportAnswerNetwork(Report report, String token){
+
+        APIService apiService =
+                ApiClient.getApiClient().create(APIService.class);
+        Call<String> call = apiService.reportAnswer(report, token);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.body()!=null) {
+                    Log.i("nn", response.body());
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+            }
+        });
+    }
+
+    public void answerRateUpNetwork(String answerId,String token){
+
+        APIService apiService =
+                ApiClient.getApiClient().create(APIService.class);
+        Call<String> call = apiService.answerUpRate(answerId, token);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.body()!=null) {
+                    Log.i("nn", response.body());
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+            }
+        });
+
+    }
+    public void answerRateDownNetwork(String answerId,String token){
+
+        APIService apiService =
+                ApiClient.getApiClient().create(APIService.class);
+        Call<String> call = apiService.answerDownRate(answerId, token);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.body()!=null) {
+                    Log.i("ns", response.body());
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+            }
+        });
+
     }
 }
