@@ -44,7 +44,7 @@
         android:layout_height="30dp"
         android:layout_below="@+id/dotsLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="34dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginEnd="55dp"
         android:layout_marginStart="55dp"
         android:background="@drawable/slide_green_button"
