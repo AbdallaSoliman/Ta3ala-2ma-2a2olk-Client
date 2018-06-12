@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         if (id.equals("0")) {
             logout.setVisible(false);
         }
+
         searchView.setMenuItem(item);
         MenuItem profile = menu.findItem(R.id.action_profile);
         profile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -105,19 +106,16 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
         switch (item.getItemId()) {
             case R.id.action_search:
+                searchView.setVisibility(View.VISIBLE);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -178,8 +176,10 @@ public class MainActivity extends AppCompatActivity {
         searchView.setSuggestions(getResources().getStringArray(R.array.query_suggestions));
         searchView.setEllipsize(true);
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String query) {
+
                 Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT).show();
                 Log.e("search", query);
                 return false;
@@ -193,10 +193,15 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
+//abdalla start
+
+                searchView.setVisibility(View.VISIBLE);
+//abdalla end
             }
 
             @Override
             public void onSearchViewClosed() {
+
             }
         });
         searchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

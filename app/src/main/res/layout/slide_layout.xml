@@ -27,8 +27,8 @@
 
         <ImageView
             android:id="@+id/slidImageView"
-            android:layout_width="141dp"
-            android:layout_height="156dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginBottom="34dp"
             android:layout_marginEnd="58dp"
             android:layout_marginStart="57dp"
@@ -36,6 +36,7 @@
             android:src="@drawable/cake"
             app:layout_constraintBottom_toTopOf="@+id/slidHeader"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +44,7 @@
         <TextView
             android:id="@+id/slidHeader"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="42dp"
             android:layout_marginEnd="82dp"
             android:layout_marginStart="82dp"
             android:fontFamily="@font/candal"
@@ -60,15 +61,19 @@
         <TextView
             android:id="@+id/slideBody"
             android:layout_width="194.3dp"
-            android:layout_height="83dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="102dp"
             android:layout_marginEnd="28dp"
             android:layout_marginStart="28dp"
             android:layout_marginTop="17dp"
             android:fontFamily="sans-serif-smallcaps"
             android:gravity="center_horizontal"
+            android:lineSpacingMultiplier=".8"
             android:text="أهلا بك في تطبيق «تعالي أما أقولك » لتبادل الخبرات والرد علي جميع الاستفسارات في مختلف المجالات"
+            android:textAlignment="center"
             android:textColor="#989898"
             android:textSize="16.7sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/slidHeader" />

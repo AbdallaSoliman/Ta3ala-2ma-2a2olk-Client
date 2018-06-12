@@ -41,7 +41,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.CompanyQuestionsList" />
+        <activity android:name=".view.CompanyQuestionsList"
+           />
         <activity android:name=".view.CompanyQuestionDetails" />
         <activity android:name=".view.AddAnswer" />
         <activity android:name=".view.ProfileScreen" />
