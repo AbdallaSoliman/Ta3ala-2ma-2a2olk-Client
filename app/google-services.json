@@ -1,0 +1,123 @@
+{
+  "project_info": {
+    "project_number": "881693549685",
+    "firebase_url": "https://gradutionproject-64797.firebaseio.com",
+    "project_id": "gradutionproject-64797",
+    "storage_bucket": "gradutionproject-64797.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881693549685:android:8f2043b62efbbb92",
+        "android_client_info": {
+          "package_name": "com.example.alialzantot.uploadimagetofirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881693549685-6dd3usk90brdb65gdfntn6ukq6j9crl1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.alialzantot.uploadimagetofirebase",
+            "certificate_hash": "047ddc81f935d57a560b6b00508f9c12b5bbaf27"
+          }
+        },
+        {
+          "client_id": "881693549685-m2pl53sfdd6trt4k272fuujvs4d39u5d.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "881693549685-m2pl53sfdd6trt4k272fuujvs4d39u5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZrRCF4H7H9WsyJZAIf0FN32PtUoyeptk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881693549685-m2pl53sfdd6trt4k272fuujvs4d39u5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881693549685:android:74d3e76d75f9f2d8",
+        "android_client_info": {
+          "package_name": "com.example.omnia.ta3ala_2ma_2a2olk_client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881693549685-9i9pn7gr184pfqbtqh5nlqacpnik6o66.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.omnia.ta3ala_2ma_2a2olk_client",
+            "certificate_hash": "3fc3fce4e17599facd35f24d0df38cf19793e3ac"
+          }
+        },
+        {
+          "client_id": "881693549685-2596rlkd40kmrnh1e00amcdq1tv5hi7u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.omnia.ta3ala_2ma_2a2olk_client",
+            "certificate_hash": "b2be3dfdbbda642fdf2910ecebeeadda98ebeb48"
+          }
+        },
+        {
+          "client_id": "881693549685-8shmj562hq65gmr2rurgj96aqbe3mkot.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.omnia.ta3ala_2ma_2a2olk_client",
+            "certificate_hash": "68580cff73853b883f473daa488ae2c6e1df125f"
+          }
+        },
+        {
+          "client_id": "881693549685-m2pl53sfdd6trt4k272fuujvs4d39u5d.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "881693549685-m2pl53sfdd6trt4k272fuujvs4d39u5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZrRCF4H7H9WsyJZAIf0FN32PtUoyeptk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881693549685-m2pl53sfdd6trt4k272fuujvs4d39u5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

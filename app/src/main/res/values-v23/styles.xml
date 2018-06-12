@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.slider" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/slidebarPrimary</item>
+        <item name="colorPrimary">@color/slidebarAccent</item>
+        <item name="colorPrimaryDark">@color/slidebarAccent</item>
+        <item name="colorAccent">@color/slidebarAccent</item>
+
+    </style>
+</resources>
