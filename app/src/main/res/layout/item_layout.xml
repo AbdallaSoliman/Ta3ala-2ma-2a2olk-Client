@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="55dip">
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="-26sp"
-        android:text="."
-        android:layout_marginLeft="30dp"
+        android:paddingTop="10dp"
+        android:src="@drawable/arrow"
         android:textColor="#0055a5"
         android:textSize="50sp" />
 
@@ -20,18 +21,19 @@
         <!--android:layout_height="match_parent"-->
         <!--android:textStyle="italic" />-->
     <TextView
+        android:id="@+id/item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:id="@+id/item"
         android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="sans-serif-light"
-        android:textStyle="normal"
-        android:textColor="#0055a5"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="-16sp"
-        android:text="Chemistry"
+        android:paddingLeft="5dp"
 
-        />
+        android:text="Chemistry"
+        android:textColor="#0055a5"
+        android:textSize="20dp"
+        android:textStyle="normal" />
 
 </LinearLayout>
