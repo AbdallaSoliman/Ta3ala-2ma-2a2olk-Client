@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/QTitle"
-        android:layout_width="283dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
 
@@ -38,14 +38,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/QTitle"
-        android:layout_marginBottom="3dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginStart="292dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="267dp"
         android:layout_marginTop="3dp"
         android:text="9 hours ago"
         android:textColor="#86a5ff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/QTitle" />
 
@@ -61,15 +62,16 @@
         android:background="@drawable/rounded_rectangle"
         android:gravity="center"
         android:paddingBottom="3dp"
-        android:paddingEnd="12dp"
-        android:paddingStart="12dp"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp"
         android:paddingTop="3dp"
         android:text="5"
         android:textAlignment="textStart"
         android:textColor="#00a88f"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlCompat" />
 
     <LinearLayout
         android:layout_width="0dp"
