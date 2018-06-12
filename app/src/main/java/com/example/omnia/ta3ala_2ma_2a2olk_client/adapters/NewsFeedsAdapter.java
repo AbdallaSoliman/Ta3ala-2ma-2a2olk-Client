@@ -34,7 +34,8 @@ public class NewsFeedsAdapter extends RecyclerView.Adapter<NewsFeedsAdapter.View
     public void onBindViewHolder(@NonNull NewsFeedsAdapter.ViewHolder holder, int position) {
         holder.tv_head.setText(questions.get(position).getTitle());
         holder.tv_body.setText(questions.get(position).getBody());
-        Picasso.get().load(questions.get(position).getImage()).into(holder.logo);
+        holder.QACount.setText(questions.get(position).getQuestionId()+"");
+        //Picasso.get().load(questions.get(position).getImage()).into(holder.logo);
 
     }
 
@@ -44,14 +45,15 @@ public class NewsFeedsAdapter extends RecyclerView.Adapter<NewsFeedsAdapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_head, tv_body;
+        TextView tv_head, tv_body , QACount;
         ImageView logo;
 
         public ViewHolder(View view) {
             super(view);
-            tv_head = (TextView) view.findViewById(R.id.cardview_list_title);
-            tv_body = (TextView) view.findViewById(R.id.short_description);
-            logo = (ImageView) view.findViewById(R.id.cardview_image);
+            tv_head = (TextView) view.findViewById(R.id.QTitle);
+            tv_body = (TextView) view.findViewById(R.id.QDate);
+            QACount = (TextView) view.findViewById(R.id.QACount);
+          //  logo = (ImageView) view.findViewById(R.id.cardview_image);
 
         }
     }
