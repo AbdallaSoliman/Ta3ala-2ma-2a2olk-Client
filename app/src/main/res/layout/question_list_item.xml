@@ -1,41 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="wrap_content"
-    android:paddingBottom="10dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="10dp">
+    android:background="@color/slidebarPrimary"
+    android:orientation="vertical"
+    android:paddingBottom="0dp"
+    android:paddingEnd="0dp"
+    android:paddingStart="0dp"
+    android:paddingTop="0dp">
 
     <TextView
         android:id="@+id/QTitle"
-        android:textSize="16dp"
-        android:textColor="#0055a5"
-        android:textStyle="bold"
-        android:maxLines="2"
+        android:layout_width="283dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="10dp"
         android:elevation="10dp"
         android:ellipsize="end"
+        android:maxLines="2"
+        android:text="How can I solve this problem ?"
+        android:textColor="#0055a5"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/QACount"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        android:layout_alignParentTop="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/QDate"
-        android:textColor="#86a5ff"
-        android:layout_below="@id/QTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/QTitle"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginStart="292dp"
+        android:layout_marginTop="3dp"
+        android:text="9 hours ago"
+        android:textColor="#86a5ff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/QTitle" />
 
     <TextView
         android:id="@+id/QACount"
-        android:textColor="#00a88f"
-        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_below="@id/QTitle"
-        android:layout_alignParentRight="true"
-        android:layout_width="30dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_rectangle"
-        android:layout_height="wrap_content" />
+        android:gravity="center"
+        android:paddingBottom="3dp"
+        android:paddingEnd="12dp"
+        android:paddingStart="12dp"
+        android:paddingTop="3dp"
+        android:text="5"
+        android:textAlignment="textStart"
+        android:textColor="#00a88f"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0.3dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginStart="18dp"
+        android:background="#00a88f"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
