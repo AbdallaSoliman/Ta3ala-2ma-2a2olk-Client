@@ -39,7 +39,7 @@ public class SplashPresenter implements SplashInterface.presenter {
         SharedPreferences.Editor editor = tokenDetails.edit();
         SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
         String token = manager.getString(tokenDetails, "persontoken", "no");
-        Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
+
 //        if (token != "no") {
 //            Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
 //           view.checksharredpreference();
@@ -49,22 +49,22 @@ public class SplashPresenter implements SplashInterface.presenter {
             call.enqueue(new Callback<TockenReturn>() {
                 @Override
                 public void onResponse(Call<TockenReturn> call, Response<TockenReturn> response) {
-                    Toast.makeText(mcontext, "in success method", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mcontext, " success ", Toast.LENGTH_LONG).show();
                     if (response.body() != null) {
                         String tocken = response.body().getTocken();
                         Log.i("tocken", tocken);
-                        Toast.makeText(mcontext, tocken, Toast.LENGTH_LONG).show();
+
                         SharedPreferences pref = mcontext.getSharedPreferences("PersonToken", 0); // 0 - for private mode
                         SharedPreferences.Editor editor = pref.edit();
                         SharredPreferenceManager m1 = new SharredPreferenceManager(mcontext);
                         String tokenvalue = "Bearer " + tocken;
                         m1.setString(pref, "persontoken", tokenvalue);
-                        Toast.makeText(mcontext, tokenvalue, Toast.LENGTH_LONG).show();
+
                         view.checksharredpreference();
                         view.finishActivity();
 
                     } else {
-                        Toast.makeText(mcontext, "Il Token Fady", Toast.LENGTH_LONG).show();
+                        Toast.makeText(mcontext, "Token empty", Toast.LENGTH_LONG).show();
 
                     }
                 }
