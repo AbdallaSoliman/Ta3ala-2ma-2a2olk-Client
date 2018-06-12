@@ -45,8 +45,9 @@ public class SliderMainActivity extends AppCompatActivity {
         addDostIndicator(0);
         mSlideViewPager.addOnPageChangeListener(viewListener);
         btnStartApp =(Button)findViewById(R.id.btnStart);
-        AssetManager am = this.getApplicationContext().getAssets();
 
+
+        AssetManager am = this.getApplicationContext().getAssets();
         Typeface  custom_font_btn = Typeface.createFromAsset(am,
                 String.format(Locale.US, "fonts/%s", "al_jazeera_arabic_regular.ttf"));
 
