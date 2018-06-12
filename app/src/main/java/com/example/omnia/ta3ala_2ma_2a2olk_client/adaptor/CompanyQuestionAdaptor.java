@@ -13,6 +13,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.Test2Listener;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitle;
 
+import java.text.Bidi;
 import java.util.List;
 
 /**
@@ -36,6 +37,9 @@ public class CompanyQuestionAdaptor extends RecyclerView.Adapter<CompanyQuestion
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.question_list_item, parent, false);
 
+
+
+
         return new ViewHolder(itemView);
     }
 
@@ -43,8 +47,6 @@ public class CompanyQuestionAdaptor extends RecyclerView.Adapter<CompanyQuestion
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.setitemPosition(position);
-
-
         CompanyQuestionForTitle companyQuestionsData = questionsData.get(position);
         holder.Qtitle.setText(companyQuestionsData.getTitle());
         holder.Qdate.setText(companyQuestionsData.getQuestionDate());
@@ -54,6 +56,14 @@ public class CompanyQuestionAdaptor extends RecyclerView.Adapter<CompanyQuestion
                 holder.Qacount.setTextColor(Color.parseColor("#ffffff"));
                 holder.Qacount.setBackgroundResource(R.drawable.rounded_rectangle_with_backcolor);
             }
+//abdalla start
+        Bidi bidi = new Bidi(companyQuestionsData.getTitle(), Bidi.DIRECTION_DEFAULT_LEFT_TO_RIGHT);
+        if(bidi.baseIsLeftToRight())
+            holder.itemView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        else
+            holder.itemView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+//abdalla end
+
 
     }
 

@@ -9,7 +9,8 @@
     android:paddingBottom="0dp"
     android:paddingEnd="0dp"
     android:paddingStart="0dp"
-    android:paddingTop="0dp">
+    android:paddingTop="0dp"
+    android:autoMirrored="true">
 
     <TextView
         android:id="@+id/QTitle"
@@ -57,6 +58,7 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@id/QTitle"
         android:layout_marginBottom="12dp"
+        android:layout_marginEnd="9dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_rectangle"
@@ -69,6 +71,7 @@
         android:textAlignment="textStart"
         android:textColor="#00a88f"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/QTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlCompat" />
