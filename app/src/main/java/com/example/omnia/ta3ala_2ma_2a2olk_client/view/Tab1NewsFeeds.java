@@ -1,19 +1,42 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.view;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.telecom.Call;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.adapters.NewsFeedsAdapter;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategorySpecial;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by omnia on 6/3/2018.
  */
 
 public class Tab1NewsFeeds extends Fragment {
+    private RecyclerView recyclerView;
+    private List<Question> data;
+    private NewsFeedsAdapter adapter;
+    private APIService apiInterface;
 
     public Tab1NewsFeeds(){}
 
@@ -26,6 +49,44 @@ public class Tab1NewsFeeds extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.tab1, container, false);
+        recyclerView = (RecyclerView)rootView.findViewById(R.id.card_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        loadJSON();
         return rootView;
+
     }
+
+    private void loadJSON() {
+        apiInterface = ApiClient.getApiClient().create(APIService.class);
+        SharedPreferences tokenDetails = getContext().getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = tokenDetails.edit();
+        SharredPreferenceManager manager = new SharredPreferenceManager(getContext().getApplicationContext());
+        String token = manager.getString(tokenDetails, "persontoken", "no");
+        Log.e("subcat", "sub" + token);
+        retrofit2.Call<List<Question>> call = apiInterface.getQuestion(token);
+        call.enqueue(new Callback<List<Question>>() {
+            @Override
+            public void onResponse(retrofit2.Call<List<Question>> call, Response<List<Question>> response) {
+                if (response.isSuccessful()) {
+                    data = response.body();
+                    Log.i("data", data.get(0).getTitle()+"hii");
+                    adapter = new NewsFeedsAdapter(data);
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<List<Question>> call, Throwable t) {
+                Toast.makeText(getActivity(),"errooooooooooooooooooooooor",Toast.LENGTH_LONG).show();
+                String message = t.getMessage();
+                Log.d("failuress", message);
+            }
+        });
+//        for (int i=0; i<data.size();i++){
+//            Log.i("il so2aal",data.get(i).getTitle());
+//        }
+    }
+
 }

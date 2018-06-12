@@ -8,6 +8,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitleList;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategory;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategorySpecial;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResonse;
@@ -15,7 +16,9 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tauser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
+
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -35,12 +38,6 @@ public interface APIService {
     @GET("places")
     Call<MainCategory> getCategories();
 
-//    @GET("/getPerson")
-//    Call<User> getUser(@Query("email") String email, @Query("password") String password);
-
-//    @POST("/getPerson")
-//    Call<User> registerUser(@Body User login);
-
     @POST("/auth")
     Call<TockenReturn> getTocken(@Header("Content-Type") String content_type, @Body Tocken tocken);
 
@@ -54,7 +51,7 @@ public interface APIService {
     Call<User> loginUserWithMail(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User user);
 
     @GET("/MainCategories/3")
-    Call<MainCategory> getCompanies(@Header("Content-Type") String content_type , @Header("Authorization") String token);
+    Call<MainCategory> getCompanies(@Header("Content-Type") String content_type, @Header("Authorization") String token);
 
     @GET("/QuestionWithSubCat/{question_id}")
     Call<CompanyQuestionForTitleList> getCompaniesQuestionsTitle(@Path(value = "question_id", encoded = true) String questionId, @Header("Authorization") String token);
@@ -109,18 +106,25 @@ public interface APIService {
 
     // ahmed hesham
     @GET("MainCategories?size=1000")
-    Call<List<MainCategories>> mainCategories (@Header("Authorization") String token);
+    Call<List<MainCategories>> mainCategories(@Header("Authorization") String token);
+
     @PUT("/Person")
     Call<ServerResonse> updateUser(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User user);
-    @POST("/TaaUser")
-    Call<ServerResonse> addTaUser (@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User user);
-    @POST("/TaaUser")
-    Call<ServerResonse> addTaUserdata (@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body Tauser user);
 
+    @POST("/TaaUser")
+    Call<ServerResonse> addTaUser(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body User user);
+
+    @POST("/TaaUser")
+    Call<ServerResonse> addTaUserdata(@Header("Content-Type") String content_type, @Header("Authorization") String token, @Body Tauser user);
+
+    @GET("MainCategoriesSpecial?size=1000")
+    Call<List<MainCategorySpecial>> mainCategoriesSpecial(@Header("Authorization") String token);
+    @GET("Question?size=10")
+    Call<List<Question>> getQuestion(@Header("Authorization") String token);
 
     // hesham muhammed
 
     @POST("Question")
-    Call<Question> addQuestion (@Body Question question , @Header("Authorization") String token);
+    Call<Question> addQuestion(@Body Question question, @Header("Authorization") String token);
 }
 

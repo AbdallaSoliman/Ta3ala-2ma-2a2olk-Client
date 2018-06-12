@@ -22,14 +22,17 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> listGroup;
     private HashMap<String, List<String>> listChild;
-    HashMap<String , List<Integer>> id;
+    HashMap<String, List<Integer>> id;
     private List<String> LogoUrl;
-    public MyBaseExpandableListAdapter(Context c, List<String> lg, HashMap<String, List<String>> lc , HashMap<String , List<Integer>> id , List<String>LogoUrl) {
+    private List<Integer> noofquestions;
+
+    public MyBaseExpandableListAdapter(Context c, List<String> lg, HashMap<String, List<String>> lc, HashMap<String, List<Integer>> id, List<String> LogoUrl, List<Integer> noofquestions) {
         context = c;
         listGroup = lg;
         listChild = lc;
-        this.id=id;
+        this.id = id;
         this.LogoUrl = LogoUrl;
+        this.noofquestions = noofquestions;
     }
 
     @Override
@@ -60,13 +63,19 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
     public int getChildrenCount(int groupPosition) {
         return listChild.get(listGroup.get(groupPosition)).size();
     }
+
     @Override
     public Object getGroup(int groupPosition) {
         return listGroup.get(groupPosition);
     }
+
     //@Override
     public Object getimage(int groupPosition) {
         return LogoUrl.get(groupPosition);
+    }
+
+    public Object getquestioncount(int groupPosition) {
+        return noofquestions.get(groupPosition);
     }
 
     @Override
@@ -88,6 +97,7 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         String textGroup = (String) getGroup(groupPosition);
+        int questionnumber = (Integer) getquestioncount(groupPosition);
         //get application resource/drawable not in Activity class, using context
         Resources contextResources = context.getResources();
         //Drawable groupDrawable = contextResources.getDrawable(R.drawable.ic_launcher);
@@ -95,24 +105,9 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
         ImageView groupImage = (ImageView) convertView.findViewById(R.id.ivGroupIndicator);
         String imagepos = (String) getimage(groupPosition);
         ImageView groupIcon = (ImageView) convertView.findViewById(R.id.groupimage);
-
-        //groupImage.setImageDrawable(groupDrawable);
-//        switch ((String) getGroup(groupPosition)) {
-//            case "Group A":
-//                //groupImage set correct image
-//                Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(groupIcon);
-//                break;
-//            case "Group B":
-//                //groupImage set correct image
-//                Picasso.get().load("https://res.cloudinary.com/demo/image/upload/sample.jpg").into(groupIcon);
-//
-//                break;
-//            case "Group C":
-//                //groupImage set correct image
-//                break;
-//        }
-            Picasso.get().load(imagepos).resize(50,50).placeholder(R.drawable.loading).error(R.drawable.loading).into(groupIcon);
-       // Picasso.get().load("https://cdn.zeplin.io/5b0c00ae2223cbb958ed28a6/assets/56150dd7-c820-48d7-a251-d12be417e9f9.png").into(groupIcon);
+        TextView question = (TextView) convertView.findViewById(R.id.Description);
+        question.setText(questionnumber+"  "+ "Questions");
+        Picasso.get().load(imagepos).resize(50, 50).placeholder(R.drawable.loading).error(R.drawable.loading).into(groupIcon);
         groupImage.setSelected(isExpanded);
         TextView textViewGroup = (TextView) convertView.findViewById(R.id.group);
         textViewGroup.setText(textGroup);

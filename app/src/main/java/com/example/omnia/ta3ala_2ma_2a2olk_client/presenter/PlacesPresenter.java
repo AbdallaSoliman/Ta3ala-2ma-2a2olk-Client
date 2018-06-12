@@ -16,6 +16,8 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.adapters.MyBaseExpandableListAdapter;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategorySpecial;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SubCatCollection;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SubCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
@@ -38,9 +40,10 @@ public class PlacesPresenter implements PlacesInterface.presenter, ExpandableLis
     HashMap<String, List<Integer>> placesMapId;
 
     private APIService apiInterface;
-    List<com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories> getCategories;
-    List<SubCategories> categories;
+    List<com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategorySpecial> getCategories;
+    List<SubCatCollection> categories;
     List<String> MainCategories = new ArrayList<>();
+    List<Integer> noofquestions = new ArrayList<>();
 List<String> url= new ArrayList<>();
     int mainNumber, subNumber;
 
@@ -62,10 +65,10 @@ List<String> url= new ArrayList<>();
         SharredPreferenceManager manager = new SharredPreferenceManager(mContext.getApplicationContext());
         String token = manager.getString(tokenDetails, "persontoken", "no");
         Log.e("subcat", "sub" + token);
-        Call<List<com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories>> call = apiInterface.mainCategories(token);
-        call.enqueue(new Callback<List<MainCategories>>() {
+        Call<List<com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategorySpecial>> call = apiInterface.mainCategoriesSpecial(token);
+        call.enqueue(new Callback<List<MainCategorySpecial>>() {
             @Override
-            public void onResponse(Call<List<MainCategories>> call, Response<List<MainCategories>> response) {
+            public void onResponse(Call<List<MainCategorySpecial>> call, Response<List<MainCategorySpecial>> response) {
                 if (response.isSuccessful()) {
                     getCategories = response.body();
                     for (int y = 0; y < 2; y++) {
@@ -74,7 +77,7 @@ List<String> url= new ArrayList<>();
                         HashMap<String, List<String>> hashMap = new HashMap<>();
                         HashMap<String, List<Integer>> hashId = new HashMap<>();
                         for (int i = 0; i < categories.size(); i++) {
-                            SubCategories subCategory = categories.get(i);
+                            SubCatCollection subCategory = categories.get(i);
                             if (hashMap.get(subCategory.getSubCatName()) == null) {
                                 hashMap.put(subCategory.getSubCatName(), new ArrayList<String>());
                                 hashId.put(subCategory.getSubCatName(), new ArrayList<Integer>());
@@ -82,7 +85,8 @@ List<String> url= new ArrayList<>();
                                     hashMap.get(subCategory.getSubCatName()).add(subCategory.getDescription());
                                     hashId.get(subCategory.getSubCatName()).add(subCategory.getSubCatId());
                                     MainCategories.add(subCategory.getSubCatName());
-                                    url.add(subCategory.getImgUrl());
+                                    url.add((String)subCategory.getImgUrl());
+                                    noofquestions.add(subCategory.getNumOfQuestion());
                                 }
                             } else {
                                 if (subCategory.getDescription() != null) {
@@ -97,14 +101,14 @@ List<String> url= new ArrayList<>();
                         }
                     }
                 }
-                myBaseExpandableListAdapter = new MyBaseExpandableListAdapter(mContext, MainCategories, placesMap, placesMapId,url);
+                myBaseExpandableListAdapter = new MyBaseExpandableListAdapter(mContext, MainCategories, placesMap, placesMapId,url , noofquestions);
                 myExpandableListView = (ExpandableListView) activity.findViewById(R.id.myexpandablelistview2);
                 myExpandableListView.setAdapter(myBaseExpandableListAdapter);
                 myExpandableListView.setOnChildClickListener(PlacesPresenter.this);
             }
 
             @Override
-            public void onFailure(Call<List<MainCategories>> call, Throwable t) {
+            public void onFailure(Call<List<MainCategorySpecial>> call, Throwable t) {
                 Toast.makeText(mContext.getApplicationContext(), "Register failed ", Toast.LENGTH_LONG).show();
                 String message = t.getMessage();
                 Log.d("failuress", message);
