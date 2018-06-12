@@ -107,7 +107,7 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
         ImageView groupIcon = (ImageView) convertView.findViewById(R.id.groupimage);
         TextView question = (TextView) convertView.findViewById(R.id.Description);
         question.setText(questionnumber+"  "+ "Questions");
-        Picasso.get().load(imagepos).resize(50, 50).placeholder(R.drawable.loading).error(R.drawable.loading).into(groupIcon);
+        Picasso.get().load(imagepos).resize(50, 50).placeholder(R.drawable.loading).onlyScaleDown().error(R.drawable.loading).into(groupIcon);
         groupImage.setSelected(isExpanded);
         TextView textViewGroup = (TextView) convertView.findViewById(R.id.group);
         textViewGroup.setText(textGroup);
