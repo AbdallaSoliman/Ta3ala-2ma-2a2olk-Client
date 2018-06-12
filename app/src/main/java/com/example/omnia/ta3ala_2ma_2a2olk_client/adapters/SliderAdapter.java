@@ -29,14 +29,14 @@ public  int[] slideImages={
       //  android.support.v4.R.drawable.
         R.drawable.cake,
         R.drawable.hold,
-        R.drawable.call_center,
-        R.drawable.group
+        R.drawable.group,
+        R.drawable.call_center
 
 };
     public String[] slide_headings ={
             "مرحبا بك",
-            "شارك خبراتك",
             "اطرح تساؤلاتك",
+            "شارك خبراتك",
             "خدمة عملاء الشركات"
 
     };
