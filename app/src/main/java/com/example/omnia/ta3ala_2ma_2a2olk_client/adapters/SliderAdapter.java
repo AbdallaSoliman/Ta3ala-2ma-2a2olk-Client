@@ -1,6 +1,8 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.adapters;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.PagerAdapter;
@@ -12,6 +14,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
+
+import java.util.Locale;
 
 public class SliderAdapter extends PagerAdapter{
 
@@ -60,10 +64,26 @@ public  int[] slideImages={
         View view =layoutInflater.inflate(R.layout.slide_layout,container,false);
         ImageView slideImageView =(ImageView)view.findViewById(R.id.slidImageView);
         TextView slideHeading =(TextView)view.findViewById(R.id.slidHeader);
-        TextView slideDescripton =(TextView)view.findViewById(R.id.slideBody);
+        TextView slideDescription =(TextView)view.findViewById(R.id.slideBody);
+
+        //        Typeface custom_font_Hedder = Typeface.createFromAsset(getAssets(),  "fonts/jazeera.ttf");
+//        Typeface custom_font_Body = Typeface.createFromAsset(getAssets(),  "fonts/jazeera.ttf");
+//
+
+        AssetManager am = context.getApplicationContext().getAssets();
+        Typeface  custom_font_Hedder = Typeface.createFromAsset(am,
+                String.format(Locale.US, "fonts/%s", "jazeera.ttf"));
+        Typeface  custom_font_Body = Typeface.createFromAsset(am,
+                String.format(Locale.US, "fonts/%s", "al_jazeera_arabic_regular.ttf"));
+
+
+
+        slideHeading.setTypeface(custom_font_Hedder);
+        slideDescription.setTypeface(custom_font_Body);
+
         slideImageView.setImageResource(slideImages[position]);
         slideHeading.setText(slide_headings[position]);
-        slideDescripton.setText(slide_desc[position]);
+        slideDescription.setText(slide_desc[position]);
         container.addView(view);
         return view;
     }

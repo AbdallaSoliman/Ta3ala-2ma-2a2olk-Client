@@ -1,6 +1,8 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.view;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
@@ -17,6 +19,8 @@ import android.widget.TextView;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.adapters.SliderAdapter;
+
+import java.util.Locale;
 
 public class SliderMainActivity extends AppCompatActivity {
 
@@ -41,6 +45,14 @@ public class SliderMainActivity extends AppCompatActivity {
         addDostIndicator(0);
         mSlideViewPager.addOnPageChangeListener(viewListener);
         btnStartApp =(Button)findViewById(R.id.btnStart);
+        AssetManager am = this.getApplicationContext().getAssets();
+
+        Typeface  custom_font_btn = Typeface.createFromAsset(am,
+                String.format(Locale.US, "fonts/%s", "al_jazeera_arabic_regular.ttf"));
+
+        btnStartApp.setTypeface(custom_font_btn);
+
+
         btnStartApp.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

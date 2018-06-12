@@ -17,6 +17,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="AppTheme.slider" parent="Theme.AppCompat.Light.NoActionBar" >
+
         <item name="colorPrimary">@color/slidebarAccent</item>
         <item name="colorPrimaryDark">@color/slidebarPrimary</item>
         <item name="colorAccent">@color/slidebarAccent</item>

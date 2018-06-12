@@ -16,8 +16,10 @@
         android:layout_alignParentTop="true"
         app:layout_constraintBottom_toTopOf="@+id/dotsLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
     </android.support.v4.view.ViewPager>
 
@@ -39,7 +41,7 @@
     <Button
         android:id="@+id/btnStart"
         android:layout_width="250.3dp"
-        android:layout_height="37.3dp"
+        android:layout_height="30dp"
         android:layout_below="@+id/dotsLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="34dp"
