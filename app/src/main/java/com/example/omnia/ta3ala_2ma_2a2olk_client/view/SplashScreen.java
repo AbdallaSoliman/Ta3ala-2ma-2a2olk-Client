@@ -47,8 +47,11 @@ public class SplashScreen extends AppCompatActivity implements SplashInterface.v
 //            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //            startActivity(intent);
 
-//abdalla start
-        if(true){
+//abdalla start  //Ahmed Hesham update
+        SharedPreferences tokenDetails = getSharedPreferences("Splash", Context.MODE_PRIVATE);
+        SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
+        String token = manager.getString(tokenDetails, "key", "no");
+        if(!(token.equals("check"))){
             Intent intent = new Intent(SplashScreen.this, SliderMainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

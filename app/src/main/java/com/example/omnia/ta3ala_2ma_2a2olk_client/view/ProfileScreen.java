@@ -114,7 +114,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
         }
         Log.i("iduser", id + "");
         image = manager.getString(userDetails, "image", "no");
-        Picasso.get().load(image).into(profile);
+        Picasso.get().load(image).placeholder(R.drawable.profile).into(profile);
         password = manager.getString(userDetails, "password", "no");
         editusername.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -55,10 +55,13 @@
 
         <ImageView
             android:id="@+id/ivGroupIndicator"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="13.7dp"
+            android:layout_height="9dp"
+            android:layout_gravity="center"
+            android:scaleType="center"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:background="@drawable/group_indicator" />
     </LinearLayout>
 </LinearLayout>
