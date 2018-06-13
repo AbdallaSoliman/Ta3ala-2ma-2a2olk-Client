@@ -1,6 +1,8 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.adaptor;
 
+import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,6 +17,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitle;
 
 import java.text.Bidi;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by omnia on 5/31/2018.
@@ -57,11 +60,21 @@ public class CompanyQuestionAdaptor extends RecyclerView.Adapter<CompanyQuestion
                 holder.Qacount.setBackgroundResource(R.drawable.rounded_rectangle_with_backcolor);
             }
 //abdalla start
+        AssetManager am = holder.Qtitle.getContext().getApplicationContext().getAssets();
+        holder.itemView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        Typeface custom_font_Hedder = Typeface.createFromAsset(am,
+                String.format(Locale.US, "fonts/%s", "al_jazeera_arabic_regular.ttf"));
+
+
+
+
         Bidi bidi = new Bidi(companyQuestionsData.getTitle(), Bidi.DIRECTION_DEFAULT_LEFT_TO_RIGHT);
         if(bidi.baseIsLeftToRight())
             holder.itemView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
-        else
+         else {
             holder.itemView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            holder.Qtitle.setTypeface(custom_font_Hedder);
+        }
 //abdalla end
 
 
