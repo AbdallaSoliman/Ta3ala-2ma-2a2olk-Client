@@ -24,7 +24,9 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SubCategory;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.AddQuestionPresenter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -145,6 +147,12 @@ public class AddQuestion extends AppCompatActivity implements MVPInterface.View 
                     question.setBody(description.getText().toString());
                     question.setSubCatCollection(subCatCollection);
                     question.setIsdeleted(0);
+                    // get date
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
+                    String currentDate = mdformat.format(calendar.getTime());
+
+                    question.setQuestionDate(currentDate);
                     Toast.makeText(getApplicationContext(), "Addedd", Toast.LENGTH_LONG).show();
                     presenter.AddQuestion(question);
                 }

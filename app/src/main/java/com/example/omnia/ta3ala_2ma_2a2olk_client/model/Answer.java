@@ -22,7 +22,7 @@ public class Answer implements Serializable {
     private int rate;
     @SerializedName("isdeleted")
     @Expose
-    private Object isdeleted;
+    private int isdeleted;
     @SerializedName("image")
     @Expose
     private Object image;
@@ -37,7 +37,7 @@ public class Answer implements Serializable {
     private Object notifi;
     @SerializedName("answersDate")
     @Expose
-    private Object answersDate;
+    private String  answersDate;
     @SerializedName("personId")
     @Expose
     private PersonId personId;
@@ -70,11 +70,11 @@ public class Answer implements Serializable {
         this.rate = rate;
     }
 
-    public Object getIsdeleted() {
+    public int getIsdeleted() {
         return isdeleted;
     }
 
-    public void setIsdeleted(Object isdeleted) {
+    public void setIsdeleted(int isdeleted) {
         this.isdeleted = isdeleted;
     }
 
@@ -110,11 +110,11 @@ public class Answer implements Serializable {
         this.notifi = notifi;
     }
 
-    public Object getAnswersDate() {
+    public String  getAnswersDate() {
         return answersDate;
     }
 
-    public void setAnswersDate(Object answersDate) {
+    public void setAnswersDate(String  answersDate) {
         this.answersDate = answersDate;
     }
 

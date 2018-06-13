@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +15,9 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.PersonId;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.AddAnswerPresenter;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class AddAnswer extends AppCompatActivity {
 
@@ -45,33 +47,6 @@ public class AddAnswer extends AppCompatActivity {
 
         answerEditText=(EditText)findViewById(R.id.answerId);
         postAnswer=(Button)findViewById(R.id.saveAnswer);
-
-//        postAnswer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                String answerText=answerEditText.getText().toString();
-//
-//                if(!answerText.trim().isEmpty()){
-//
-//                    // save answer to server
-//                    Answer answer=new Answer();
-//                    answer.setAnswer(answerText);
-//                    answer.setQuestionId(qId.getQuestionId());
-//                    PersonId p=new PersonId();
-//                    //get person object from database
-//                    p.setPersonId(1);
-//                    answer.setPersonId(p);
-//                    AddAnswerPresenter addAnswerPresenter=new AddAnswerPresenter();
-//                    addAnswerPresenter.saveAnswerToServerPresenter(answer,getToken());
-//                    Intent intent1=new Intent(this,CompanyQuestionDetails.class);
-//                    finish();
-//                }
-//                else{
-//                    answerEditText.setError("please enter data");
-//                }
-//            }
-//        });
     }
 
     public void saveAnswer(View view){
@@ -88,16 +63,22 @@ public class AddAnswer extends AppCompatActivity {
             //get person object from database
             p.setPersonId(Integer.parseInt(getPersonId()));
             answer.setPersonId(p);
+            answer.setIsdeleted(0);
+            // get date
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
+            String currentDate = mdformat.format(calendar.getTime());
+            answer.setAnswersDate(currentDate);
             AddAnswerPresenter addAnswerPresenter=new AddAnswerPresenter();
             addAnswerPresenter.saveAnswerToServerPresenter(answer,getToken());
 
             finish();
+
         }
         else{
             answerEditText.setError("please enter data");
         }
     }
-
 
     public String getToken(){
         SharedPreferences pref = this.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
