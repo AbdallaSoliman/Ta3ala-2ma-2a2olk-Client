@@ -55,7 +55,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
 
     @Override
     public int checkInput(String email, String password) {
-        if (password.length() <6) {
+        if (password.length() >6) {
             view.registerStatus(1);
             return 0;
         } else if (email.isEmpty() || password.isEmpty()) {

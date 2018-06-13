@@ -148,7 +148,7 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         public ImageView editImageView,deleteImageView,reportImageView;
         public TextView editTextView,deleteTextView,reportTextView;
         public View horizontalLine1,horizontalLine2;
-        public Button answerUpRate,answerDownRate;
+        public ImageView answerUpRate,answerDownRate;
         public TextView answerRateCount;
 
 
@@ -163,11 +163,12 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
             deleteTextView=(TextView)view.findViewById(R.id.deletetext);
             reportImageView=(ImageView)view.findViewById(R.id.reportImage);
             reportTextView=(TextView)view.findViewById(R.id.reportText);
+
             horizontalLine1=(View)view.findViewById(R.id.view1);
             horizontalLine2=(View)view.findViewById(R.id.view2);
 
-            answerUpRate=(Button)view.findViewById(R.id.AupRate);
-            answerDownRate=(Button)view.findViewById(R.id.AdownRate);
+            answerUpRate=view.findViewById(R.id.AupRate);
+            answerDownRate=view.findViewById(R.id.AdownRate);
             answerRateCount=(TextView)view.findViewById(R.id.ArateCount);
 
         }

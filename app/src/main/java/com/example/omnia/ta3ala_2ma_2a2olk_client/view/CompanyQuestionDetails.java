@@ -11,18 +11,15 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
-import com.example.omnia.ta3ala_2ma_2a2olk_client.adaptor.CompanyQuestionAdaptor;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.adaptor.QuestionAnswersAdaptoe;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.PersonId;
@@ -33,7 +30,6 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.CompanyQuestionDetai
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class CompanyQuestionDetails extends AppCompatActivity {
@@ -51,7 +47,7 @@ public class CompanyQuestionDetails extends AppCompatActivity {
     String id;
     TextView rateCount;
     LinearLayout rateLayout;
-    Button upRate, downRate;
+    ImageView upRate, downRate;
 
     // for back button on action bar
     @Override
@@ -76,7 +72,6 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         rateCount.setText(String.valueOf(question.getRate()));
         if (checkLangouge(question.getTitle()) != true) {
             Log.i("aa", "arabic ");
-            rateLayout.setGravity(Gravity.CENTER);
         }
         madaptor.notifyDataSetChanged();
     }
@@ -144,10 +139,9 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         });
 
         rateCount = (TextView) findViewById(R.id.rateCount);
-        rateLayout = (LinearLayout) findViewById(R.id.rateLayout);
 
-        upRate = (Button) findViewById(R.id.upRate);
-        downRate = (Button) findViewById(R.id.downRate);
+        upRate = findViewById(R.id.upRate);
+        downRate = findViewById(R.id.downRate);
         upRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -244,10 +238,9 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         });
 
         rateCount = (TextView) findViewById(R.id.rateCount);
-        rateLayout = (LinearLayout) findViewById(R.id.rateLayout);
 
-        upRate = (Button) findViewById(R.id.upRate);
-        downRate = (Button) findViewById(R.id.downRate);
+       upRate =  findViewById(R.id.upRate);
+       downRate = findViewById(R.id.downRate);
 
     }
 
