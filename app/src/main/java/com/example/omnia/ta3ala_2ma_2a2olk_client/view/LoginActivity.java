@@ -85,9 +85,11 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpInterfac
     @Override
     public void questionActivity(String email) {
         if (email.equals("user")) {
-            Intent intent = new Intent(LoginActivity.this, AddQuestion.class);
+
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            finish();
         }else {
             Toast.makeText(getApplicationContext(),"Login Error",Toast.LENGTH_LONG).show();
         }

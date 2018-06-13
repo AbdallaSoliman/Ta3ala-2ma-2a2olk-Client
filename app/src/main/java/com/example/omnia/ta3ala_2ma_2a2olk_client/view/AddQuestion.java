@@ -1,6 +1,7 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.view;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -386,5 +387,13 @@ public class AddQuestion extends AppCompatActivity implements MVPInterface.View 
         });
         AlertDialog alert = alertDialog.create();
         alert.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(AddQuestion.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
