@@ -163,6 +163,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+        //Ahmed Hesham
+        finish();
     }
 
 
