@@ -96,6 +96,8 @@
         android:paddingTop="91dp"
         android:scaleType="center"
         app:borderWidth="0dp"
+        android:elevation="150dp"
+        app:elevation="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/container"
 
         app:layout_constraintEnd_toEndOf="parent"
