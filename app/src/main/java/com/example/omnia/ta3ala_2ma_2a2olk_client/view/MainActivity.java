@@ -3,7 +3,9 @@ package com.example.omnia.ta3ala_2ma_2a2olk_client.view;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -60,7 +62,39 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-        searchViewCode();
+
+
+        //abdalla start
+
+
+        tabLayout.setOnTabSelectedListener(
+                new TabLayout.ViewPagerOnTabSelectedListener(mViewPager) {
+
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        super.onTabSelected(tab);
+                        int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.slideDotActive);
+                        tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+                        super.onTabUnselected(tab);
+                        int tabIconColor = ContextCompat.getColor(getApplicationContext(), R.color.slideDotdisActive);
+                        tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+                        super.onTabReselected(tab);
+                    }
+                }
+        );
+
+
+        //abdalla end
+
+       searchViewCode();
     }
 
     @Override

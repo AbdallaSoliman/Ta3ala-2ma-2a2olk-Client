@@ -38,31 +38,33 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            app:tabIndicatorColor="#ffffff">
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_text_1" />
+                android:icon="@drawable/browser" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_text_2" />
+                android:icon="@drawable/support" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_text_3" />
+                android:icon="@drawable/four_black_squares" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_text_4" />
+                android:icon="@drawable/facebook_placeholder_for_locate_places_on_maps" />
 
         </android.support.design.widget.TabLayout>
 
@@ -73,5 +75,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/fab2"
+        android:layout_width="70.7dp"
+        android:layout_height="70.7dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/locate_user_FAB_marginBottom"
+        android:layout_marginRight="@dimen/map_FAB_marginRight"
+        android:padding="91dp"
+        android:paddingBottom="80dp"
+        android:paddingEnd="91dp"
+        android:paddingLeft="91dp"
+        android:paddingRight="91dp"
+        android:paddingStart="91dp"
+        android:paddingTop="91dp"
+        android:scaleType="center"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/container"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="80"
+        app:srcCompat="@drawable/add" />
 
 </android.support.design.widget.CoordinatorLayout>
