@@ -35,6 +35,7 @@ import java.util.List;
 
 public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswersAdaptoe.ViewHolder>{
 
+
     private List<Answer> answers;
     Context mcContext;
     CompanyQuestionDetails ii;
