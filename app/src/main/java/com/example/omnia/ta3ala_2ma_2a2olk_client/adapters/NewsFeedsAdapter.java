@@ -13,6 +13,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.squareup.picasso.Picasso;
 
+import java.text.Bidi;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,13 @@ public class NewsFeedsAdapter extends RecyclerView.Adapter<NewsFeedsAdapter.View
         holder.tv_head.setText(questions.get(position).getTitle());
         holder.tv_body.setText(questions.get(position).getBody());
         holder.QACount.setText(questions.get(position).getQuestionId()+"");
+//abdalla start
+        Bidi bidi = new Bidi(questions.get(position).getTitle(), Bidi.DIRECTION_DEFAULT_LEFT_TO_RIGHT);
+        if(bidi.baseIsLeftToRight())
+            holder.itemView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        else
+            holder.itemView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+//abdalla end
         //Picasso.get().load(questions.get(position).getImage()).into(holder.logo);
 
     }
