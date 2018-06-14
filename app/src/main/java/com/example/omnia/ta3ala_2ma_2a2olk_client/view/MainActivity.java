@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -44,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
     MaterialSearchView searchView;
     MenuItem logout;
     Toolbar toolbar;
-
+//abdalla start
+    FloatingActionButton fabBtn;
+//abdalla end
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +66,33 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+//abdalla start
+        fabBtn = (FloatingActionButton) findViewById(R.id.fabBtn);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
 
+            @Override
+            public void onPageSelected(int position) {
+
+                switch (position) {
+                    case 0:
+                        fabBtn.show();
+                        break;
+
+                    default:
+                        fabBtn.hide();
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+//abdalla end
 
         //abdalla start
 
@@ -96,7 +126,11 @@ public class MainActivity extends AppCompatActivity {
 
        searchViewCode();
     }
-
+//abdalla start
+    public FloatingActionButton getFloatingActionButton() {
+        return fabBtn;
+    }
+//abdalla end
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

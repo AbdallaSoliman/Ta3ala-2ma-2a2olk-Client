@@ -44,14 +44,14 @@ public class PlacesPresenter implements PlacesInterface.presenter, ExpandableLis
     List<SubCatCollection> categories;
     List<String> MainCategories = new ArrayList<>();
     List<Integer> noofquestions = new ArrayList<>();
-List<String> url= new ArrayList<>();
+    List<String> url = new ArrayList<>();
     int mainNumber, subNumber;
 
     Activity activity;
     Context mContext;
     PlacesInterface.view view;
 
-    public PlacesPresenter(PlacesInterface.view view, Activity activity ,Context mContext) {
+    public PlacesPresenter(PlacesInterface.view view, Activity activity, Context mContext) {
         this.view = view;
         this.activity = activity;
         this.mContext = mContext;
@@ -85,7 +85,7 @@ List<String> url= new ArrayList<>();
                                     hashMap.get(subCategory.getSubCatName()).add(subCategory.getDescription());
                                     hashId.get(subCategory.getSubCatName()).add(subCategory.getSubCatId());
                                     MainCategories.add(subCategory.getSubCatName());
-                                    url.add((String)subCategory.getImgUrl());
+                                    url.add((String) subCategory.getImgUrl());
                                     noofquestions.add(subCategory.getNumOfQuestion());
                                 }
                             } else {
@@ -101,12 +101,14 @@ List<String> url= new ArrayList<>();
                         }
                     }
                 }
-                myBaseExpandableListAdapter = new MyBaseExpandableListAdapter(mContext, MainCategories, placesMap, placesMapId,url , noofquestions);
+                myBaseExpandableListAdapter = new MyBaseExpandableListAdapter(mContext, MainCategories, placesMap, placesMapId, url, noofquestions);
                 myExpandableListView = (ExpandableListView) activity.findViewById(R.id.myexpandablelistview2);
-                myExpandableListView.setAdapter(myBaseExpandableListAdapter);
-                myExpandableListView.setOnChildClickListener(PlacesPresenter.this);
+ //abdalla start
+                if (myBaseExpandableListAdapter != null&&myExpandableListView!=null){
+                    myExpandableListView.setAdapter(myBaseExpandableListAdapter);
+                myExpandableListView.setOnChildClickListener(PlacesPresenter.this);}
             }
-
+//abdalla end
             @Override
             public void onFailure(Call<List<MainCategorySpecial>> call, Throwable t) {
                 Toast.makeText(mContext.getApplicationContext(), "Register failed ", Toast.LENGTH_LONG).show();
@@ -122,13 +124,14 @@ List<String> url= new ArrayList<>();
         mainNumber = i;
         subNumber = i1;
         Log.e("mytag", "value is " + (placesMapId.get(MainCategories.get(i))).get(i1));
-        String id =String.valueOf(placesMapId.get(MainCategories.get(i)).get(i1));
-        transferToIntent(mContext , id);
+        String id = String.valueOf(placesMapId.get(MainCategories.get(i)).get(i1));
+        transferToIntent(mContext, id);
         return true;
     }
+
     private void transferToIntent(Context mContext, String id) {
         Intent intent = new Intent(mContext, CompanyQuestionsList.class);
-        intent.putExtra("companyId",id);
+        intent.putExtra("companyId", id);
         mContext.startActivity(intent);
     }
 }

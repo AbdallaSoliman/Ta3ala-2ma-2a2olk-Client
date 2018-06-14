@@ -64,7 +64,10 @@ public class Tab2CustomerService extends Fragment {
         adapter = new CompaniesAdaptor(this.getActivity(), companies);
         listView = (ListView) rootView.findViewById(R.id.companiesList);
         listView.setAdapter(adapter);
-
+//abdalla start
+        listView.setDivider(null);
+        listView.setDividerHeight(0);
+//abdalla end
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override

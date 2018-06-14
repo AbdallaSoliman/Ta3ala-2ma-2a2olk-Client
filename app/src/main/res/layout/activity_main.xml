@@ -77,7 +77,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/fab2"
+        android:id="@+id/fabBtn"
         android:layout_width="70.7dp"
         android:layout_height="70.7dp"
         android:layout_alignParentBottom="true"
@@ -87,6 +87,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/locate_user_FAB_marginBottom"
         android:layout_marginRight="@dimen/map_FAB_marginRight"
+        android:elevation="150dp"
         android:padding="91dp"
         android:paddingBottom="80dp"
         android:paddingEnd="91dp"
@@ -96,7 +97,6 @@
         android:paddingTop="91dp"
         android:scaleType="center"
         app:borderWidth="0dp"
-        android:elevation="150dp"
         app:elevation="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/container"
 

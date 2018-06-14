@@ -103,8 +103,11 @@ public class HomePresenter implements TabHomeInterface.presenter , ExpandableLis
                 }
                 myBaseExpandableListAdapter = new MyBaseExpandableListAdapter(mContext, MainCategories, categoriesMap, categoriesMapId ,LogoUrl , noofquestions);
                 myExpandableListView = (ExpandableListView) activity.findViewById(R.id.myexpandablelistview);
+//abdalla start
+              if (myBaseExpandableListAdapter!=null&&myExpandableListView!=null){
                 myExpandableListView.setAdapter(myBaseExpandableListAdapter);
-                myExpandableListView.setOnChildClickListener(HomePresenter.this);
+                myExpandableListView.setOnChildClickListener(HomePresenter.this);}
+//abdalla end
                 for (int i=0; i<LogoUrl.size();i++){
                     Log.i("url",LogoUrl.get(i)+"");
                     Log.i("data",noofquestions.get(i)+"");
