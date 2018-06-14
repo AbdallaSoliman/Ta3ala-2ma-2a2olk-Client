@@ -86,7 +86,6 @@ public class CompanyQuestionDetails extends AppCompatActivity {
             reportTextView.setVisibility(View.GONE);
             reportImageView.setVisibility(View.GONE);
             v1.setVisibility(View.GONE);
-
             // check if user rate before
            if(checkIfUserRateOrNot()==1){
 
