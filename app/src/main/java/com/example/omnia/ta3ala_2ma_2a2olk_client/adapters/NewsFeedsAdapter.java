@@ -1,6 +1,8 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -13,7 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.NewsFeed;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.view.CompanyQuestionDetails;
 import com.squareup.picasso.Picasso;
 
 import java.text.Bidi;
@@ -22,10 +26,12 @@ import java.util.List;
 import java.util.Locale;
 
 public class NewsFeedsAdapter extends RecyclerView.Adapter<NewsFeedsAdapter.ViewHolder> {
-    List<Question> questions;
+    List<NewsFeed> questions;
+    Activity activity ;
 
-    public NewsFeedsAdapter(List<Question> questions) {
+    public NewsFeedsAdapter(List<NewsFeed> questions , Activity activity) {
         this.questions = questions;
+        this.activity = activity ;
     }
 
     @NonNull
@@ -36,12 +42,12 @@ public class NewsFeedsAdapter extends RecyclerView.Adapter<NewsFeedsAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NewsFeedsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NewsFeedsAdapter.ViewHolder holder, final int position) {
         holder.tv_head.setText(questions.get(position).getTitle());
         holder.tv_body.setText(questions.get(position).getQuestionDate());
-        holder.QACount.setText(questions.get(position).getQuestionId() + "");
+        holder.QACount.setText(questions.get(position).getNumOfAns() + "");
 //abdalla start
-        if (questions.get(position).getVerified()==1) {
+        if (questions.get(position).getVerified() == 1) {
             holder.QACount.setTextColor(Color.parseColor("#ffffff"));
             holder.QACount.setBackgroundResource(R.drawable.rounded_rectangle_with_backcolor);
         }
@@ -60,8 +66,15 @@ public class NewsFeedsAdapter extends RecyclerView.Adapter<NewsFeedsAdapter.View
             holder.tv_head.setTypeface(custom_font_Hedder);
         }
 //abdalla end
-        //Picasso.get().load(questions.get(position).getImage()).into(holder.logo);
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(activity.getApplication(), CompanyQuestionDetails.class);
+                String id =String.valueOf( questions.get(position).getQuestionId()) ;
+                i.putExtra("questionID", id);
+                activity.startActivity(i);
+            }
+        });
     }
 
     @Override
