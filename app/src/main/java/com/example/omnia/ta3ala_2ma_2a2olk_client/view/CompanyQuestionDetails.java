@@ -85,6 +85,7 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         if (personId.getPersonId() == getUserId()) {
             reportTextView.setVisibility(View.GONE);
             reportImageView.setVisibility(View.GONE);
+
             v1.setVisibility(View.GONE);
             // check if user rate before
            if(checkIfUserRateOrNot()==1){
