@@ -12,10 +12,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
@@ -36,17 +39,17 @@ public class CompanyQuestionDetails extends AppCompatActivity {
     SharredPreferenceManager shM;
     CompanyQuestionDetailsPresenter cQDPresenter;
     Question question;
-    TextView titleTextView, bodyTextView;
-    TextView personNameTextView, editTextView, deleteTextView,reportTextView;
-    ImageView deleteImageView, personImageView, editImageView,reportImageView;
+    TextView titleTextView, bodyTextView, rateCount;
+    TextView personNameTextView, editTextView, deleteTextView, reportTextView;
+    ImageView deleteImageView, personImageView, editImageView, reportImageView;
     List<Answer> questionAnswers;
     PersonId person;
     RecyclerView recyclerView;
     QuestionAnswersAdaptoe madaptor;
     String id;
-    TextView rateCount;
-    LinearLayout rateLayout;
     ImageView upRate, downRate;
+    View v1,v2,h3;
+    Button addComment;
 
     // for back button on action bar
     @Override
@@ -56,9 +59,11 @@ public class CompanyQuestionDetails extends AppCompatActivity {
     }
 
     public void setQuestionDetails(Question q, List<Answer> answers) {
+
         this.question = q;
         questionAnswers.addAll(answers);
         person = question.getPersonId();
+
         titleTextView.setText(question.getTitle());
         bodyTextView.setText(question.getBody());
         if (person != null) {
@@ -69,10 +74,76 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         }
 
         rateCount.setText(String.valueOf(question.getRate()));
-        if (checkLangouge(question.getTitle()) != true) {
-            Log.i("aa", "arabic ");
-        }
         madaptor.notifyDataSetChanged();
+
+         showWhichCompnent(person);
+    }
+
+    public void showWhichCompnent(PersonId personId) {
+
+        // check if question is mine
+        if (personId.getPersonId() == getUserId()) {
+            reportTextView.setVisibility(View.GONE);
+            reportImageView.setVisibility(View.GONE);
+            v1.setVisibility(View.GONE);
+
+            // check if user rate before
+           if(checkIfUserRateOrNot()==1){
+
+           }
+           else {
+               upRate.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+                       cQDPresenter.questionUpRatePresenter(String.valueOf(question.getQuestionId()), getToken());
+                       int rate = question.getRate() + 1;
+                       rateCount.setText(String.valueOf(rate));
+                   }
+               });
+               downRate.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+                       cQDPresenter.questionDownRatePresenter(String.valueOf(question.getQuestionId()), getToken());
+                       int rate = question.getRate() - 1;
+                       rateCount.setText(String.valueOf(rate));
+                   }
+               });
+           }
+        }
+        // question is not mine
+        else {
+
+            ((ViewGroup)rateCount.getParent()).removeView(deleteTextView);
+            ((ViewGroup)rateCount.getParent()).removeView( deleteImageView);
+            ((ViewGroup)rateCount.getParent()).removeView( editTextView);
+            ((ViewGroup)rateCount.getParent()).removeView( editImageView);
+            ((ViewGroup)rateCount.getParent()).removeView( v1);
+            ((ViewGroup)rateCount.getParent()).removeView( v2);
+
+            // check if user rate before
+            if(checkIfUserRateOrNot()==1){
+
+            }
+            else {
+                upRate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        cQDPresenter.questionUpRatePresenter(String.valueOf(question.getQuestionId()), getToken());
+                        int rate = question.getRate() + 1;
+                        rateCount.setText(String.valueOf(rate));
+                    }
+                });
+                downRate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        cQDPresenter.questionDownRatePresenter(String.valueOf(question.getQuestionId()), getToken());
+                        int rate = question.getRate() - 1;
+                        rateCount.setText(String.valueOf(rate));
+                    }
+                });
+            }
+        }
+
     }
 
     public void afterAddAnswer(Answer newAnswer) {
@@ -110,71 +181,95 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         // delete&edit
         deleteTextView = (TextView) findViewById(R.id.deleteText);
         deleteImageView = (ImageView) findViewById(R.id.deleteImage);
-        deleteImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDeleteDialog();
-            }
-        });
-        deleteTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDeleteDialog();
-            }
-        });
         editTextView = (TextView) findViewById(R.id.editText);
         editImageView = (ImageView) findViewById(R.id.editImage);
-        editImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showEditDialog(question);
-            }
-        });
-        editTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showEditDialog(question);
-            }
-        });
+
+        h3=findViewById(R.id.view5);
+        v1=findViewById(R.id.v1);
+        v2=findViewById(R.id.v2);
 
         rateCount = (TextView) findViewById(R.id.rateCount);
 
         upRate = findViewById(R.id.upRate);
         downRate = findViewById(R.id.downRate);
-        upRate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cQDPresenter.questionUpRatePresenter(String.valueOf(question.getQuestionId()),getToken());
-                int rate=question.getRate()+1;
-                rateCount.setText(String.valueOf(rate));
-            }
-        });
-        downRate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cQDPresenter.questionDownRatePresenter(String.valueOf(question.getQuestionId()),getToken());
-                int rate=question.getRate()-1;
-                rateCount.setText(String.valueOf(rate));
-            }
-        });
+        reportTextView = (TextView) findViewById(R.id.reportText);
+        reportImageView = (ImageView) findViewById(R.id.reportImage);
 
-        reportTextView=(TextView)findViewById(R.id.reportText);
-        reportImageView=(ImageView)findViewById(R.id.reportImage);
-
-        reportImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                reportDialog();
-            }
-        });
-        reportTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                reportDialog();
-            }
-        });
+        addComment=findViewById(R.id.addCommentButton);
 
 
+        if(checkIfUserLoginOrNot()==0){
+            deleteTextView.setVisibility(View.GONE);
+            deleteImageView.setVisibility(View.GONE);
+            v1.setVisibility(View.GONE);
+            editTextView.setVisibility(View.GONE);
+            editImageView.setVisibility(View.GONE);
+            v2.setVisibility(View.GONE);
+            reportTextView.setVisibility(View.GONE);
+            reportImageView.setVisibility(View.GONE);
+            addComment.setVisibility(View.GONE);
+            h3.setVisibility(View.GONE);
+        }
+        else {
+            deleteImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showDeleteDialog();
+                }
+            });
+
+            deleteTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showDeleteDialog();
+                }
+            });
+
+            editImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showEditDialog(question);
+                }
+            });
+
+            editTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showEditDialog(question);
+                }
+            });
+
+            reportImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    reportDialog();
+                }
+            });
+            reportTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    reportDialog();
+                }
+            });
+
+//            upRate.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    cQDPresenter.questionUpRatePresenter(String.valueOf(question.getQuestionId()), getToken());
+//                    int rate = question.getRate() + 1;
+//                    rateCount.setText(String.valueOf(rate));
+//                }
+//            });
+//            downRate.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    cQDPresenter.questionDownRatePresenter(String.valueOf(question.getQuestionId()), getToken());
+//                    int rate = question.getRate() - 1;
+//                    rateCount.setText(String.valueOf(rate));
+//                }
+//            });
+
+        }
     }
 
     public void onRestart() {
@@ -238,10 +333,68 @@ public class CompanyQuestionDetails extends AppCompatActivity {
 
         rateCount = (TextView) findViewById(R.id.rateCount);
 
-       upRate =  findViewById(R.id.upRate);
-       downRate = findViewById(R.id.downRate);
+        upRate = findViewById(R.id.upRate);
+        downRate = findViewById(R.id.downRate);
 
     }
+
+    public int checkIfUserRateOrNot(){
+
+        int x=0,i=0;
+        List<PersonId> ratedPerson=question.getPersonRateCollection();
+
+        while (x==0&&i<ratedPerson.size()){
+
+            if(ratedPerson.get(i).getPersonId()==getUserId()){
+             x=1;
+            }
+            else {
+                 i++;
+            }
+        }
+        return x;
+    }
+
+    public int getUserId(){
+        SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+        SharredPreferenceManager manager =new SharredPreferenceManager(getApplicationContext());
+        String  idstr = manager.getString(userDetails, "id", "0");
+        return Integer.parseInt(idstr);
+    }
+
+    public int checkIfUserLoginOrNot() {
+        int x = 0;
+        SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = userDetails.edit();
+        SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
+        String email = manager.getString(userDetails, "email", "no");
+
+        if (email.equals("no")) {
+          x = 0;
+        } else {
+          x = 1;
+        }
+        return x;
+    }
+
+    public String getToken() {
+        SharedPreferences pref = this.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
+        shM = new SharredPreferenceManager(this);
+        final String token = shM.getString(pref, "persontoken", "error");
+        return token;
+    }
+
+    public void addAnswer(View view) {
+        Intent intent2 = new Intent(this, AddAnswer.class);
+        intent2.putExtra("questionId", question);
+        startActivity(intent2);
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    //////////////////////////// dialogs//////////////////////////
 
     public void showDeleteDialog() {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -312,28 +465,10 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         });
     }
 
-    public String getToken() {
-        SharedPreferences pref = this.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
-        shM = new SharredPreferenceManager(this);
-        final String token = shM.getString(pref, "persontoken", "error");
-        return token;
-    }
-
-    public void addAnswer(View view) {
-        Intent intent2 = new Intent(this, AddAnswer.class);
-        intent2.putExtra("questionId", question);
-        startActivity(intent2);
-    }
-
-    public Question getQuestion() {
-        return question;
-    }
-
-    public void reportDialog(){
-
+    public void reportDialog() {
         final View view1 = getLayoutInflater().inflate(R.layout.question_report_dialog, null);
         final EditText reportTitleEditText = (EditText) view1.findViewById(R.id.reportTitle);
-        final EditText reportBodyEditText=(EditText)view1.findViewById(R.id.reportBody);
+        final EditText reportBodyEditText = (EditText) view1.findViewById(R.id.reportBody);
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Question Report");
         dialog.setView(view1)
@@ -358,27 +493,25 @@ public class CompanyQuestionDetails extends AppCompatActivity {
 
                 if (reportTitleEditText.getText().toString().trim().isEmpty()) {
                     reportTitleEditText.setError("please enter data");
-                }
-                else if(reportBodyEditText.getText().toString().trim().isEmpty()){
+                } else if (reportBodyEditText.getText().toString().trim().isEmpty()) {
                     reportBodyEditText.setError("please enter data");
-                }
-                else {
-                    Report report=new Report();
+                } else {
+                    Report report = new Report();
                     report.setTitle(reportTitleEditText.getText().toString());
                     report.setMsg(reportBodyEditText.getText().toString());
                     report.setChecked(question.getQuestionId());
                     // get date
                     Calendar calendar = Calendar.getInstance();
                     SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
-                     String currentDate = mdformat.format(calendar.getTime());
+                    String currentDate = mdformat.format(calendar.getTime());
                     report.setReportDate(currentDate);
                     Log.i("datee", currentDate);
                     report.setType("question");
                     // get person id from sharedpref
-                    PersonId person=new PersonId();
+                    PersonId person = new PersonId();
                     SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
-                    SharredPreferenceManager manager =new SharredPreferenceManager(getApplicationContext());
-                    String  idstr = manager.getString(userDetails, "id", "0");
+                    SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
+                    String idstr = manager.getString(userDetails, "id", "0");
                     person.setPersonId(Integer.parseInt(idstr));
                     report.setPersonId(person);
 
@@ -387,24 +520,6 @@ public class CompanyQuestionDetails extends AppCompatActivity {
                 }
             }
         });
-
-    }
-
-    public boolean checkLangouge(String title) {
-        String arr[] = title.split("");
-        String firstWord = arr[0];
-        boolean result = isProbablyArabic(firstWord);
-        return result;
-    }
-
-    public static boolean isProbablyArabic(String stitle) {
-        for (int i = 0; i < stitle.length(); ) {
-            int c = stitle.codePointAt(i);
-            if (c >= 0x0600 && c <= 0x06E0)
-                return true;
-            i += Character.charCount(c);
-        }
-        return false;
     }
 
 

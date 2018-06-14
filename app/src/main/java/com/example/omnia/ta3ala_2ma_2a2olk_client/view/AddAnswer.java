@@ -71,7 +71,6 @@ public class AddAnswer extends AppCompatActivity {
             answer.setAnswersDate(currentDate);
             AddAnswerPresenter addAnswerPresenter=new AddAnswerPresenter();
             addAnswerPresenter.saveAnswerToServerPresenter(answer,getToken());
-
             finish();
 
         }

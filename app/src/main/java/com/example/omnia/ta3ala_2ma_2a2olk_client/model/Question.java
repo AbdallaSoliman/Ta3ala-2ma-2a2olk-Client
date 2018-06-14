@@ -53,7 +53,7 @@ public class Question implements Serializable {
     private List<SubCategory> subCatCollection = null;
     @SerializedName("personRateCollection")
     @Expose
-    private List<Object> personRateCollection = null;
+    private List<PersonId> personRateCollection ;
     @SerializedName("personId")
     @Expose
     private PersonId personId;
@@ -165,11 +165,11 @@ public class Question implements Serializable {
         this.subCatCollection = subCatCollection;
     }
 
-    public List<Object> getPersonRateCollection() {
+    public List<PersonId> getPersonRateCollection() {
         return personRateCollection;
     }
 
-    public void setPersonRateCollection(List<Object> personRateCollection) {
+    public void setPersonRateCollection(List<PersonId> personRateCollection) {
         this.personRateCollection = personRateCollection;
     }
 
