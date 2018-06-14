@@ -6,7 +6,8 @@
         android:icon="@drawable/copy_search"
         android:orderInCategory="100"
         android:title="search"
-        app:showAsAction="ifRoom" />
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_profile"
         android:orderInCategory="100"
