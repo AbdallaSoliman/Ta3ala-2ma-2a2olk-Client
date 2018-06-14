@@ -1,39 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/subLineSeparator "
     android:layout_width="match_parent"
-    android:layout_height="55dip">
+    android:layout_height="30dp"
+    android:background="#ffffff">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
+        android:id="@+id/imageView"
+        android:layout_width="5.7dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="75dp"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="-26sp"
-        android:paddingTop="10dp"
         android:src="@drawable/arrow"
         android:textColor="#0055a5"
-        android:textSize="50sp" />
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--<TextView-->
-        <!--android:id="@+id/item"-->
-        <!--android:layout_width="360dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:textStyle="italic" />-->
+    <!--android:id="@+id/item"-->
+    <!--android:layout_width="360dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:textStyle="italic" />-->
     <TextView
         android:id="@+id/item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="sans-serif-light"
+        android:layout_marginBottom="7dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/roboto_light"
+
         android:letterSpacing="0.01"
         android:lineSpacingExtra="-16sp"
-        android:paddingLeft="5dp"
-
+        android:paddingLeft="8.3dp"
         android:text="Chemistry"
         android:textColor="#0055a5"
         android:textSize="20dp"
-        android:textStyle="normal" />
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+    <View
+        android:id="@+id/viewLineSupSeparator "
+        android:layout_width="0dp"
+        android:layout_height="0.3dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginStart="57dp"
+        android:background="@color/slideDotActive"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

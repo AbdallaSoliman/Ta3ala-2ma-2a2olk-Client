@@ -1,8 +1,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:fillViewport="true">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
@@ -13,24 +15,45 @@ android:fillViewport="true">
     tools:context="com.example.omnia.ta3ala_2ma_2a2olk_client.view.Tab3Categories">
 
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="85dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="sans-serif"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="-26sp"
         android:text="Categories"
         android:textAlignment="center"
+        android:textAllCaps="false"
         android:textColor="#00a88f"
-        android:textSize="40dp"
-        android:textStyle="bold" />
+        android:textSize="16.7sp "
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ExpandableListView
         android:id="@+id/myexpandablelistview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:groupIndicator="@null" />
+        android:layout_height="471dp"
 
-</LinearLayout>
+        android:layout_marginTop="10dp"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:groupIndicator="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="0dp"
+        android:layout_height="1.3dp"
+        android:layout_marginTop="3dp"
+        android:background="@color/slideDotActive"
+        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+</android.support.constraint.ConstraintLayout>
 </ScrollView>
