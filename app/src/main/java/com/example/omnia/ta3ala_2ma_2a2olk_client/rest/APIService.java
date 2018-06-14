@@ -9,6 +9,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitleL
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategory;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategorySpecial;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.NewsFeed;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResonse;
@@ -119,8 +120,12 @@ public interface APIService {
 
     @GET("MainCategoriesSpecial?size=1000")
     Call<List<MainCategorySpecial>> mainCategoriesSpecial(@Header("Authorization") String token);
+
     @GET("Question?size=10")
     Call<List<Question>> getQuestion(@Header("Authorization") String token);
+
+    @GET("QuestionNewsFeed?size=10")
+    Call<List<NewsFeed>> getNewsFeeds(@Header("Authorization") String token);
 
     // hesham muhammed
 
