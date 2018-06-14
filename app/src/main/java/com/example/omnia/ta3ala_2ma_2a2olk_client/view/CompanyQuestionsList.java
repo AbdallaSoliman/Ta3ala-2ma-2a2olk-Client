@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
@@ -19,6 +20,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.Test2Listener;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.adaptor.CompanyQuestionAdaptor;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitle;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.CompanyQuestionsListPresenter;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +53,11 @@ public class CompanyQuestionsList extends AppCompatActivity implements Test2List
 
         //circle button
 
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,10 +75,14 @@ public class CompanyQuestionsList extends AppCompatActivity implements Test2List
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                } else {
+                    //abdalla start
+                } else if(ApiClient.isNetworkAvalaiable()){
                     Intent intent = new Intent(getApplicationContext(), AddQuestion.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
+                } else if(!ApiClient.isNetworkAvalaiable()){
+                     Toast.makeText(getApplicationContext(), "no network connection Avalaiabl", Toast.LENGTH_LONG).show();
+
                 }
             }
         });

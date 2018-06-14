@@ -23,14 +23,14 @@ import retrofit2.Response;
 
 public class Tab2CustomerServiceNetwork {
 
-    List<SubCategory> companies=new ArrayList<>();
+    List<SubCategory> companies = new ArrayList<>();
     Tab2CustomerServiceInterface presenterREFR;
 
     public Tab2CustomerServiceNetwork(Tab2CustomerServiceInterface presenterREFR) {
         this.presenterREFR = presenterREFR;
     }
 
-    public void getCompaniesFromNetwork(String token){
+    public void getCompaniesFromNetwork(String token) {
 
         APIService apiService =
                 ApiClient.getApiClient().create(APIService.class);
@@ -38,11 +38,13 @@ public class Tab2CustomerServiceNetwork {
         call.enqueue(new Callback<MainCategory>() {
             @Override
             public void onResponse(Call<MainCategory> call, Response<MainCategory> response) {
-
-                companies.addAll(response.body().getSubCatCollection());
-                presenterREFR.setCompaniesList(companies);
-               }
-
+//abdalla start
+                if (response.body() != null&&companies!=null) {
+                    companies.addAll(response.body().getSubCatCollection());
+                    presenterREFR.setCompaniesList(companies);
+                }
+            }
+//abdalla end
             @Override
             public void onFailure(Call<MainCategory> call, Throwable t) {
             }

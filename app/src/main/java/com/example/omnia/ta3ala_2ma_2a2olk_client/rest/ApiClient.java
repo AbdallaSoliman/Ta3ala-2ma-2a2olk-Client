@@ -1,14 +1,25 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.rest;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories;
+
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -18,6 +29,7 @@ public class ApiClient {
     static private Retrofit retrofit;
     static private OkHttpClient httpClient;
     static private Retrofit.Builder builder;
+
     public static Retrofit getApiClient() {
         int cacheSize = 10 * 1024 * 1024; // 10 MiB
         Cache cache = new Cache(MyApplication.getContext().getCacheDir(), cacheSize);
