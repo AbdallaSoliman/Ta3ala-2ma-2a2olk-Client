@@ -56,10 +56,6 @@ public class AddAnswer extends AppCompatActivity {
 
         if(!answerText.trim().isEmpty()){
 
-            //abdalla start
-            //registra
-            FirebaseMessaging.getInstance().subscribeToTopic("QuestionNotifications"+qId.getQuestionId());
-            //abdalla end
             // save answer to server
             Answer answer=new Answer();
             answer.setAnswer(answerText);

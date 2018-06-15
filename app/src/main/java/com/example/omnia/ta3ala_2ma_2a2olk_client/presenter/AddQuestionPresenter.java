@@ -12,11 +12,13 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SubCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SubCategory;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import okhttp3.CacheControl;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -119,11 +121,15 @@ public class AddQuestionPresenter implements MVPInterface.Presenter {
     public void AddQuestion(Question question) {
         retrofitConnection = ApiClient.getApiClient().create(APIService.class);
         questionCalling = retrofitConnection.addQuestion(question, getToken());
+        questionCalling.request().newBuilder().cacheControl(CacheControl.FORCE_NETWORK);
         questionCalling.enqueue(new Callback<Question>() {
             @Override
             public void onResponse(Call<Question> call, Response<Question> response) {
                 if (response != null) {
                     view.isAdded("Question Addedd");
+                    //abdalla start
+                    FirebaseMessaging.getInstance().subscribeToTopic("QuestionNotifications"+response.body().getQuestionId());
+                    //abdalla end
                 }
             }
 
