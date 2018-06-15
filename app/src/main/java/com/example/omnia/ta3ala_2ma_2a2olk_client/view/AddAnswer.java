@@ -15,6 +15,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.PersonId;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.AddAnswerPresenter;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -55,6 +56,10 @@ public class AddAnswer extends AppCompatActivity {
 
         if(!answerText.trim().isEmpty()){
 
+            //abdalla start
+            //registra
+            FirebaseMessaging.getInstance().subscribeToTopic("QuestionNotifications"+qId.getQuestionId());
+            //abdalla end
             // save answer to server
             Answer answer=new Answer();
             answer.setAnswer(answerText);
