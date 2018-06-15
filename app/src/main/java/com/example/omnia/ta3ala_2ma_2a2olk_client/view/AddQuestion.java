@@ -1,7 +1,9 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.view;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,8 @@ import android.widget.Toast;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.MVPInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.PersonId;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SubCategory;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.AddQuestionPresenter;
@@ -63,10 +67,20 @@ public class AddQuestion extends AppCompatActivity implements MVPInterface.View 
     Set<String> categoriesSet, placesSet, customerSet;
     String[] categoriesArray, placesArray, customerArray;
 
+    // for back button on action bar
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_question);
+
+        // for back arrow
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         presenter = new AddQuestionPresenter(this, getApplicationContext());
         presenter.showData();
@@ -147,6 +161,9 @@ public class AddQuestion extends AppCompatActivity implements MVPInterface.View 
                     question.setBody(description.getText().toString());
                     question.setSubCatCollection(subCatCollection);
                     question.setIsdeleted(0);
+                    PersonId personId=new PersonId();
+                    personId.setPersonId(getUserId());
+                    question.setPersonId(personId);
                     // get date
                     Calendar calendar = Calendar.getInstance();
                     SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
@@ -403,5 +420,12 @@ public class AddQuestion extends AppCompatActivity implements MVPInterface.View 
         Intent intent = new Intent(AddQuestion.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    public int getUserId(){
+        SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+        SharredPreferenceManager manager =new SharredPreferenceManager(getApplicationContext());
+        String  idstr = manager.getString(userDetails, "id", "0");
+        return Integer.parseInt(idstr);
     }
 }
