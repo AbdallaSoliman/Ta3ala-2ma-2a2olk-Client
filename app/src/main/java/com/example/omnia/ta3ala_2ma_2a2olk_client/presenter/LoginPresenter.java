@@ -92,7 +92,6 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                     SharredPreferenceManager m1 = new SharredPreferenceManager(mcontext);
                     String tokenvalue = "Bearer " + response.body().getTocken().toString();
                     m1.setString(pref, "persontoken", tokenvalue);
-
                     User user = new User(username,password);
                     loadUser(mcontext,tokenvalue,user);
                     Toast.makeText(mcontext, tokenvalue, Toast.LENGTH_LONG).show();
