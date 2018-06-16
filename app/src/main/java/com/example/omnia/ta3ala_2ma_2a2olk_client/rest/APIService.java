@@ -137,7 +137,7 @@ public interface APIService {
 
     @POST("Question")
     Call<Question> addQuestion(@Body Question question, @Header("Authorization") String token);
-
-    Call<ServerResponseId> addQuestion(@Header("Content-Type") String content_type,@Body Question question, @Header("Authorization") String token);
+  //  @POST
+   // Call<ServerResponseId> addQuestion(@Header("Content-Type") String content_type,@Body Question question, @Header("Authorization") String token);
 }
 
