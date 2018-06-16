@@ -34,7 +34,7 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
 
 
     @Override
-    public int checkInput(String username , String email, String password, String first, String last) {
+    public int checkInput(String username, String email, String password, String first, String last) {
         Boolean status = validateEmail(email);
         Log.i("tag", status.toString());
         if (!status) {
@@ -44,7 +44,7 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
         } else if (password.length() < 6) {
             view.registerStatus(1);
             return 0;
-        } else if (email.isEmpty() || password.isEmpty() || first.isEmpty() || last.isEmpty()|| username.isEmpty()) {
+        } else if (email.isEmpty() || password.isEmpty() || first.isEmpty() || last.isEmpty() || username.isEmpty()) {
             view.registerStatus(2);
             return 0;
         }
@@ -52,13 +52,13 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
     }
 
     @Override
-    public void loadDataFromServer(String username , String email, String password, String first, String last, String gender, final Context mcontext) {
+    public void loadDataFromServer(String username, String email, String password, String first, String last, String gender, final Context mcontext) {
         Toast.makeText(mcontext, "Signing up", Toast.LENGTH_LONG).show();
-        final User user = new User(first, last, password, email, "user", gender, true , username);
+        final User user = new User(first, last, password, email, "user", gender, true, username);
 
         SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
-        String token = manager.getString(tokenDetails, "persontoken", "no");
+        String token = manager.getString(tokenDetails, "persontoken1", "no");
         Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
 
         apiInterface = ApiClient.getApiClient().create(APIService.class);
@@ -69,10 +69,14 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
                 if (response.isSuccessful()) {
                     Toast.makeText(mcontext, "Register succesful ", Toast.LENGTH_LONG).show();
                     int id = response.body().getPersonId();
-                    registerTaUser(id , mcontext);
+                    registerTaUser(id, mcontext);
+                    if (response.body().getEmail() == null || response.body().getUsername() == null) {
+                        Toast.makeText(mcontext, "Username or E-mail already exist ", Toast.LENGTH_LONG).show();
+
+                    }
                     Toast.makeText(mcontext, response.body().getEmail(), Toast.LENGTH_LONG).show();
-                  //  int id = response.body().getPersonId();
-                    Log.i("id",id+"");
+                    //  int id = response.body().getPersonId();
+                    Log.i("id", id + "");
                 }
             }
 
@@ -88,30 +92,32 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
 
     }
 
-    private void registerTaUser(int id , Context mcontext) {
+    private void registerTaUser(int id, final Context mcontext) {
         SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
-        String token = manager.getString(tokenDetails, "persontoken", "no");
+        String token = manager.getString(tokenDetails, "persontoken1", "no");
         apiInterface = ApiClient.getApiClient().create(APIService.class);
         User tauser = new User();
         tauser.setPersonId(id);
-        Log.i("il-id",+id+"");
-       Call<ServerResonse> call = apiInterface.addTaUser("application/json",token,tauser);
-       call.enqueue(new Callback<ServerResonse>() {
-           @Override
-           public void onResponse(Call<ServerResonse> call, Response<ServerResonse> response) {
-               if (response.isSuccessful()){
-                   Log.i("user response" ,response.body().getMessage().toString()+"");
-               }
-           }
+        Log.i("il-id", +id + "");
+        Call<ServerResonse> call = apiInterface.addTaUser("application/json", token, tauser);
+        call.enqueue(new Callback<ServerResonse>() {
+            @Override
+            public void onResponse(Call<ServerResonse> call, Response<ServerResonse> response) {
+                if (response.isSuccessful()) {
+                    Log.i("user response", response.body().getMessage().toString() + "");
+                    android.content.Intent intent = new android.content.Intent(mcontext, LoginActivity.class);
+                    mcontext.startActivity(intent);
+                }
+            }
 
-           @Override
-           public void onFailure(Call<ServerResonse> call, Throwable t) {
+            @Override
+            public void onFailure(Call<ServerResonse> call, Throwable t) {
+                Toast.makeText(mcontext, "Username or E-mail already exist ", Toast.LENGTH_LONG).show();
+                Log.i("user response", "failed");
 
-               Log.i("user response" ,"failed");
-
-           }
-       });
+            }
+        });
 
     }
 

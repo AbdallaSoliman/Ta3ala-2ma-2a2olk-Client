@@ -62,7 +62,7 @@ public class SplashPresenter implements SplashInterface.presenter {
                 SharedPreferences.Editor editor = pref.edit();
                 SharredPreferenceManager m1 = new SharredPreferenceManager(mcontext);
                 String tokenvalue = "Bearer " + tocken;
-                m1.setString(pref, "persontoken", tokenvalue);
+                m1.setString(pref, "persontoken1", tokenvalue);
                 view.checksharredpreference();
                 view.finishActivity();
             }

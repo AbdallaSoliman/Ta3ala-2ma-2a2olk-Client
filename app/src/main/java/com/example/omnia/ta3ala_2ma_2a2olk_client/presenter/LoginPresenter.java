@@ -56,10 +56,11 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
     @Override
     public int checkInput(String email, String password) {
         //abdalla start
-        if (password.length() < 6) {
-            view.registerStatus(1);
-            return 0;
-        } else if (email.isEmpty() || password.isEmpty()) {
+//        if (password.length() < 6) {
+//            view.registerStatus(1);
+//            return 0;
+//        }
+  if (email.isEmpty() || password.isEmpty()) {
             view.registerStatus(2);
             return 0;
         }
@@ -76,7 +77,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
         SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = tokenDetails.edit();
         SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
-        String token = manager.getString(tokenDetails, "persontoken", "no");
+        String token = manager.getString(tokenDetails, "persontoken1", "no");
         Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
         apiInterface = ApiClient.getApiClient().create(APIService.class);
         final Tocken user = new Tocken(password, username);
