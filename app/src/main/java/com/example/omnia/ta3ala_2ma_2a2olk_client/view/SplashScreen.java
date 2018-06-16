@@ -14,7 +14,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPrefe
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.SplashPresenter;
 
 public class SplashScreen extends AppCompatActivity implements SplashInterface.view {
-    SplashPresenter presenter ;
+    SplashPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

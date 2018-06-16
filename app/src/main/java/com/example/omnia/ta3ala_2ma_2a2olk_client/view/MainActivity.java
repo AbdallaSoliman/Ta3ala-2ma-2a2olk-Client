@@ -1,5 +1,6 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.view;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,8 +8,11 @@ import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -21,11 +25,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.Search;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.adapters.NewsFeedsAdapter;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.NewsFeed;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.SearchPresenter;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,10 +56,15 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     MaterialSearchView searchView;
     MenuItem logout;
+    private RecyclerView recyclerView;
+    private NewsFeedsAdapter adapter;
+
     Toolbar toolbar;
-//abdalla start
+    // SearchPresenter presenter;
+    //abdalla start
     FloatingActionButton fabBtn;
-//abdalla end
+
+    //abdalla end
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,11 +73,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
+        recyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
+        //  presenter = new SearchPresenter(this);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -124,19 +141,53 @@ public class MainActivity extends AppCompatActivity {
 
         //abdalla end
 
-       searchViewCode();
+        searchViewCode();
     }
-//abdalla start
+
+    //abdalla start
     public FloatingActionButton getFloatingActionButton() {
         return fabBtn;
     }
-//abdalla end
+
+    //abdalla end
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         // getMenuInflater().inflate(R.menu.menu_main, menu);
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem item = menu.findItem(R.id.action_search);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView view = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        if (null != view) {
+            view.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            view.setIconifiedByDefault(false);
+        }
+        view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                // presenter.loadSearchResults(s,getApplicationContext(),MainActivity.this);
+                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("query", s);
+//// set Fragmentclass Arguments
+//                Tab1NewsFeeds fragobj = new Tab1NewsFeeds();
+//                fragobj.setArguments(bundle);
+//                FragmentManager fragmentManager = getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.container,fragobj);
+//                fragmentTransaction.commit();
+                Intent i = new Intent(MainActivity.this, SearchActivity.class);
+                i.putExtra("query", s);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
         logout = menu.findItem(R.id.action_logout);
         SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
         SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
@@ -172,8 +223,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return true;
-    }
 
+    }
 
 
     @Override
@@ -200,6 +251,19 @@ public class MainActivity extends AppCompatActivity {
         //Ahmed Hesham
         finish();
     }
+
+//    @Override
+//    public void showSearchResults(List<NewsFeed> data) {
+////        adapter = new NewsFeedsAdapter(data, MainActivity.this);
+////        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+////        recyclerView.setLayoutManager(layoutManager);
+////        recyclerView.setAdapter(adapter);
+//        Bundle bundle = new Bundle();
+//        bundle.putArra("edttext", "From Activity");
+//// set Fragmentclass Arguments
+//        Tab1NewsFeeds fragobj = new Tab1NewsFeeds();
+//        fragobj.setArguments(bundle);
+//    }
 
 
     /**

@@ -107,6 +107,7 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
 
            @Override
            public void onFailure(Call<ServerResonse> call, Throwable t) {
+
                Log.i("user response" ,"failed");
 
            }

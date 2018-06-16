@@ -104,6 +104,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Intent intent = new Intent(ProfileScreen.this, MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.putExtra("companyId", id);
                             getApplicationContext().startActivity(intent);
                         }

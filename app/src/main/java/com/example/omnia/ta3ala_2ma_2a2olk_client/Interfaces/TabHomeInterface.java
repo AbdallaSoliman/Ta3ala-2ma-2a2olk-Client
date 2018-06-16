@@ -1,5 +1,6 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces;
 
+import android.app.Activity;
 import android.content.Context;
 
 public interface TabHomeInterface {
@@ -9,5 +10,6 @@ public interface TabHomeInterface {
 
     interface presenter {
         void initData(Context mContext);
+
     }
 }

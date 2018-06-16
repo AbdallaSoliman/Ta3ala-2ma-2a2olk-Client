@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.*;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.RegisterMvpInterface;
@@ -15,6 +16,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 public class SignUp extends AppCompatActivity implements RegisterMvpInterface.view {
 
     EditText email , password , first , last , username ;
+    RadioGroup radioGroup;
     RadioButton male , female ;
     Button signup;
     SignupPresenter presenter;
@@ -28,8 +30,9 @@ public class SignUp extends AppCompatActivity implements RegisterMvpInterface.vi
        password = (EditText) findViewById(R.id.txtPassUP);
        first = (EditText) findViewById(R.id.txtFirst);
        last = (EditText) findViewById(R.id.txtLast);
-       male = (RadioButton) findViewById(R.id.rdmale);
-       female = (RadioButton) findViewById(R.id.rdfemale);
+       radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+       male = (RadioButton) findViewById(R.id.male);
+       female = (RadioButton) findViewById(R.id.Female);
        signup = (Button) findViewById(R.id.btnSignup);
        username = (EditText) findViewById(R.id.txtUserName);
        signup.setOnClickListener(new View.OnClickListener() {
