@@ -70,34 +70,40 @@ public class PlacesPresenter implements PlacesInterface.presenter, ExpandableLis
             @Override
             public void onResponse(Call<List<MainCategorySpecial>> call, Response<List<MainCategorySpecial>> response) {
                 if (response.isSuccessful()) {
-                    getCategories = response.body();
-                    for (int y = 0; y < 2; y++) {
-                        MainCategories.clear();
-                        categories = getCategories.get(y).getSubCatCollection();
-                        HashMap<String, List<String>> hashMap = new HashMap<>();
-                        HashMap<String, List<Integer>> hashId = new HashMap<>();
-                        for (int i = 0; i < categories.size(); i++) {
-                            SubCatCollection subCategory = categories.get(i);
-                            if (hashMap.get(subCategory.getSubCatName()) == null) {
-                                hashMap.put(subCategory.getSubCatName(), new ArrayList<String>());
-                                hashId.put(subCategory.getSubCatName(), new ArrayList<Integer>());
-                                if (subCategory.getDescription() != null) {
-                                    hashMap.get(subCategory.getSubCatName()).add(subCategory.getDescription());
-                                    hashId.get(subCategory.getSubCatName()).add(subCategory.getSubCatId());
-                                    MainCategories.add(subCategory.getSubCatName());
-                                    url.add((String) subCategory.getImgUrl());
-                                    noofquestions.add(subCategory.getNumOfQuestion());
+
+                    if (response.body() != null) {
+                        getCategories = response.body();
+
+                        for (int y = 0; y < 2; y++) {
+                            if (getCategories.size() > 0) {
+                                MainCategories.clear();
+                                categories = getCategories.get(y).getSubCatCollection();
+                                HashMap<String, List<String>> hashMap = new HashMap<>();
+                                HashMap<String, List<Integer>> hashId = new HashMap<>();
+                                for (int i = 0; i < categories.size(); i++) {
+                                    SubCatCollection subCategory = categories.get(i);
+                                    if (hashMap.get(subCategory.getSubCatName()) == null) {
+                                        hashMap.put(subCategory.getSubCatName(), new ArrayList<String>());
+                                        hashId.put(subCategory.getSubCatName(), new ArrayList<Integer>());
+                                        if (subCategory.getDescription() != null) {
+                                            hashMap.get(subCategory.getSubCatName()).add(subCategory.getDescription());
+                                            hashId.get(subCategory.getSubCatName()).add(subCategory.getSubCatId());
+                                            MainCategories.add(subCategory.getSubCatName());
+                                            url.add((String) subCategory.getImgUrl());
+                                            noofquestions.add(subCategory.getNumOfQuestion());
+                                        }
+                                    } else {
+                                        if (subCategory.getDescription() != null) {
+                                            hashMap.get(subCategory.getSubCatName()).add(subCategory.getDescription());
+                                            hashId.get(subCategory.getSubCatName()).add(subCategory.getSubCatId());
+                                        }
+                                    }
                                 }
-                            } else {
-                                if (subCategory.getDescription() != null) {
-                                    hashMap.get(subCategory.getSubCatName()).add(subCategory.getDescription());
-                                    hashId.get(subCategory.getSubCatName()).add(subCategory.getSubCatId());
+                                if (y == 1) {
+                                    placesMap = hashMap;
+                                    placesMapId = hashId;
                                 }
                             }
-                        }
-                        if (y == 1) {
-                            placesMap = hashMap;
-                            placesMapId = hashId;
                         }
                     }
                 }
