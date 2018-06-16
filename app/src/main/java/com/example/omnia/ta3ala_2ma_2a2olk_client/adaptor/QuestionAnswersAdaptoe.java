@@ -164,6 +164,7 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
             Question qq=ii.getQuestion();
           if(qq.getPersonId().getPersonId()==getUserId()){
              // queestion is mine
+          //    if(answers.get(position))
           }
           else {
               holder.answerVerified.setVisibility(View.GONE);
