@@ -135,9 +135,9 @@ public interface APIService {
 
     // hesham muhammed
 
+//    @POST("Question")
+//    Call<Question> addQuestion(@Body Question question, @Header("Authorization") String token);
     @POST("Question")
-    Call<Question> addQuestion(@Body Question question, @Header("Authorization") String token);
-
     Call<ServerResponseId> addQuestion(@Header("Content-Type") String content_type,@Body Question question, @Header("Authorization") String token);
 }
 
