@@ -47,7 +47,7 @@ public class NewsFeedsPresenter implements NewsFeeds.presenter {
             public void onResponse(retrofit2.Call<List<NewsFeed>> call, Response<List<NewsFeed>> response) {
                 if (response.isSuccessful()) {
                     data = response.body();
-                    Log.i("data", data.get(0).getTitle()+"hii");
+//                    Log.i("data", data.get(0).getTitle()+"hii");
                     view.setAdapter(data);
                 }
             }

@@ -20,16 +20,6 @@
         android:background="#f0fcff"
         tools:context="com.example.omnia.ta3ala_2ma_2a2olk_client.view.CompanyQuestionDetails">
 
-        <!--<Button-->
-        <!--android:id="@+id/upRate"-->
-        <!--android:layout_width="20dp"-->
-        <!--android:layout_height="15dp"-->
-        <!--android:layout_marginEnd="40dp"-->
-        <!--android:layout_marginTop="36dp"-->
-        <!--android:background="@drawable/uprate"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-
         <ImageView
             android:id="@+id/upRate"
             android:layout_width="wrap_content"
@@ -55,14 +45,6 @@
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
-        <!--<Button-->
-        <!--android:id="@+id/downRate"-->
-        <!--android:background="@drawable/downrate"-->
-        <!--android:layout_width="20dp"-->
-        <!--android:layout_height="15dp" />-->
-
 
         <ImageView
             android:id="@+id/downRate"
@@ -124,7 +106,6 @@
             app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        <!--android:text="العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم .. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم .. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم .. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم .. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم .. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم"-->
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/personImage"
@@ -151,7 +132,7 @@
             app:layout_constraintTop_toBottomOf="@+id/qBody" />
 
         <TextView
-            android:id="@+id/personeDate"
+            android:id="@+id/questionDate"
             android:layout_width="264dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"

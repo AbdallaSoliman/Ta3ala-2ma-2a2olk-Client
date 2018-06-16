@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.MVPInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
@@ -54,7 +55,6 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
 
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.answer_list_item, parent, false);
-
         return new QuestionAnswersAdaptoe.ViewHolder(itemView);
     }
 
@@ -71,70 +71,98 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         String email=getUserOffAppEmail();
 
         holder.answerRateCount.setText(String.valueOf(answers.get(position).getRate()));
-//        if(!email.equals(auerEmail)){
-//            holder.editImageView.setVisibility(View.GONE);
-//            holder.editTextView.setVisibility(View.GONE);
-//            holder.deleteImageView.setVisibility(View.GONE);
-//            holder.deleteTextView.setVisibility(View.GONE);
-//            holder.horizontalLine1.setVisibility(View.GONE);
-//            holder.horizontalLine2.setVisibility(View.GONE);
-//        }
 
+          if(checkIfUserLoginOrNot()==0){
+            holder.editImageView.setVisibility(View.GONE);
+            holder.editTextView.setVisibility(View.GONE);
+            holder.deleteImageView.setVisibility(View.GONE);
+            holder.deleteTextView.setVisibility(View.GONE);
+            holder.reportImageView.setVisibility(View.GONE);
+            holder.reportTextView.setVisibility(View.GONE);
+            holder.horizontalLine1.setVisibility(View.GONE);
+            holder.horizontalLine2.setVisibility(View.GONE);
+            holder.v1.setVisibility(View.GONE);
+            holder.v2.setVisibility(View.GONE);
 
-        holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDeleteDialog(position);
-                }
-        });
+          }else{
+              // check if answer is mine
+              if(answer.getPersonId().getPersonId()==getUserId()){
+                  holder.reportImageView.setVisibility(View.GONE);
+                  holder.reportTextView.setVisibility(View.GONE);
 
-        holder.deleteTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDeleteDialog(position);
-            }
-        });
+                  holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View view) {
+                          showDeleteDialog(position);
+                      }
+                  });
 
-        holder.editImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showEditDialog(position);
-            }
-        });
-        holder.editTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showEditDialog(position);
-            }
-        });
-        holder.reportImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showReportDialog(position);
-            }
-        });
-        holder.reportTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showReportDialog(position);
-            }
-        });
+                  holder.deleteTextView.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View view) {
+                          showDeleteDialog(position);
+                      }
+                  });
 
-        holder.answerUpRate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.answerRateCount.setText(String.valueOf(answers.get(position).getRate()+1));
-                qAAPresenter.answerRateUpPresenter(String.valueOf(answers.get(position).getAnswersId()),getToken());
-            }
-        });
-        holder.answerDownRate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.answerRateCount.setText(String.valueOf(answers.get(position).getRate()-1));
-                qAAPresenter.answerRateDownPresenter(String.valueOf(answers.get(position).getAnswersId()),getToken());
+                  holder.editImageView.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View view) {
+                          showEditDialog(position);
+                      }
+                  });
+                  holder.editTextView.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View view) {
+                          showEditDialog(position);
+                      }
+                  });
 
-            }
-        });
+              }else {// answer is not mine
+
+                  holder.editImageView.setVisibility(View.GONE);
+                  holder.editTextView.setVisibility(View.GONE);
+                  holder.deleteImageView.setVisibility(View.GONE);
+                  holder.deleteTextView.setVisibility(View.GONE);
+                  holder.v1.setVisibility(View.GONE);
+                  holder.v2.setVisibility(View.GONE);
+
+                  holder.reportImageView.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View view) {
+                          showReportDialog(position);
+                      }
+                  });
+                  holder.reportTextView.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View view) {
+                          showReportDialog(position);
+                      }
+                  });
+
+                  // check if user rate this answer before
+                  if(checkIfUserRateBefore(answers.get(position))==0){
+                     // answer not rated before
+                      holder.answerUpRate.setOnClickListener(new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
+                              holder.answerRateCount.setText(String.valueOf(answers.get(position).getRate()+1));
+                              qAAPresenter.answerRateUpPresenter(String.valueOf(answers.get(position).getAnswersId()),getToken());
+                          }
+                      });
+                      holder.answerDownRate.setOnClickListener(new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
+                              holder.answerRateCount.setText(String.valueOf(answers.get(position).getRate()-1));
+                              qAAPresenter.answerRateDownPresenter(String.valueOf(answers.get(position).getAnswersId()),getToken());
+                          }
+                      });
+                  }
+                  else{
+                  }
+
+              }
+          }
+
     }
 
     @Override
@@ -148,10 +176,9 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         public ImageView personImage;
         public ImageView editImageView,deleteImageView,reportImageView;
         public TextView editTextView,deleteTextView,reportTextView;
-        public View horizontalLine1,horizontalLine2;
+        public View horizontalLine1,horizontalLine2,v1,v2;
         public ImageView answerUpRate,answerDownRate;
         public TextView answerRateCount;
-
 
         public ViewHolder(View view) {
             super(view);
@@ -165,14 +192,57 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
             reportImageView=(ImageView)view.findViewById(R.id.reportImage);
             reportTextView=(TextView)view.findViewById(R.id.reportText);
 
-            horizontalLine1=(View)view.findViewById(R.id.view1);
-            horizontalLine2=(View)view.findViewById(R.id.view2);
+            horizontalLine1=(View)view.findViewById(R.id.h1);
+            horizontalLine2=(View)view.findViewById(R.id.h2);
+            v1=(View) view.findViewById(R.id.v1);
+            v2=(View) view.findViewById(R.id.v2);
 
             answerUpRate=view.findViewById(R.id.AupRate);
             answerDownRate=view.findViewById(R.id.AdownRate);
             answerRateCount=(TextView)view.findViewById(R.id.ArateCount);
 
         }
+    }
+
+    public void deleteAnswer(int answerId){
+        final String token = getToken();
+        // send request to delete data
+        qAAPresenter.deleteAnswerPresenter(answerId,token);
+        notifyDataSetChanged();
+    }
+
+    public void editAnswer(Answer answer){
+        final String token = getToken();
+        QuestionAnswerAdapotorPresenter qAAPresenter=new QuestionAnswerAdapotorPresenter();
+        qAAPresenter.editAnswerPresenter(answer,token);
+    }
+
+    public int checkIfUserRateBefore(Answer answer){
+        int x = 0, i = 0;
+        List<PersonId> ratedPerson = answer.getPersonCollection();
+        while (x == 0 && i < ratedPerson.size()) {
+
+            if (ratedPerson.get(i).getPersonId() == getUserId()) {
+                x = 1;
+            } else {
+                i++;
+            }
+        }
+        return x;
+    }
+
+    public int checkIfUserLoginOrNot() {
+        int x = 0;
+        SharedPreferences userDetails = mcContext.getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = userDetails.edit();
+        SharredPreferenceManager manager = new SharredPreferenceManager(mcContext);
+        String email = manager.getString(userDetails, "email", "no");
+        if (email.equals("no")) {
+            x = 0;
+        } else {
+            x = 1;
+        }
+        return x;
     }
 
     public String  getUserOffAppEmail(){
@@ -182,6 +252,21 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         String email = manager.getString(userDetails, "email", "no");
         return email;
     }
+
+    public int getUserId(){
+        SharedPreferences userDetails = mcContext.getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+        SharredPreferenceManager manager =new SharredPreferenceManager(mcContext);
+        String  idstr = manager.getString(userDetails, "id", "0");
+        return Integer.parseInt(idstr);
+    }
+
+    public String getToken(){
+        SharedPreferences pref = mcContext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
+        SharredPreferenceManager shM = new SharredPreferenceManager(mcContext);
+        final String token = shM.getString(pref, "persontoken", "error");
+        return token;
+    }
+///////////////// dialogs////////////////////////////////
 
     public void showDeleteDialog(final int answerPosition){
 
@@ -202,15 +287,8 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
                 dialog.dismiss();
             }
         });
-          alertDialog.setCancelable(false);
+        alertDialog.setCancelable(false);
         alertDialog.show();
-    }
-
-    public void deleteAnswer(int answerId){
-        final String token = getToken();
-        // send request to delete data
-        qAAPresenter.deleteAnswerPresenter(answerId,token);
-        notifyDataSetChanged();
     }
 
     public void showEditDialog(final int answerPosition){
@@ -237,7 +315,7 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
                         Log.i("qq", qq.getQuestionId().toString());
                         editAnswer(answer);
                         notifyDataSetChanged();
-                      }
+                    }
                 });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"CANCEL",new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -248,82 +326,64 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         alertDialog.show();
     }
 
-    public void editAnswer(Answer answer){
-        final String token = getToken();
-        QuestionAnswerAdapotorPresenter qAAPresenter=new QuestionAnswerAdapotorPresenter();
-        qAAPresenter.editAnswerPresenter(answer,token);
-    }
-
     public void showReportDialog(final int position){
 
-        LayoutInflater linflater = (LayoutInflater) mcContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final  View view1=linflater.inflate(R.layout.question_report_dialog,null);
+    LayoutInflater linflater = (LayoutInflater) mcContext
+            .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    final  View view1=linflater.inflate(R.layout.question_report_dialog,null);
 
-        final EditText reportTitleEditText = (EditText) view1.findViewById(R.id.reportTitle);
-        final EditText reportBodyEditText=(EditText)view1.findViewById(R.id.reportBody);
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(mcContext);
-        dialog.setTitle("Answer Report");
-        dialog.setView(view1)
+    final EditText reportTitleEditText = (EditText) view1.findViewById(R.id.reportTitle);
+    final EditText reportBodyEditText=(EditText)view1.findViewById(R.id.reportBody);
+    final AlertDialog.Builder dialog = new AlertDialog.Builder(mcContext);
+    dialog.setTitle("Answer Report");
+    dialog.setView(view1)
 
-                .setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                    }
-                })
-                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                        dialog.dismiss();
-                    }
-                })
-                .setCancelable(false);
-        final AlertDialog alert = dialog.create();
-        alert.show();
-        alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            .setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int i) {
+                }
+            })
+            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int i) {
+                    dialog.dismiss();
+                }
+            })
+            .setCancelable(false);
+    final AlertDialog alert = dialog.create();
+    alert.show();
+    alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
 
-                if (reportTitleEditText.getText().toString().trim().isEmpty()) {
-                    reportTitleEditText.setError("please enter data");
-                }
-                else if(reportBodyEditText.getText().toString().trim().isEmpty()){
-                    reportBodyEditText.setError("please enter data");
-                }
-                else {
-                    Report report=new Report();
-                    report.setTitle(reportTitleEditText.getText().toString());
-                    report.setMsg(reportBodyEditText.getText().toString());
-                    report.setChecked(answers.get(position).getAnswersId());
-                    // get date
-                    Calendar calendar = Calendar.getInstance();
-                    SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
-                    String currentDate = mdformat.format(calendar.getTime());
-                    report.setReportDate(currentDate);
-                    report.setType("answer");
-                    // get person id from sharedpref
-                    PersonId person=new PersonId();
-                    person.setPersonId(Integer.parseInt(getPersonId()));
-                    report.setPersonId(person);
-                    qAAPresenter.reportAnswerPresenter(report, getToken());
-                    alert.dismiss();
-                }
+            if (reportTitleEditText.getText().toString().trim().isEmpty()) {
+                reportTitleEditText.setError("please enter data");
             }
-        });
-    }
+            else if(reportBodyEditText.getText().toString().trim().isEmpty()){
+                reportBodyEditText.setError("please enter data");
+            }
+            else {
+                Report report=new Report();
+                report.setTitle(reportTitleEditText.getText().toString());
+                report.setMsg(reportBodyEditText.getText().toString());
+                report.setChecked(answers.get(position).getAnswersId());
+                // get date
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
+                String currentDate = mdformat.format(calendar.getTime());
+                report.setReportDate(currentDate);
+                report.setType("answer");
+                // get person id from sharedpref
+                PersonId person=new PersonId();
+                person.setPersonId(getUserId());
+                report.setPersonId(person);
+                qAAPresenter.reportAnswerPresenter(report, getToken());
+                alert.dismiss();
+            }
+        }
+    });
+}
 
-    public String getPersonId(){
-        SharedPreferences userDetails = mcContext.getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
-        SharredPreferenceManager manager =new SharredPreferenceManager(mcContext);
-        String  idstr = manager.getString(userDetails, "id", "0");
-        return idstr;
-    }
 
-    public String getToken(){
-        SharedPreferences pref = mcContext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
-        SharredPreferenceManager shM = new SharredPreferenceManager(mcContext);
-        final String token = shM.getString(pref, "persontoken", "error");
-        return token;
-    }
 }
 

@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by omnia on 6/2/2018.
@@ -38,6 +39,9 @@ public class Answer implements Serializable {
     @SerializedName("answersDate")
     @Expose
     private String  answersDate;
+    @SerializedName("personCollection")
+    @Expose
+    private List<PersonId> personCollection;
     @SerializedName("personId")
     @Expose
     private PersonId personId;
@@ -132,5 +136,13 @@ public class Answer implements Serializable {
 
     public void setQuestionId(int questionId) {
         this.questionId = questionId;
+    }
+
+    public List<PersonId> getPersonCollection() {
+        return personCollection;
+    }
+
+    public void setPersonCollection(List<PersonId> personCollection) {
+        this.personCollection = personCollection;
     }
 }

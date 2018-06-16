@@ -39,7 +39,7 @@ public class CompanyQuestionDetails extends AppCompatActivity {
     SharredPreferenceManager shM;
     CompanyQuestionDetailsPresenter cQDPresenter;
     Question question;
-    TextView titleTextView, bodyTextView, rateCount;
+    TextView titleTextView, bodyTextView, rateCount,questionDateTextView;
     TextView personNameTextView, editTextView, deleteTextView, reportTextView;
     ImageView deleteImageView, personImageView, editImageView, reportImageView;
     List<Answer> questionAnswers;
@@ -48,7 +48,7 @@ public class CompanyQuestionDetails extends AppCompatActivity {
     QuestionAnswersAdaptoe madaptor;
     String id;
     ImageView upRate, downRate;
-    View v1,v2,h3;
+    View v1, v2, h3;
     Button addComment;
 
     // for back button on action bar
@@ -66,8 +66,9 @@ public class CompanyQuestionDetails extends AppCompatActivity {
 
         titleTextView.setText(question.getTitle());
         bodyTextView.setText(question.getBody());
-        if (person != null) {
+        if (person.getImage() != null && person.getFirst() != null) {
             personNameTextView.setText(person.getFirst() + " " + person.getLast());
+            questionDateTextView.setText(question.getQuestionDate());
             Glide.with(this)
                     .load(person.getImage())
                     .into(personImageView);
@@ -76,74 +77,99 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         rateCount.setText(String.valueOf(question.getRate()));
         madaptor.notifyDataSetChanged();
 
-         showWhichCompnent(person);
+        showWhichCompnent(person);
     }
 
     public void showWhichCompnent(PersonId personId) {
 
-        // check if question is mine
-        if (personId.getPersonId() == getUserId()) {
+        if (checkIfUserLoginOrNot() == 0) {
+            // user not logged in
+            deleteTextView.setVisibility(View.GONE);
+            deleteImageView.setVisibility(View.GONE);
+            v1.setVisibility(View.GONE);
+            editTextView.setVisibility(View.GONE);
+            editImageView.setVisibility(View.GONE);
+            v2.setVisibility(View.GONE);
             reportTextView.setVisibility(View.GONE);
             reportImageView.setVisibility(View.GONE);
+            addComment.setVisibility(View.GONE);
+            h3.setVisibility(View.GONE);
+        } else { // user login
+            // check if question is mine
+            if (personId.getPersonId() == getUserId()) {
+                reportTextView.setVisibility(View.GONE);
+                reportImageView.setVisibility(View.GONE);
+                v1.setVisibility(View.GONE);
 
-            v1.setVisibility(View.GONE);
-            // check if user rate before
-           if(checkIfUserRateOrNot()==1){
-
-           }
-           else {
-               upRate.setOnClickListener(new View.OnClickListener() {
-                   @Override
-                   public void onClick(View view) {
-                       cQDPresenter.questionUpRatePresenter(String.valueOf(question.getQuestionId()), getToken());
-                       int rate = question.getRate() + 1;
-                       rateCount.setText(String.valueOf(rate));
-                   }
-               });
-               downRate.setOnClickListener(new View.OnClickListener() {
-                   @Override
-                   public void onClick(View view) {
-                       cQDPresenter.questionDownRatePresenter(String.valueOf(question.getQuestionId()), getToken());
-                       int rate = question.getRate() - 1;
-                       rateCount.setText(String.valueOf(rate));
-                   }
-               });
-           }
-        }
-        // question is not mine
-        else {
-
-            ((ViewGroup)rateCount.getParent()).removeView(deleteTextView);
-            ((ViewGroup)rateCount.getParent()).removeView( deleteImageView);
-            ((ViewGroup)rateCount.getParent()).removeView( editTextView);
-            ((ViewGroup)rateCount.getParent()).removeView( editImageView);
-            ((ViewGroup)rateCount.getParent()).removeView( v1);
-            ((ViewGroup)rateCount.getParent()).removeView( v2);
-
-            // check if user rate before
-            if(checkIfUserRateOrNot()==1){
-
-            }
-            else {
-                upRate.setOnClickListener(new View.OnClickListener() {
+                deleteImageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        cQDPresenter.questionUpRatePresenter(String.valueOf(question.getQuestionId()), getToken());
-                        int rate = question.getRate() + 1;
-                        rateCount.setText(String.valueOf(rate));
+                        showDeleteDialog();
                     }
                 });
-                downRate.setOnClickListener(new View.OnClickListener() {
+                deleteTextView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        cQDPresenter.questionDownRatePresenter(String.valueOf(question.getQuestionId()), getToken());
-                        int rate = question.getRate() - 1;
-                        rateCount.setText(String.valueOf(rate));
+                        showDeleteDialog();
                     }
                 });
-            }
-        }
+                editImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showEditDialog(question);
+                    }
+                });
+                editTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showEditDialog(question);
+                    }
+                });
+            } else {
+                // question is not mine
+                ((ViewGroup) rateCount.getParent()).removeView(deleteTextView);
+                ((ViewGroup) rateCount.getParent()).removeView(deleteImageView);
+                ((ViewGroup) rateCount.getParent()).removeView(editTextView);
+                ((ViewGroup) rateCount.getParent()).removeView(editImageView);
+                ((ViewGroup) rateCount.getParent()).removeView(v1);
+                ((ViewGroup) rateCount.getParent()).removeView(v2);
 
+                reportImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        reportDialog();
+                    }
+                });
+                reportTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        reportDialog();
+                    }
+                });
+
+                // check if user rate befor or not
+                if (checkIfUserRateOrNot() == 1) {
+                } else {
+                    upRate.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            cQDPresenter.questionUpRatePresenter(String.valueOf(question.getQuestionId()), getToken());
+                            int rate = question.getRate() + 1;
+                            rateCount.setText(String.valueOf(rate));
+                        }
+                    });
+                    downRate.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            cQDPresenter.questionDownRatePresenter(String.valueOf(question.getQuestionId()), getToken());
+                            int rate = question.getRate() - 1;
+                            rateCount.setText(String.valueOf(rate));
+                        }
+                    });
+                }
+            }
+
+        }
     }
 
     public void afterAddAnswer(Answer newAnswer) {
@@ -169,7 +195,7 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         bodyTextView = (TextView) findViewById(R.id.qBody);
         personNameTextView = (TextView) findViewById(R.id.personeName);
         personImageView = (ImageView) findViewById(R.id.personImage);
-
+        questionDateTextView=findViewById(R.id.questionDate);
         // recycleview
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         madaptor = new QuestionAnswersAdaptoe(questionAnswers, this, this);
@@ -184,9 +210,9 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         editTextView = (TextView) findViewById(R.id.editText);
         editImageView = (ImageView) findViewById(R.id.editImage);
 
-        h3=findViewById(R.id.view5);
-        v1=findViewById(R.id.v1);
-        v2=findViewById(R.id.v2);
+        h3 = findViewById(R.id.h2);
+        v1 = findViewById(R.id.v1);
+        v2 = findViewById(R.id.v2);
 
         rateCount = (TextView) findViewById(R.id.rateCount);
 
@@ -195,81 +221,7 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         reportTextView = (TextView) findViewById(R.id.reportText);
         reportImageView = (ImageView) findViewById(R.id.reportImage);
 
-        addComment=findViewById(R.id.addCommentButton);
-
-
-        if(checkIfUserLoginOrNot()==0){
-            deleteTextView.setVisibility(View.GONE);
-            deleteImageView.setVisibility(View.GONE);
-            v1.setVisibility(View.GONE);
-            editTextView.setVisibility(View.GONE);
-            editImageView.setVisibility(View.GONE);
-            v2.setVisibility(View.GONE);
-            reportTextView.setVisibility(View.GONE);
-            reportImageView.setVisibility(View.GONE);
-            addComment.setVisibility(View.GONE);
-            h3.setVisibility(View.GONE);
-        }
-        else {
-            deleteImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    showDeleteDialog();
-                }
-            });
-
-            deleteTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    showDeleteDialog();
-                }
-            });
-
-            editImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    showEditDialog(question);
-                }
-            });
-
-            editTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    showEditDialog(question);
-                }
-            });
-
-            reportImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    reportDialog();
-                }
-            });
-            reportTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    reportDialog();
-                }
-            });
-
-//            upRate.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    cQDPresenter.questionUpRatePresenter(String.valueOf(question.getQuestionId()), getToken());
-//                    int rate = question.getRate() + 1;
-//                    rateCount.setText(String.valueOf(rate));
-//                }
-//            });
-//            downRate.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    cQDPresenter.questionDownRatePresenter(String.valueOf(question.getQuestionId()), getToken());
-//                    int rate = question.getRate() - 1;
-//                    rateCount.setText(String.valueOf(rate));
-//                }
-//            });
-
-        }
+        addComment = findViewById(R.id.addCommentButton);
     }
 
     public void onRestart() {
@@ -280,14 +232,7 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         bodyTextView = (TextView) findViewById(R.id.qBody);
         personNameTextView = (TextView) findViewById(R.id.personeName);
         personImageView = (ImageView) findViewById(R.id.personImage);
-
-        cQDPresenter = new CompanyQuestionDetailsPresenter(this);
-
-        Intent intent = getIntent();
-        id = intent.getStringExtra("questionID");
-
-        cQDPresenter.getQuestionDetailsPresenter(id, getToken());
-
+        questionDateTextView=findViewById(R.id.questionDate);
         // recycleview
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         madaptor = new QuestionAnswersAdaptoe(questionAnswers, this, this);
@@ -299,66 +244,44 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         // delete&edit
         deleteTextView = (TextView) findViewById(R.id.deleteText);
         deleteImageView = (ImageView) findViewById(R.id.deleteImage);
-
-        deleteImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDeleteDialog();
-            }
-        });
-
-        deleteTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDeleteDialog();
-            }
-        });
-
         editTextView = (TextView) findViewById(R.id.editText);
         editImageView = (ImageView) findViewById(R.id.editImage);
 
-        editImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showEditDialog(question);
-            }
-        });
-
-        editTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showEditDialog(question);
-            }
-        });
+        h3 = findViewById(R.id.h2);
+        v1 = findViewById(R.id.v1);
+        v2 = findViewById(R.id.v2);
 
         rateCount = (TextView) findViewById(R.id.rateCount);
 
         upRate = findViewById(R.id.upRate);
         downRate = findViewById(R.id.downRate);
+        reportTextView = (TextView) findViewById(R.id.reportText);
+        reportImageView = (ImageView) findViewById(R.id.reportImage);
+
+        addComment = findViewById(R.id.addCommentButton);
 
     }
 
-    public int checkIfUserRateOrNot(){
+    public int checkIfUserRateOrNot() {
 
-        int x=0,i=0;
-        List<PersonId> ratedPerson=question.getPersonRateCollection();
+        int x = 0, i = 0;
+        List<PersonId> ratedPerson = question.getPersonRateCollection();
 
-        while (x==0&&i<ratedPerson.size()){
+        while (x == 0 && i < ratedPerson.size()) {
 
-            if(ratedPerson.get(i).getPersonId()==getUserId()){
-             x=1;
-            }
-            else {
-                 i++;
+            if (ratedPerson.get(i).getPersonId() == getUserId()) {
+                x = 1;
+            } else {
+                i++;
             }
         }
         return x;
     }
 
-    public int getUserId(){
+    public int getUserId() {
         SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
-        SharredPreferenceManager manager =new SharredPreferenceManager(getApplicationContext());
-        String  idstr = manager.getString(userDetails, "id", "0");
+        SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
+        String idstr = manager.getString(userDetails, "id", "0");
         return Integer.parseInt(idstr);
     }
 
@@ -370,9 +293,9 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         String email = manager.getString(userDetails, "email", "no");
 
         if (email.equals("no")) {
-          x = 0;
+            x = 0;
         } else {
-          x = 1;
+            x = 1;
         }
         return x;
     }
