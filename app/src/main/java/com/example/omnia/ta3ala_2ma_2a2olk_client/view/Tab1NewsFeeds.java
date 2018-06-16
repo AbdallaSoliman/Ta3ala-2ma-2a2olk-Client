@@ -52,13 +52,18 @@ public class Tab1NewsFeeds extends Fragment implements NewsFeeds.view {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        presenter = new NewsFeedsPresenter(this);
+//        Bundle bundle = this.getArguments();
+//        if (bundle != null) {
+//            String strtext = getArguments().getString("query");
+//            Log.i("query", strtext);
+//            presenter.loadSearchResults(strtext, getContext(), getActivity());
+//        }
         View rootView = inflater.inflate(R.layout.tab1, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.card_recycler_view);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        presenter = new NewsFeedsPresenter(this);
         presenter.loadNewsFeeds(getContext(), getActivity());
         return rootView;
 
@@ -66,10 +71,11 @@ public class Tab1NewsFeeds extends Fragment implements NewsFeeds.view {
 
     @Override
     public void setAdapter(List<NewsFeed> data) {
-        adapter = new NewsFeedsAdapter(data , getActivity());
+        adapter = new NewsFeedsAdapter(data, getActivity());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
 

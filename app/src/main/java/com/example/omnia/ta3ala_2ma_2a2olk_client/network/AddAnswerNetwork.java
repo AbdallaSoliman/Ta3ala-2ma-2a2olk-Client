@@ -7,6 +7,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.AddAnswerPresenter;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
 
+import okhttp3.CacheControl;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,6 +23,9 @@ public class AddAnswerNetwork {
         APIService apiService =
                 ApiClient.getApiClient().create(APIService.class);
         Call<String> call = apiService.saveAnswer(answer, token);
+//        abdalla start
+        call.request().newBuilder().cacheControl(CacheControl.FORCE_NETWORK);
+//        abdalla end
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

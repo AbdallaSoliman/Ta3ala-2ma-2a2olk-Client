@@ -55,7 +55,8 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
 
     @Override
     public int checkInput(String email, String password) {
-        if (password.length() >6) {
+        //abdalla start
+        if (password.length() < 6) {
             view.registerStatus(1);
             return 0;
         } else if (email.isEmpty() || password.isEmpty()) {
@@ -63,6 +64,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
             return 0;
         }
         return 1;
+        //abdalla end
     }
 
     @Override
@@ -89,6 +91,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                     SharredPreferenceManager m1 = new SharredPreferenceManager(mcontext);
                     String tokenvalue = "Bearer " + response.body().getTocken().toString();
                     m1.setString(pref, "persontoken", tokenvalue);
+
                     User user = new User(username,password);
                     loadUser(mcontext,tokenvalue,user);
                     Toast.makeText(mcontext, tokenvalue, Toast.LENGTH_LONG).show();

@@ -12,7 +12,9 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategorySpecial;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.NewsFeed;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Search;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResonse;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResponseId;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tauser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
@@ -29,6 +31,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface APIService {
 
@@ -126,10 +129,15 @@ public interface APIService {
 
     @GET("QuestionNewsFeed?size=10")
     Call<List<NewsFeed>> getNewsFeeds(@Header("Authorization") String token);
+    @GET("QuestionFilterCustomization?size=10&page=0")
+    Call<List<NewsFeed>> search(@Header("Authorization") String token , @Query("search")String query);
+
 
     // hesham muhammed
 
     @POST("Question")
     Call<Question> addQuestion(@Body Question question, @Header("Authorization") String token);
+
+    Call<ServerResponseId> addQuestion(@Header("Content-Type") String content_type,@Body Question question, @Header("Authorization") String token);
 }
 

@@ -7,16 +7,13 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.NewsFeed;
 
 import java.util.List;
 
-public interface NewsFeeds {
+public interface Search {
     interface view {
-
-        void setAdapter(List<NewsFeed> data);
+        void showSearchResults(List<NewsFeed> data);
     }
 
     interface presenter {
-        void loadNewsFeeds(Context mContext, Activity activity);
-
-        void loadSearchResults(String query, Context context, Activity activity);
-
+        void loadSearchResults(String query , Context context , Activity activity);
     }
+
 }
