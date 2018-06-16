@@ -9,6 +9,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitle;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitleList;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
 
@@ -57,16 +58,16 @@ public class CompanyQuestionDetailsNetwork {
 
         APIService apiService =
                 ApiClient.getApiClient().create(APIService.class);
-        Call<String> call = apiService.deleteQuestion(q, token);
-        call.enqueue(new Callback<String>() {
+        Call<TockenReturn> call = apiService.deleteQuestion(q, token);
+        call.enqueue(new Callback<TockenReturn>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<TockenReturn> call, Response<TockenReturn> response) {
 
                 // response.body();
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<TockenReturn> call, Throwable t) {
             }
         });
     }
@@ -75,33 +76,36 @@ public class CompanyQuestionDetailsNetwork {
 
         APIService apiService =
                 ApiClient.getApiClient().create(APIService.class);
-        Call<String> call = apiService.editQuestion(question, token);
-        call.enqueue(new Callback<String>() {
+        Call<TockenReturn> call = apiService.editQuestion(question, token);
+        call.enqueue(new Callback<TockenReturn>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<TockenReturn> call, Response<TockenReturn> response) {
 
                 // response.body();
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<TockenReturn> call, Throwable t) {
             }
         });
     }
 
     public void questionUpRateNetwork(String question_id, String token) {
 
+        Log.i("tokken", token);
+        Log.i("qq", question_id);
         APIService apiService =
                 ApiClient.getApiClient().create(APIService.class);
-        Call<String> call = apiService.questionUpRate(question_id, token);
-        call.enqueue(new Callback<String>() {
+        Call<TockenReturn> call = apiService.questionUpRate(question_id, token);
+        call.enqueue(new Callback<TockenReturn>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<TockenReturn> call, Response<TockenReturn> response) {
 
-                Log.i("dd", "onResponse: ");
+                Log.i("qdd", "onResponse: ");
             }
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<TockenReturn> call, Throwable t) {
+                Log.i("qdd", t.getMessage());
             }
         });
     }
@@ -110,15 +114,15 @@ public class CompanyQuestionDetailsNetwork {
 
         APIService apiService =
                 ApiClient.getApiClient().create(APIService.class);
-        Call<String> call = apiService.questionDownRate(question_id, token);
-        call.enqueue(new Callback<String>() {
+        Call<TockenReturn> call = apiService.questionDownRate(question_id, token);
+        call.enqueue(new Callback<TockenReturn>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<TockenReturn> call, Response<TockenReturn> response) {
 
                 Log.i("dd", "onResponse: ");
             }
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<TockenReturn> call, Throwable t) {
             }
         });
     }
@@ -126,15 +130,15 @@ public class CompanyQuestionDetailsNetwork {
     public void reportQuestionNetwork(Report report,String token){
         APIService apiService =
                 ApiClient.getApiClient().create(APIService.class);
-        Call<String> call = apiService.reportQuestion(report, token);
-        call.enqueue(new Callback<String>() {
+        Call<TockenReturn> call = apiService.reportQuestion(report, token);
+        call.enqueue(new Callback<TockenReturn>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<TockenReturn> call, Response<TockenReturn> response) {
 
                 Log.i("ll", "onResponse: ");
             }
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<TockenReturn> call, Throwable t) {
             }
         });
     }

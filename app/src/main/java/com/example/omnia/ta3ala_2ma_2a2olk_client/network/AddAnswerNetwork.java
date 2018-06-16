@@ -3,6 +3,7 @@ package com.example.omnia.ta3ala_2ma_2a2olk_client.network;
 import android.util.Log;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.AddAnswerPresenter;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
@@ -22,20 +23,20 @@ public class AddAnswerNetwork {
 
         APIService apiService =
                 ApiClient.getApiClient().create(APIService.class);
-        Call<String> call = apiService.saveAnswer(answer, token);
+        Call<TockenReturn> call = apiService.saveAnswer(answer, token);
 //        abdalla start
         call.request().newBuilder().cacheControl(CacheControl.FORCE_NETWORK);
 //        abdalla end
-        call.enqueue(new Callback<String>() {
+        call.enqueue(new Callback<TockenReturn>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<TockenReturn> call, Response<TockenReturn> response) {
 
 //                if(response.body().equals("Add Done successfully")){
 //                    Log.i("hh", "onResponse: ");
 //                }
             }
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<TockenReturn> call, Throwable t) {
             }
         });
     }

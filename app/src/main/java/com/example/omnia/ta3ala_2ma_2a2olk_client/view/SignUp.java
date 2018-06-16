@@ -42,12 +42,12 @@ public class SignUp extends AppCompatActivity implements RegisterMvpInterface.vi
                if (valid == 1) {
                    if (male.isChecked()) {
                        presenter.loadDataFromServer(username.getText().toString() , email.getText().toString(), password.getText().toString(), first.getText().toString(), last.getText().toString(), male.getText().toString(), SignUp.this);
-                       Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                       startActivity(intent);
+//                       Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                       startActivity(intent);
                    } else if (female.isChecked()) {
                        presenter.loadDataFromServer(username.getText().toString() , email.getText().toString(), password.getText().toString(), first.getText().toString(), last.getText().toString(), female.getText().toString(), SignUp.this);
-                       Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                       startActivity(intent);
+//                       Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                       startActivity(intent);
                    }
                }
            }
@@ -65,7 +65,7 @@ public class SignUp extends AppCompatActivity implements RegisterMvpInterface.vi
             Toast.makeText(this , "Please Enter a Password 6 characters or more " , Toast.LENGTH_LONG).show();
         }
         if (key == 2){
-            Toast.makeText(this , "Please Enter username and password " , Toast.LENGTH_LONG).show();
+            Toast.makeText(this , "Please Fill all the input Fields " , Toast.LENGTH_LONG).show();
         }
     }
 }
