@@ -19,6 +19,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tauser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
+import com.google.firebase.auth.GetTokenResult;
 
 import java.util.List;
 
@@ -65,47 +66,47 @@ public interface APIService {
 
     @Headers({"Content-Type: application/json"})
     @DELETE("/Answers/{answer_id}")
-    Call<String> deleteAnswer(@Path(value = "answer_id", encoded = true) String answerId, @Header("Authorization") String token);
+    Call<TockenReturn> deleteAnswer(@Path(value = "answer_id", encoded = true) String answerId, @Header("Authorization") String token);
 
     @Headers({"Content-Type: application/json"})
     @PUT("/Answers")
-    Call<String> editAnswer(@Body Answer answer, @Header("Authorization") String token);
+    Call<TockenReturn> editAnswer(@Body Answer answer, @Header("Authorization") String token);
 
     @Headers({"Content-Type: application/json"})
     @PUT("/Question")
-    Call<String> deleteQuestion(@Body Question q, @Header("Authorization") String token);
+    Call<TockenReturn> deleteQuestion(@Body Question q, @Header("Authorization") String token);
 
     @Headers({"Content-Type: application/json"})
     @PUT("/Question")
-    Call<String> editQuestion(@Body Question question, @Header("Authorization") String token);
+    Call<TockenReturn> editQuestion(@Body Question question, @Header("Authorization") String token);
 
     @Headers({"Content-Type: application/json"})
     @POST("/Answers")
-    Call<String> saveAnswer(@Body Answer answer, @Header("Authorization") String token);
+    Call<TockenReturn> saveAnswer(@Body Answer answer, @Header("Authorization") String token);
 
     @Headers({"Content-Type: application/json"})
     @GET("/QuestionRateUp/{question_id}")
-    Call<String> questionUpRate(@Path(value = "question_id", encoded = true) String questionId, @Header("Authorization") String token);
+    Call<TockenReturn> questionUpRate(@Path(value = "question_id", encoded = true) String questionId, @Header("Authorization") String token);
 
     @Headers({"Content-Type: application/json"})
     @GET("/QuestionRateDown/{question_id}")
-    Call<String> questionDownRate(@Path(value = "question_id", encoded = true) String questionId, @Header("Authorization") String token);
+    Call<TockenReturn> questionDownRate(@Path(value = "question_id", encoded = true) String questionId, @Header("Authorization") String token);
 
     @Headers({"Content-Type: application/json"})
     @POST("/Report")
-    Call<String> reportQuestion(@Body Report report, @Header("Authorization") String token);
+    Call<TockenReturn> reportQuestion(@Body Report report, @Header("Authorization") String token);
 
     @Headers({"Content-Type: application/json"})
     @POST("/Report")
-    Call<String> reportAnswer(@Body Report report, @Header("Authorization") String token);
+    Call<TockenReturn> reportAnswer(@Body Report report, @Header("Authorization") String token);
 
     @Headers({"Content-Type: application/json"})
     @GET("/AnswerRateUp/{answer_id}")
-    Call<String> answerUpRate(@Path(value = "answer_id", encoded = true) String answerId, @Header("Authorization") String token);
+    Call<TockenReturn> answerUpRate(@Path(value = "answer_id", encoded = true) String answerId, @Header("Authorization") String token);
 
     @Headers({"Content-Type: application/json"})
     @GET("/AnswerRateDown/{answer_id}")
-    Call<String> answerDownRate(@Path(value = "answer_id", encoded = true) String answerId, @Header("Authorization") String token);
+    Call<TockenReturn> answerDownRate(@Path(value = "answer_id", encoded = true) String answerId, @Header("Authorization") String token);
 
 
     // ahmed hesham
