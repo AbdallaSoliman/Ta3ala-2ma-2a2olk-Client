@@ -59,6 +59,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_screen);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         presenter = new ProfilePresenter(this);
         profile = (ImageView) findViewById(R.id.profileimg);
         spinner1 = (Spinner) findViewById(R.id.spinner1);
@@ -283,9 +284,9 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             String city =  String.valueOf(spinner1.getSelectedItem());
-             String district = String.valueOf(spinner2.getSelectedItem());
-             presenter.addLocation(getApplicationContext() , city , district , id);
+                String city = String.valueOf(spinner1.getSelectedItem());
+                String district = String.valueOf(spinner2.getSelectedItem());
+                presenter.addLocation(getApplicationContext(), city, district, id);
             }
         });
     }

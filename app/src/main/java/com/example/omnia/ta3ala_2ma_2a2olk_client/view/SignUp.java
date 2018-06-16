@@ -25,6 +25,8 @@ public class SignUp extends AppCompatActivity implements RegisterMvpInterface.vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         presenter = new SignupPresenter(this);
        email = (EditText) findViewById(R.id.txtEmailUP);
        password = (EditText) findViewById(R.id.txtPassUP);

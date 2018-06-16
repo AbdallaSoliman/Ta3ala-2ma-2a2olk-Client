@@ -24,12 +24,24 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.LoginActivity">
+        <activity
+            android:name=".view.LoginActivity"
+            android:parentActivityName="com.example.omnia.ta3ala_2ma_2a2olk_client.view.MainActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.omnia.ta3ala_2ma_2a2olk_client.view.MainActivity" />>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.SignUp" />
+        <activity
+            android:name=".view.SignUp"
+            android:parentActivityName="com.example.omnia.ta3ala_2ma_2a2olk_client.view.LoginActivity" />
+        <!-- Parent activity meta-data to support 4.0 and lower -->
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.omnia.ta3ala_2ma_2a2olk_client.view.LoginActivity" />/>
         <activity android:name=".view.AddQuestion" />
         <activity
             android:name=".view.SplashScreen"
@@ -44,7 +56,15 @@
         <activity android:name=".view.CompanyQuestionsList" />
         <activity android:name=".view.CompanyQuestionDetails" />
         <activity android:name=".view.AddAnswer" />
-        <activity android:name=".view.ProfileScreen" />
+        <activity
+            android:name=".view.ProfileScreen"
+            android:parentActivityName="com.example.omnia.ta3ala_2ma_2a2olk_client.view.MainActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.omnia.ta3ala_2ma_2a2olk_client.view.MainActivity" />
+        </activity>
+        />
         <activity
             android:name=".view.SliderMainActivity"
             android:theme="@style/AppTheme.slider"></activity>
@@ -59,7 +79,14 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".view.SearchActivity"></activity>
+        <activity
+            android:name=".view.SearchActivity"
+            android:parentActivityName="com.example.omnia.ta3ala_2ma_2a2olk_client.view.MainActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.omnia.ta3ala_2ma_2a2olk_client.view.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
