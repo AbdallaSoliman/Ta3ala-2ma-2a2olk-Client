@@ -163,6 +163,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                     editor.putString("password",myuser.getPassword());
                     editor.putString("gender",myuser.getGender());
                     editor.putString("image",myuser.getImage());
+                    editor.putString("type",myuser.getType());
                     Log.e("Hamada",myuser.getEmail()+"mail");
                     editor.commit();
                     Log.e("userData",pref.getString("email","MFESH"));
