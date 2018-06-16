@@ -159,8 +159,14 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
                   }
                   else{
                   }
-
               }
+          }
+            Question qq=ii.getQuestion();
+          if(qq.getPersonId().getPersonId()==getUserId()){
+             // queestion is mine
+          }
+          else {
+              holder.answerVerified.setVisibility(View.GONE);
           }
 
     }
@@ -177,7 +183,7 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         public ImageView editImageView,deleteImageView,reportImageView;
         public TextView editTextView,deleteTextView,reportTextView;
         public View horizontalLine1,horizontalLine2,v1,v2;
-        public ImageView answerUpRate,answerDownRate;
+        public ImageView answerUpRate,answerDownRate,answerVerified;
         public TextView answerRateCount;
 
         public ViewHolder(View view) {
@@ -201,8 +207,11 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
             answerDownRate=view.findViewById(R.id.AdownRate);
             answerRateCount=(TextView)view.findViewById(R.id.ArateCount);
 
+            answerVerified=(ImageView)view.findViewById(R.id.verified);
         }
     }
+
+
 
     public void deleteAnswer(int answerId){
         final String token = getToken();

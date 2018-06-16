@@ -64,6 +64,7 @@
 
 
     <ImageView
+        android:id="@+id/verified"
         android:layout_width="12dp"
         android:layout_height="12dp"
         android:layout_marginEnd="12dp"

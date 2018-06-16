@@ -172,6 +172,7 @@ public class AddQuestion extends AppCompatActivity implements MVPInterface.View 
                     question.setQuestionDate(currentDate);
                     Toast.makeText(getApplicationContext(), "Addedd", Toast.LENGTH_LONG).show();
                     presenter.AddQuestion(question);
+                    finish();
                 }
             }
         });
