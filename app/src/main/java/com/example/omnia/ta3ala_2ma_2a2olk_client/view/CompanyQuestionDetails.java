@@ -182,6 +182,7 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_question_details);
 
+        Log.i("tokenomnia", getToken());
         // for back arrow
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
