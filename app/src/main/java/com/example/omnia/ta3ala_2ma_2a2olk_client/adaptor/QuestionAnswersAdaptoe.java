@@ -167,6 +167,7 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
             //  if(answers.get(position))
           }
           else {
+              
               holder.answerVerified.setVisibility(View.GONE);
           }
 
