@@ -101,19 +101,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--android:text="العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم .. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم .. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم .. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم"-->
 
-    <!--<de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--android:id="@+id/personImage"-->
-    <!--android:layout_width="50dp"-->
-    <!--android:layout_height="50dp"-->
-    <!--android:layout_marginEnd="10dp"-->
-    <!--android:layout_marginStart="10dp"-->
-    <!--android:layout_marginTop="20dp"-->
-    <!--app:civ_border_color="#00a88f"-->
-    <!--app:civ_border_width="3dp" />-->
-
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/personImage"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -314,7 +304,7 @@
     <!--android:rotation="90" />-->
 
     <View
-        android:id="@+id/view1"
+        android:id="@+id/v1"
         android:layout_width="18dp"
         android:layout_height="1dp"
         android:layout_marginEnd="6dp"
@@ -382,7 +372,7 @@
     <!--android:background="#00a88f" />-->
 
     <View
-        android:id="@+id/view2"
+        android:id="@+id/h1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginEnd="8dp"

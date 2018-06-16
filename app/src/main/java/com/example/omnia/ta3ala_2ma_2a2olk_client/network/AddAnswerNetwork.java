@@ -30,9 +30,9 @@ public class AddAnswerNetwork {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
-                if(response.body().equals("Add Done successfully")){
-                    Log.i("hh", "onResponse: ");
-                }
+//                if(response.body().equals("Add Done successfully")){
+//                    Log.i("hh", "onResponse: ");
+//                }
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
