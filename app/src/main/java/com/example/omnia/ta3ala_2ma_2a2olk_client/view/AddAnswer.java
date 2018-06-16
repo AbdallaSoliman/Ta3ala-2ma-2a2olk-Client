@@ -15,6 +15,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.PersonId;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.AddAnswerPresenter;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -71,7 +72,6 @@ public class AddAnswer extends AppCompatActivity {
             answer.setAnswersDate(currentDate);
             AddAnswerPresenter addAnswerPresenter=new AddAnswerPresenter();
             addAnswerPresenter.saveAnswerToServerPresenter(answer,getToken());
-
             finish();
 
         }

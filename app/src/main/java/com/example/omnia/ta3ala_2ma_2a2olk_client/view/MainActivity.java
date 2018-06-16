@@ -34,6 +34,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPrefe
 import com.example.omnia.ta3ala_2ma_2a2olk_client.adapters.NewsFeedsAdapter;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.NewsFeed;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.SearchPresenter;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.List;
@@ -111,6 +112,32 @@ public class MainActivity extends AppCompatActivity {
         });
 //abdalla end
 
+  //abdalla start
+        fabBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = userDetails.edit();
+                SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
+                String email = manager.getString(userDetails, "email", "no");
+                // Toast.makeText(getApplicationContext(), "email is " + email, Toast.LENGTH_LONG).show();
+                Log.e("prefMail",email);
+                if (email.equals("no")) {
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    //abdalla start
+                } else if(ApiClient.isNetworkAvalaiable()){
+                    Intent intent = new Intent(getApplicationContext(), AddQuestion.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } else if(!ApiClient.isNetworkAvalaiable()){
+                    Toast.makeText(getApplicationContext(), "no network connection Avalaiabl", Toast.LENGTH_LONG).show();
+
+                }
+            }
+        });
+   //abdalla end
         //abdalla start
 
 
@@ -143,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
         searchViewCode();
     }
+
 
     //abdalla start
     public FloatingActionButton getFloatingActionButton() {

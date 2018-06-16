@@ -52,7 +52,14 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.item_layout, null);
         }
-
+        //abdalla start
+        View lineSeparator = (View) convertView.findViewById(R.id.viewLineSupSeparator);
+        if(isLastChild){
+            lineSeparator.setVisibility(View.GONE);
+        }else{
+            lineSeparator.setVisibility(View.VISIBLE);
+        }
+        //abdalla end
         TextView textViewItem = (TextView) convertView.findViewById(R.id.item);
         String text = (String) getChild(groupPosition, childPosition);
         textViewItem.setText(text);
@@ -106,6 +113,14 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
         String imagepos = (String) getimage(groupPosition);
         ImageView groupIcon = (ImageView) convertView.findViewById(R.id.groupimage);
         TextView question = (TextView) convertView.findViewById(R.id.Description);
+        //abdalla start
+        View lineSeparator = (View) convertView.findViewById(R.id.lineSeparator);
+        if(isExpanded){
+            lineSeparator.setVisibility(View.GONE);
+        }else{
+            lineSeparator.setVisibility(View.VISIBLE);
+        }
+        //abdalla end
         question.setText(questionnumber+"  "+ "Questions");
         Picasso.get().load(imagepos).resize(50, 50).placeholder(R.drawable.loading).onlyScaleDown().error(R.drawable.loading).into(groupIcon);
         groupImage.setSelected(isExpanded);

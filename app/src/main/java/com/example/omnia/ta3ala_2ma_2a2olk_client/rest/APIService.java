@@ -14,6 +14,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Search;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResonse;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResponseId;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tauser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
@@ -137,5 +138,6 @@ public interface APIService {
     @POST("Question")
     Call<Question> addQuestion(@Body Question question, @Header("Authorization") String token);
 
+    Call<ServerResponseId> addQuestion(@Header("Content-Type") String content_type,@Body Question question, @Header("Authorization") String token);
 }
 

@@ -38,11 +38,13 @@ public class CompanyQuestionDetailsNetwork {
         call.enqueue(new Callback<Question>() {
             @Override
             public void onResponse(Call<Question> call, Response<Question> response) {
-
-                Question q = response.body();
-                List<Answer> s = response.body().getAnswersCollection();
-                cListPresener.setCompanyQuetionDetailsPresenter(q, s);
-
+//abdalla start
+                if(response.body().getAnswersCollection()!=null ) {
+                    Question q = response.body();
+                    List<Answer> s = response.body().getAnswersCollection();
+                    cListPresener.setCompanyQuetionDetailsPresenter(q, s);
+                }
+//abdalla end
             }
 
             @Override

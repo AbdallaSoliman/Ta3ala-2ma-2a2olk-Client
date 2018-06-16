@@ -28,14 +28,14 @@ public class NewsFeedsPresenter implements NewsFeeds.presenter {
     private List<NewsFeed> data;
     private NewsFeedsAdapter adapter;
     private APIService apiInterface;
-    NewsFeeds.view view ;
+    NewsFeeds.view view;
 
     public NewsFeedsPresenter(NewsFeeds.view view) {
         this.view = view;
     }
 
     @Override
-    public void loadNewsFeeds(final Context context , final Activity activity) {
+    public void loadNewsFeeds(final Context context, final Activity activity) {
         apiInterface = ApiClient.getApiClient().create(APIService.class);
         SharedPreferences tokenDetails = context.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = tokenDetails.edit();
@@ -50,12 +50,20 @@ public class NewsFeedsPresenter implements NewsFeeds.presenter {
                     data = response.body();
 //                    Log.i("data", data.get(0).getTitle()+"hii");
                     view.setAdapter(data);
+                    //abdalla start
+                    if (response.body() != null) {
+                        data = response.body();
+                        if (data.size() > 0) {
+                            view.setAdapter(data);
+                        }
+                    }
+                    //abdalla end
                 }
             }
 
             @Override
             public void onFailure(retrofit2.Call<List<NewsFeed>> call, Throwable t) {
-                Toast.makeText(context,"errooooooooooooooooooooooor",Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "errooooooooooooooooooooooor", Toast.LENGTH_LONG).show();
                 String message = t.getMessage();
                 Log.d("failuress", message);
             }
