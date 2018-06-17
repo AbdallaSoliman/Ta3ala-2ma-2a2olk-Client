@@ -34,19 +34,19 @@ import java.util.List;
  * Created by omnia on 6/2/2018.
  */
 
-public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswersAdaptoe.ViewHolder>{
+public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswersAdaptoe.ViewHolder> {
 
 
     private List<Answer> answers;
     Context mcContext;
     CompanyQuestionDetails ii;
     Answer answer;
-    QuestionAnswerAdapotorPresenter qAAPresenter=new QuestionAnswerAdapotorPresenter();
+    QuestionAnswerAdapotorPresenter qAAPresenter = new QuestionAnswerAdapotorPresenter();
 
-    public QuestionAnswersAdaptoe(List<Answer> qd,Context c,CompanyQuestionDetails s){
-        this.answers=qd;
-        this.mcContext=c;
-        ii=s;
+    public QuestionAnswersAdaptoe(List<Answer> qd, Context c, CompanyQuestionDetails s) {
+        this.answers = qd;
+        this.mcContext = c;
+        ii = s;
     }
 
     @NonNull
@@ -62,17 +62,17 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
     public void onBindViewHolder(final @NonNull ViewHolder holder, final int position) {
         final Answer answer = answers.get(position);
         holder.answer.setText(answer.getAnswer());
-        holder.personName.setText(answer.getPersonId().getFirst()+" "+answer.getPersonId().getLast());
+        holder.personName.setText(answer.getPersonId().getFirst() + " " + answer.getPersonId().getLast());
         Glide.with(mcContext)
                 .load(answer.getPersonId().getImage())
                 .into(holder.personImage);
 
-        String userEmail=answers.get(position).getPersonId().getEmail();
-        String email=getUserOffAppEmail();
+        String userEmail = answers.get(position).getPersonId().getEmail();
+        String email = getUserOffAppEmail();
 
         holder.answerRateCount.setText(String.valueOf(answers.get(position).getRate()));
 
-          if(checkIfUserLoginOrNot()==0){
+        if (checkIfUserLoginOrNot() == 0) {
             holder.editImageView.setVisibility(View.GONE);
             holder.editTextView.setVisibility(View.GONE);
             holder.deleteImageView.setVisibility(View.GONE);
@@ -84,92 +84,112 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
             holder.v1.setVisibility(View.GONE);
             holder.v2.setVisibility(View.GONE);
 
-          }else{
-              // check if answer is mine
-              if(answer.getPersonId().getPersonId()==getUserId()){
-                  holder.reportImageView.setVisibility(View.GONE);
-                  holder.reportTextView.setVisibility(View.GONE);
+        } else {
+            // check if answer is mine
+            if (answer.getPersonId().getPersonId() == getUserId()) {
+                holder.reportImageView.setVisibility(View.GONE);
+                holder.reportTextView.setVisibility(View.GONE);
 
-                  holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
-                      @Override
-                      public void onClick(View view) {
-                          showDeleteDialog(position);
-                      }
-                  });
+                holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showDeleteDialog(position);
+                    }
+                });
 
-                  holder.deleteTextView.setOnClickListener(new View.OnClickListener() {
-                      @Override
-                      public void onClick(View view) {
-                          showDeleteDialog(position);
-                      }
-                  });
+                holder.deleteTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showDeleteDialog(position);
+                    }
+                });
 
-                  holder.editImageView.setOnClickListener(new View.OnClickListener() {
-                      @Override
-                      public void onClick(View view) {
-                          showEditDialog(position);
-                      }
-                  });
-                  holder.editTextView.setOnClickListener(new View.OnClickListener() {
-                      @Override
-                      public void onClick(View view) {
-                          showEditDialog(position);
-                      }
-                  });
+                holder.editImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showEditDialog(position);
+                    }
+                });
+                holder.editTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showEditDialog(position);
+                    }
+                });
 
-              }else {// answer is not mine
+            } else {// answer is not mine
 
-                  holder.editImageView.setVisibility(View.GONE);
-                  holder.editTextView.setVisibility(View.GONE);
-                  holder.deleteImageView.setVisibility(View.GONE);
-                  holder.deleteTextView.setVisibility(View.GONE);
-                  holder.v1.setVisibility(View.GONE);
-                  holder.v2.setVisibility(View.GONE);
+                holder.editImageView.setVisibility(View.GONE);
+                holder.editTextView.setVisibility(View.GONE);
+                holder.deleteImageView.setVisibility(View.GONE);
+                holder.deleteTextView.setVisibility(View.GONE);
+                holder.v1.setVisibility(View.GONE);
+                holder.v2.setVisibility(View.GONE);
 
-                  holder.reportImageView.setOnClickListener(new View.OnClickListener() {
-                      @Override
-                      public void onClick(View view) {
-                          showReportDialog(position);
-                      }
-                  });
-                  holder.reportTextView.setOnClickListener(new View.OnClickListener() {
-                      @Override
-                      public void onClick(View view) {
-                          showReportDialog(position);
-                      }
-                  });
+                holder.reportImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showReportDialog(position);
+                    }
+                });
+                holder.reportTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showReportDialog(position);
+                    }
+                });
 
-                  // check if user rate this answer before
-                  if(checkIfUserRateBefore(answers.get(position))==0){
-                     // answer not rated before
-                      holder.answerUpRate.setOnClickListener(new View.OnClickListener() {
-                          @Override
-                          public void onClick(View view) {
-                              holder.answerRateCount.setText(String.valueOf(answers.get(position).getRate()+1));
-                              qAAPresenter.answerRateUpPresenter(String.valueOf(answers.get(position).getAnswersId()),getToken());
-                          }
-                      });
-                      holder.answerDownRate.setOnClickListener(new View.OnClickListener() {
-                          @Override
-                          public void onClick(View view) {
-                              holder.answerRateCount.setText(String.valueOf(answers.get(position).getRate()-1));
-                              qAAPresenter.answerRateDownPresenter(String.valueOf(answers.get(position).getAnswersId()),getToken());
-                          }
-                      });
-                  }
-                  else{
-                  }
-              }
-          }
-            Question qq=ii.getQuestion();
-          if(qq.getPersonId().getPersonId()==getUserId()){
-             // queestion is mine
-            //  if(answers.get(position))
-          }
-          else {
-              
-              holder.answerVerified.setVisibility(View.GONE);
-          }
+                // check if user rate this answer before
+                if (checkIfUserRateBefore(answers.get(position)) == 0) {
+                    // answer not rated before
+                    holder.answerUpRate.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            holder.answerRateCount.setText(String.valueOf(answers.get(position).getRate() + 1));
+                            qAAPresenter.answerRateUpPresenter(String.valueOf(answers.get(position).getAnswersId()), getToken());
+                        }
+                    });
+                    holder.answerDownRate.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            holder.answerRateCount.setText(String.valueOf(answers.get(position).getRate() - 1));
+                            qAAPresenter.answerRateDownPresenter(String.valueOf(answers.get(position).getAnswersId()), getToken());
+                        }
+                    });
+                } else {
+                }
+            }
+        }
+        // verify handel cases
+        final Question qq = ii.getQuestion();
+        if (qq.getPersonId().getPersonId() == getUserId()) {
+            // queestion is mine
+
+            // check if question is verified
+            if (qq.getVerified() == 0) {// question is not verified
+                holder.answerVerified.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        qq.setVerified(answer.getAnswersId());
+                        qAAPresenter.verifyAnswerPresenter(qq, getToken());
+                        holder.answerVerified.setImageResource(R.drawable.greenverified);
+                    }
+                });
+
+            } else {// set green verified right
+                if(answer.getAnswersId()==qq.getVerified()){
+                    holder.answerVerified.setImageResource(R.drawable.greenverified);
+                }
+            }
+        } else {
+            holder.answerVerified.setVisibility(View.GONE);
+        }
+        if(answer.getAnswersId()==qq.getVerified()){
+
+        }
+        else {
+            holder.answerVerified.setVisibility(View.GONE);
+        }
 
     }
 
@@ -180,55 +200,54 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView answer,personName;
+        public TextView answer, personName;
         public ImageView personImage;
-        public ImageView editImageView,deleteImageView,reportImageView;
-        public TextView editTextView,deleteTextView,reportTextView;
-        public View horizontalLine1,horizontalLine2,v1,v2;
-        public ImageView answerUpRate,answerDownRate,answerVerified;
+        public ImageView editImageView, deleteImageView, reportImageView;
+        public TextView editTextView, deleteTextView, reportTextView;
+        public View horizontalLine1, horizontalLine2, v1, v2;
+        public ImageView answerUpRate, answerDownRate, answerVerified;
         public TextView answerRateCount;
 
         public ViewHolder(View view) {
             super(view);
-            answer=(TextView)view.findViewById(R.id.answerId);
-            personName=(TextView)view.findViewById(R.id.personName);
-            personImage=(ImageView) view.findViewById(R.id.personImage);
-            editImageView=(ImageView)view.findViewById(R.id.editimage);
-            editTextView=(TextView)view.findViewById(R.id.edittext);
-            deleteImageView=(ImageView)view.findViewById(R.id.deleteimage);
-            deleteTextView=(TextView)view.findViewById(R.id.deletetext);
-            reportImageView=(ImageView)view.findViewById(R.id.reportImage);
-            reportTextView=(TextView)view.findViewById(R.id.reportText);
+            answer = (TextView) view.findViewById(R.id.answerId);
+            personName = (TextView) view.findViewById(R.id.personName);
+            personImage = (ImageView) view.findViewById(R.id.personImage);
+            editImageView = (ImageView) view.findViewById(R.id.editimage);
+            editTextView = (TextView) view.findViewById(R.id.edittext);
+            deleteImageView = (ImageView) view.findViewById(R.id.deleteimage);
+            deleteTextView = (TextView) view.findViewById(R.id.deletetext);
+            reportImageView = (ImageView) view.findViewById(R.id.reportImage);
+            reportTextView = (TextView) view.findViewById(R.id.reportText);
 
-            horizontalLine1=(View)view.findViewById(R.id.h1);
-            horizontalLine2=(View)view.findViewById(R.id.h2);
-            v1=(View) view.findViewById(R.id.v1);
-            v2=(View) view.findViewById(R.id.v2);
+            horizontalLine1 = (View) view.findViewById(R.id.h1);
+            horizontalLine2 = (View) view.findViewById(R.id.h2);
+            v1 = (View) view.findViewById(R.id.v1);
+            v2 = (View) view.findViewById(R.id.v2);
 
-            answerUpRate=view.findViewById(R.id.AupRate);
-            answerDownRate=view.findViewById(R.id.AdownRate);
-            answerRateCount=(TextView)view.findViewById(R.id.ArateCount);
+            answerUpRate = view.findViewById(R.id.AupRate);
+            answerDownRate = view.findViewById(R.id.AdownRate);
+            answerRateCount = (TextView) view.findViewById(R.id.ArateCount);
 
-            answerVerified=(ImageView)view.findViewById(R.id.verified);
+            answerVerified = (ImageView) view.findViewById(R.id.verified);
         }
     }
 
 
-
-    public void deleteAnswer(int answerId){
+    public void deleteAnswer(int answerId) {
         final String token = getToken();
         // send request to delete data
-        qAAPresenter.deleteAnswerPresenter(answerId,token);
+        qAAPresenter.deleteAnswerPresenter(answerId, token);
         notifyDataSetChanged();
     }
 
-    public void editAnswer(Answer answer){
+    public void editAnswer(Answer answer) {
         final String token = getToken();
-        QuestionAnswerAdapotorPresenter qAAPresenter=new QuestionAnswerAdapotorPresenter();
-        qAAPresenter.editAnswerPresenter(answer,token);
+        QuestionAnswerAdapotorPresenter qAAPresenter = new QuestionAnswerAdapotorPresenter();
+        qAAPresenter.editAnswerPresenter(answer, token);
     }
 
-    public int checkIfUserRateBefore(Answer answer){
+    public int checkIfUserRateBefore(Answer answer) {
         int x = 0, i = 0;
         List<PersonId> ratedPerson = answer.getPersonCollection();
         while (x == 0 && i < ratedPerson.size()) {
@@ -256,7 +275,7 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         return x;
     }
 
-    public String  getUserOffAppEmail(){
+    public String getUserOffAppEmail() {
         // get user email from sharedpref
         SharedPreferences userDetails = mcContext.getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
         SharredPreferenceManager manager = new SharredPreferenceManager(mcContext);
@@ -264,14 +283,14 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         return email;
     }
 
-    public int getUserId(){
+    public int getUserId() {
         SharedPreferences userDetails = mcContext.getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
-        SharredPreferenceManager manager =new SharredPreferenceManager(mcContext);
-        String  idstr = manager.getString(userDetails, "id", "0");
+        SharredPreferenceManager manager = new SharredPreferenceManager(mcContext);
+        String idstr = manager.getString(userDetails, "id", "0");
         return Integer.parseInt(idstr);
     }
 
-    public String getToken(){
+    public String getToken() {
         SharedPreferences pref = mcContext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharredPreferenceManager shM = new SharredPreferenceManager(mcContext);
         final String token = shM.getString(pref, "persontoken", "error");
@@ -279,7 +298,7 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
     }
 ///////////////// dialogs////////////////////////////////
 
-    public void showDeleteDialog(final int answerPosition){
+    public void showDeleteDialog(final int answerPosition) {
 
         AlertDialog alertDialog = new AlertDialog.Builder(mcContext).create();
         alertDialog.setTitle("Delete Answer");
@@ -293,7 +312,7 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
                         notifyItemRemoved(answerPosition);
                     }
                 });
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"NO",new DialogInterface.OnClickListener() {
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
@@ -302,13 +321,13 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         alertDialog.show();
     }
 
-    public void showEditDialog(final int answerPosition){
+    public void showEditDialog(final int answerPosition) {
 
         LayoutInflater linflater = (LayoutInflater) mcContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final  View view1=linflater.inflate(R.layout.answer_edit_dialog,null);
+        final View view1 = linflater.inflate(R.layout.answer_edit_dialog, null);
 
-        final EditText answerEditText=(EditText)view1.findViewById(R.id.editedanswer);
+        final EditText answerEditText = (EditText) view1.findViewById(R.id.editedanswer);
         answerEditText.setText(answers.get(answerPosition).getAnswer());
 
         AlertDialog alertDialog = new AlertDialog.Builder(mcContext).create();
@@ -318,17 +337,17 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // edit this ansewer from database and recycleview
-                        String editAnswer =answerEditText.getText().toString();
-                        Answer answer=answers.get(answerPosition);
+                        String editAnswer = answerEditText.getText().toString();
+                        Answer answer = answers.get(answerPosition);
                         answer.setAnswer(editAnswer);
-                        Question qq=ii.getQuestion();
+                        Question qq = ii.getQuestion();
                         answer.setQuestionId(qq.getQuestionId());
                         Log.i("qq", qq.getQuestionId().toString());
                         editAnswer(answer);
                         notifyDataSetChanged();
                     }
                 });
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"CANCEL",new DialogInterface.OnClickListener() {
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
@@ -337,63 +356,61 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         alertDialog.show();
     }
 
-    public void showReportDialog(final int position){
+    public void showReportDialog(final int position) {
 
-    LayoutInflater linflater = (LayoutInflater) mcContext
-            .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    final  View view1=linflater.inflate(R.layout.question_report_dialog,null);
+        LayoutInflater linflater = (LayoutInflater) mcContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View view1 = linflater.inflate(R.layout.question_report_dialog, null);
 
-    final EditText reportTitleEditText = (EditText) view1.findViewById(R.id.reportTitle);
-    final EditText reportBodyEditText=(EditText)view1.findViewById(R.id.reportBody);
-    final AlertDialog.Builder dialog = new AlertDialog.Builder(mcContext);
-    dialog.setTitle("Answer Report");
-    dialog.setView(view1)
+        final EditText reportTitleEditText = (EditText) view1.findViewById(R.id.reportTitle);
+        final EditText reportBodyEditText = (EditText) view1.findViewById(R.id.reportBody);
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(mcContext);
+        dialog.setTitle("Answer Report");
+        dialog.setView(view1)
 
-            .setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int i) {
+                .setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false);
+        final AlertDialog alert = dialog.create();
+        alert.show();
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (reportTitleEditText.getText().toString().trim().isEmpty()) {
+                    reportTitleEditText.setError("please enter data");
+                } else if (reportBodyEditText.getText().toString().trim().isEmpty()) {
+                    reportBodyEditText.setError("please enter data");
+                } else {
+                    Report report = new Report();
+                    report.setTitle(reportTitleEditText.getText().toString());
+                    report.setMsg(reportBodyEditText.getText().toString());
+                    report.setChecked(answers.get(position).getAnswersId());
+                    // get date
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
+                    String currentDate = mdformat.format(calendar.getTime());
+                    report.setReportDate(currentDate);
+                    report.setType("answer");
+                    // get person id from sharedpref
+                    PersonId person = new PersonId();
+                    person.setPersonId(getUserId());
+                    report.setPersonId(person);
+                    qAAPresenter.reportAnswerPresenter(report, getToken());
+                    alert.dismiss();
                 }
-            })
-            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int i) {
-                    dialog.dismiss();
-                }
-            })
-            .setCancelable(false);
-    final AlertDialog alert = dialog.create();
-    alert.show();
-    alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            if (reportTitleEditText.getText().toString().trim().isEmpty()) {
-                reportTitleEditText.setError("please enter data");
             }
-            else if(reportBodyEditText.getText().toString().trim().isEmpty()){
-                reportBodyEditText.setError("please enter data");
-            }
-            else {
-                Report report=new Report();
-                report.setTitle(reportTitleEditText.getText().toString());
-                report.setMsg(reportBodyEditText.getText().toString());
-                report.setChecked(answers.get(position).getAnswersId());
-                // get date
-                Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat mdformat = new SimpleDateFormat("yyyy-MM-dd");
-                String currentDate = mdformat.format(calendar.getTime());
-                report.setReportDate(currentDate);
-                report.setType("answer");
-                // get person id from sharedpref
-                PersonId person=new PersonId();
-                person.setPersonId(getUserId());
-                report.setPersonId(person);
-                qAAPresenter.reportAnswerPresenter(report, getToken());
-                alert.dismiss();
-            }
-        }
-    });
-}
+        });
+    }
 
 
 }

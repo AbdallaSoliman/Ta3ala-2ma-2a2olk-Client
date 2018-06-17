@@ -66,7 +66,7 @@ public class CompanyQuestionDetails extends AppCompatActivity {
 
         titleTextView.setText(question.getTitle());
         bodyTextView.setText(question.getBody());
-        if (person.getImage() != null && person.getFirst() != null) {
+        if (person!= null) {
             personNameTextView.setText(person.getFirst() + " " + person.getLast());
             questionDateTextView.setText(question.getQuestionDate());
             Glide.with(this)
