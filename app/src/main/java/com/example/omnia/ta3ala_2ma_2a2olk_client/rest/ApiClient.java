@@ -59,7 +59,7 @@ public class ApiClient {
                         CacheControl.Builder cacheBuilder = new CacheControl.Builder();
 
                         if (isNetworkAvalaiable()) {
-                            cacheBuilder.maxAge(10, TimeUnit.SECONDS);
+                            cacheBuilder.maxAge(1, TimeUnit.MINUTES);
                             okhttp3.Response response = chain.proceed(chain.request());
                             return response.newBuilder()
                                     .removeHeader("Pragma")
