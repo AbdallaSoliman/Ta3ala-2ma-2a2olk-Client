@@ -8,12 +8,6 @@
     android:background="#f0fcff"
     android:orientation="vertical">
 
-    <!--<Button-->
-    <!--android:id="@+id/AupRate"-->
-    <!--android:layout_width="20dp"-->
-    <!--android:layout_height="15dp"-->
-    <!--android:background="@drawable/uprate" />-->
-
     <ImageView
         android:id="@+id/AupRate"
         android:layout_width="wrap_content"
@@ -23,12 +17,6 @@
         android:src="@drawable/arrow_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!--<TextView-->
-    <!--android:id="@+id/ArateCount"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center" />-->
 
     <TextView
         android:id="@+id/ArateCount"
@@ -46,12 +34,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--<Button-->
-    <!--android:id="@+id/AdownRate"-->
-    <!--android:layout_width="20dp"-->
-    <!--android:layout_height="15dp"-->
-    <!--android:background="@drawable/downrate" />-->
-
     <ImageView
         android:id="@+id/AdownRate"
         android:layout_width="wrap_content"
@@ -62,7 +44,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <ImageView
         android:id="@+id/verified"
         android:layout_width="12dp"
@@ -72,14 +53,6 @@
         android:src="@drawable/correct_symbol"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--<TextView-->
-    <!--android:id="@+id/answerId"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginEnd="10dp"-->
-    <!--android:layout_marginStart="10dp"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:background="#ffffff" />-->
 
     <TextView
         android:id="@+id/answerId"
@@ -102,9 +75,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/personImage"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -115,15 +86,6 @@
         app:civ_border_width="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answerId" />
-
-    <!--<TextView-->
-    <!--android:id="@+id/personName"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginEnd="10dp"-->
-    <!--android:layout_marginStart="10dp"-->
-    <!--android:layout_marginTop="30dp"-->
-    <!--android:text="Person Name" />-->
 
     <TextView
         android:id="@+id/personName"
@@ -136,7 +98,6 @@
         android:textSize="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answerId" />
-
 
     <TextView
         android:id="@+id/personeDate"
@@ -159,14 +120,6 @@
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/personeDate" />
-    <!--<View-->
-    <!--android:id="@+id/view1"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="2dp"-->
-    <!--android:layout_marginEnd="8dp"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:layout_marginTop="20dp"-->
-    <!--android:background="#00a88f" />-->
 
     <View
         android:id="@+id/h2"
@@ -180,15 +133,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answerId" />
 
-    <!--<ImageView-->
-    <!--android:id="@+id/deleteimage"-->
-    <!--android:layout_width="20dp"-->
-    <!--android:layout_height="20dp"-->
-    <!--android:layout_marginEnd="5dp"-->
-    <!--android:layout_marginStart="5dp"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:background="@drawable/delete_button_copy" />-->
-
     <ImageView
         android:id="@+id/deleteimage"
         android:layout_width="14dp"
@@ -198,18 +142,6 @@
         android:background="@drawable/delete_button"
         app:layout_constraintEnd_toStartOf="@+id/deletetext"
         app:layout_constraintTop_toBottomOf="@+id/answerId" />
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/deletetext"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginEnd="10dp"-->
-    <!--android:layout_marginStart="5dp"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:text="Delete"-->
-    <!--android:textColor="#00a88f" />-->
-
 
     <TextView
         android:id="@+id/deletetext"
@@ -227,16 +159,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answerId" />
 
-    <!--<View-->
-    <!--android:id="@id/view2"-->
-    <!--android:layout_width="30dp"-->
-    <!--android:layout_height="0.5dp"-->
-    <!--android:layout_marginEnd="5dp"-->
-    <!--android:layout_marginStart="5dp"-->
-    <!--android:layout_marginTop="15dp"-->
-    <!--android:background="#00a88f"-->
-    <!--android:rotation="90" />-->
-
     <View
         android:id="@+id/v2"
         android:layout_width="18dp"
@@ -248,16 +170,6 @@
         app:layout_constraintEnd_toStartOf="@+id/deleteimage"
         app:layout_constraintTop_toBottomOf="@+id/answerId" />
 
-
-    <!--<ImageView-->
-    <!--android:id="@+id/reportImage"-->
-    <!--android:layout_width="20dp"-->
-    <!--android:layout_height="20dp"-->
-    <!--android:layout_marginEnd="10dp"-->
-    <!--android:layout_marginStart="10dp"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:background="@drawable/report" />-->
-
     <ImageView
         android:id="@+id/reportImage"
         android:layout_width="14dp"
@@ -267,16 +179,6 @@
         android:background="@drawable/warning"
         app:layout_constraintEnd_toStartOf="@+id/reportText"
         app:layout_constraintTop_toBottomOf="@+id/answerId" />
-
-    <!--<TextView-->
-    <!--android:id="@+id/reportText"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginEnd="5dp"-->
-    <!--android:layout_marginStart="5dp"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:text="Report"-->
-    <!--android:textColor="#00a88f" />-->
 
     <TextView
         android:id="@+id/reportText"
@@ -294,16 +196,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answerId" />
 
-    <!--<View-->
-    <!--android:id="@id/view2"-->
-    <!--android:layout_width="30dp"-->
-    <!--android:layout_height="0.5dp"-->
-    <!--android:layout_marginEnd="5dp"-->
-    <!--android:layout_marginStart="5dp"-->
-    <!--android:layout_marginTop="15dp"-->
-    <!--android:background="#00a88f"-->
-    <!--android:rotation="90" />-->
-
     <View
         android:id="@+id/v1"
         android:layout_width="18dp"
@@ -315,16 +207,6 @@
         app:layout_constraintEnd_toStartOf="@+id/reportImage"
         app:layout_constraintTop_toBottomOf="@+id/answerId" />
 
-    <!--<ImageView-->
-    <!--android:id="@+id/editimage"-->
-    <!--android:layout_width="20dp"-->
-    <!--android:layout_height="20dp"-->
-    <!--android:layout_marginEnd="10dp"-->
-    <!--android:layout_marginStart="10dp"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:background="@drawable/edit_button" />-->
-
-
     <ImageView
         android:id="@+id/editimage"
         android:layout_width="14dp"
@@ -334,16 +216,6 @@
         android:background="@drawable/new_file_copy"
         app:layout_constraintEnd_toStartOf="@+id/edittext"
         app:layout_constraintTop_toBottomOf="@+id/answerId" />
-
-    <!--<TextView-->
-    <!--android:id="@+id/edittext"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginEnd="5dp"-->
-    <!--android:layout_marginStart="5dp"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:text="Edit"-->
-    <!--android:textColor="#00a88f" />-->
 
     <TextView
         android:id="@+id/edittext"
@@ -360,17 +232,6 @@
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/answerId" />
-
-
-    <!--<View-->
-    <!--android:id="@+id/view2"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="2dp"-->
-    <!--android:layout_marginBottom="5dp"-->
-    <!--android:layout_marginEnd="10dp"-->
-    <!--android:layout_marginStart="10dp"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:background="#00a88f" />-->
 
     <View
         android:id="@+id/h1"
