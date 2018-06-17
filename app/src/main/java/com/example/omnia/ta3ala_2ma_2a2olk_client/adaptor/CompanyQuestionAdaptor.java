@@ -55,7 +55,7 @@ public class CompanyQuestionAdaptor extends RecyclerView.Adapter<CompanyQuestion
         holder.Qdate.setText(companyQuestionsData.getQuestionDate());
         holder.Qacount.setText(String.valueOf(companyQuestionsData.getNumOfAns()));
 
-            if (companyQuestionsData.getVerified()==1) {
+            if (companyQuestionsData.getVerified()!=0) {
                 holder.Qacount.setTextColor(Color.parseColor("#ffffff"));
                 holder.Qacount.setBackgroundResource(R.drawable.rounded_rectangle_with_backcolor);
             }
