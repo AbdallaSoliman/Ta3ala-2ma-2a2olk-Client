@@ -160,6 +160,7 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
                 }
             }
         }
+        
         // verify handel cases
         final Question qq = ii.getQuestion();
         if (qq.getPersonId().getPersonId() == getUserId()) {
