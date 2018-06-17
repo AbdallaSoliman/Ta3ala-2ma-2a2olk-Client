@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.MVPInterface;
@@ -60,6 +61,12 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
 
     @Override
     public void onBindViewHolder(final @NonNull ViewHolder holder, final int position) {
+//
+//        Log.i("testu", getUserId()+"nkjkj");
+//        Log.i("testu", ii.getQuestion().getPersonId().getPersonId()+"");
+//      //  Toast.makeText(mcContext, getUserId()+"user id", Toast.LENGTH_LONG).show();
+//        Toast.makeText(mcContext, ii.getQuestion().getPersonId().getPersonId()+"qid", Toast.LENGTH_LONG).show();
+
         final Answer answer = answers.get(position);
         holder.answer.setText(answer.getAnswer());
         holder.personName.setText(answer.getPersonId().getFirst() + " " + answer.getPersonId().getLast());
@@ -118,7 +125,6 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
                 });
 
             } else {// answer is not mine
-
                 holder.editImageView.setVisibility(View.GONE);
                 holder.editTextView.setVisibility(View.GONE);
                 holder.deleteImageView.setVisibility(View.GONE);
@@ -160,11 +166,12 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
                 }
             }
         }
-        
+
         // verify handel cases
         final Question qq = ii.getQuestion();
         if (qq.getPersonId().getPersonId() == getUserId()) {
             // queestion is mine
+            Toast.makeText(mcContext, "==v", Toast.LENGTH_LONG).show();
 
             // check if question is verified
             if (qq.getVerified() == 0) {// question is not verified
@@ -174,23 +181,28 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
                         qq.setVerified(answer.getAnswersId());
                         qAAPresenter.verifyAnswerPresenter(qq, getToken());
                         holder.answerVerified.setImageResource(R.drawable.greenverified);
+                    notifyDataSetChanged();
                     }
                 });
-
             } else {// set green verified right
-                if(answer.getAnswersId()==qq.getVerified()){
+                if (answer.getAnswersId() == qq.getVerified()) {
                     holder.answerVerified.setImageResource(R.drawable.greenverified);
                 }
+                else {
+                    holder.answerVerified.setVisibility(View.GONE);
+                }
             }
-        } else {
+            
+        } else {// question is not mine
             holder.answerVerified.setVisibility(View.GONE);
         }
-        if(answer.getAnswersId()==qq.getVerified()){
+//        if(answer.getAnswersId()==qq.getVerified()){
+//            holder.answerVerified.setImageResource(R.drawable.greenverified);
+//        }
+//        else if(qq.getVerified()==0){
+//            holder.answerVerified.setVisibility(View.GONE);
+//        }
 
-        }
-        else {
-            holder.answerVerified.setVisibility(View.GONE);
-        }
 
     }
 
