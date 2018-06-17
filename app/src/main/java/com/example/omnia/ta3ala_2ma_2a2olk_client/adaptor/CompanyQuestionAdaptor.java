@@ -59,6 +59,7 @@ public class CompanyQuestionAdaptor extends RecyclerView.Adapter<CompanyQuestion
                 holder.Qacount.setTextColor(Color.parseColor("#ffffff"));
                 holder.Qacount.setBackgroundResource(R.drawable.rounded_rectangle_with_backcolor);
             }
+            
 //abdalla start
         AssetManager am = holder.Qtitle.getContext().getApplicationContext().getAssets();
         holder.itemView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
