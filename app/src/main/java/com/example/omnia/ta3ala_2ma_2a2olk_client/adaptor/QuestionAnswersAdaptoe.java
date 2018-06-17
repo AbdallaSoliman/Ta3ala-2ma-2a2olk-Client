@@ -192,6 +192,7 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
                     holder.answerVerified.setVisibility(View.GONE);
                 }
             }
+            
         } else {// question is not mine
             holder.answerVerified.setVisibility(View.GONE);
         }
