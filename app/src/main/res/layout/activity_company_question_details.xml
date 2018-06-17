@@ -24,7 +24,7 @@
             android:id="@+id/upRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="23dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="23dp"
             android:src="@drawable/arrow_up"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
             android:id="@+id/rateCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="26dp"
+            android:layout_marginEnd="14dp"
             android:layout_marginTop="35dp"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.01"
@@ -50,7 +50,7 @@
             android:id="@+id/downRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="23dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="55dp"
             android:src="@drawable/arrow_down"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,17 +58,18 @@
 
         <TextView
             android:id="@+id/qTitle"
-            android:layout_width="318dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="26dp"
             android:letterSpacing="0.01"
             android:lineSpacingExtra="2.3sp"
-            android:text="لو سمحتم يا جماعة مين أفضل مدرس رياضة في طنطا ؟ علشان ألحق أحجز قبل السنة الجديدة ؟"
+            android:text=" لو سمحتم يا جماعة مين أفضل مدرس رياضة في طنطا !!!!!!! ؟"
             android:textColor="#0055a5"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/downRate"
+            app:layout_constraintEnd_toStartOf="@+id/rateCount"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -125,7 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="65dp"
             android:layout_marginTop="10dp"
-            android:text="Hesham Muhammed"
+            android:text="Person Name"
             android:textColor="#00a88f"
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -145,13 +146,13 @@
         <TextView
             android:id="@+id/personeRate"
             android:layout_width="264dp"
-            android:layout_height="wrap_content"
+            android:layout_height="11dp"
             android:layout_marginStart="64dp"
             android:text="4.7 / 5.0"
             android:textColor="#00a88f"
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/personeDate" />
+            app:layout_constraintTop_toBottomOf="@+id/questionDate" />
 
         <View
             android:id="@+id/h2"
