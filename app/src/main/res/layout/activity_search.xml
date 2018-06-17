@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".view.SearchActivity">
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/card_recycler_view1"
         android:scrollbars="vertical"
