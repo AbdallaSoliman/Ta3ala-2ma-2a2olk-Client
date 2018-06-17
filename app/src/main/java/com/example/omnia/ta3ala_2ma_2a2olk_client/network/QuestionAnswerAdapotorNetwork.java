@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitle;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CompanyQuestionForTitleList;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.APIService;
@@ -109,6 +110,22 @@ public class QuestionAnswerAdapotorNetwork {
             public void onFailure(Call<TockenReturn> call, Throwable t) {
             }
         });
+    }
 
+    public void verifyAnswerNetwork(Question question, String token){
+
+        APIService apiService =
+                ApiClient.getApiClient().create(APIService.class);
+        Call<TockenReturn> call = apiService.verifyAnswer(question, token);
+        call.enqueue(new Callback<TockenReturn>() {
+            @Override
+            public void onResponse(Call<TockenReturn> call, Response<TockenReturn> response) {
+                if(response.body()!=null) {
+                }
+            }
+            @Override
+            public void onFailure(Call<TockenReturn> call, Throwable t) {
+            }
+        });
     }
 }

@@ -108,6 +108,10 @@ public interface APIService {
     @GET("/AnswerRateDown/{answer_id}")
     Call<TockenReturn> answerDownRate(@Path(value = "answer_id", encoded = true) String answerId, @Header("Authorization") String token);
 
+    @Headers({"Content-Type: application/json"})
+    @PUT("/Question")
+    Call<TockenReturn> verifyAnswer(@Body Question question, @Header("Authorization") String token);
+
 
     // ahmed hesham
     @GET("MainCategories?size=1000")
