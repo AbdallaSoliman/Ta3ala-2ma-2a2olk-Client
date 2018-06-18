@@ -148,6 +148,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
         return matcher.matches();
     }
     public User loadUser(final Context mcontext , String token , final User user) {
+        customerService = new CustomerService();
         apiInterface = ApiClient.getApiClient().create(APIService.class);
          Toast.makeText(mcontext , user.getPassword()+"username" , Toast.LENGTH_LONG).show();
          Log.e("username" , user.getPassword());
@@ -157,7 +158,11 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Toast.makeText(mcontext, "success", Toast.LENGTH_LONG).show();
-                if (response.isSuccessful()) {
+                if (response.body().getCustomerService() != null) {
+                    SharedPreferences pref = mcontext.getSharedPreferences("LoginPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("cid", customerService.getService()+"");
+                }
                     myuser = response.body();
                     Log.e("testData", response.body().toString());
                     Log.e("testUser", "user"+user.getEmail());
@@ -193,7 +198,6 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                     editor.putString("gender",myuser.getGender());
                     editor.putString("image",myuser.getImage());
                     editor.putString("type",myuser.getType());
-                    editor.putString("cid",customerService.getService());
                     Log.e("Hamada",myuser.getEmail()+"mail");
                     editor.commit();
                     Log.e("userData",pref.getString("email","MFESH"));
@@ -211,9 +215,9 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                         view.questionActivity(myuser.getType());
                         Toast.makeText(mcontext,pref.getString("first","MFESH")+"login",Toast.LENGTH_LONG).show();
                     }
-                }else {
-                    Toast.makeText(mcontext, "Empty Response", Toast.LENGTH_LONG).show();
-                }
+//                else {
+//                    Toast.makeText(mcontext, "Empty Response", Toast.LENGTH_LONG).show();
+//                }
 
 
             }

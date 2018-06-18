@@ -256,8 +256,8 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
 
                     }
                 });
-                int sub = pref.getInt("scountry", 0);
-                spinner2.setSelection(sub);
+              //  int sub = pref.getInt("scountry", 0);
+               // spinner2.setSelection(sub);
             }
 
             @Override
