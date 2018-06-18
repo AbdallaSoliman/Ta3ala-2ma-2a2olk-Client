@@ -7,6 +7,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.network.CompanyQuestionDetailsNetwork;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.view.CompanyQuestionDetails;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -27,7 +28,11 @@ public class CompanyQuestionDetailsPresenter implements CompanyQuestionDetailsIn
     }
 
     public void setCompanyQuetionDetailsPresenter(Question q, List<Answer> answers){
-        cQDetails.setQuestionDetails(q,answers);
+        try {
+            cQDetails.setQuestionDetails(q,answers);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteQuestionPresenter(Question q,String token){
