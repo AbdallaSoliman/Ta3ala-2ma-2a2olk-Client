@@ -22,6 +22,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class SplashPresenter implements SplashInterface.presenter {
     SplashInterface.view view;
     APIService service;
@@ -38,14 +40,16 @@ public class SplashPresenter implements SplashInterface.presenter {
         service = ApiClient.getApiClient().create(APIService.class);
         SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = tokenDetails.edit();
+        SharedPreferences pref = mcontext.getSharedPreferences("LoginPref", MODE_PRIVATE);
+        SharredPreferenceManager manager1 = new SharredPreferenceManager(mcontext);
         SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
         String token = manager.getString(tokenDetails, "persontoken", "no");
-
-//        if (token != "no") {
-//            Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
-//           view.checksharredpreference();
-//            view.finishActivity();
-//        } else {
+        String id = manager1.getString(pref,"id","no");
+        if (id != "no") {
+            Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
+           view.checksharredpreference();
+            view.finishActivity();
+        } else {
         Call<TockenReturn> call = service.getTocken("application/json", tocken1);
         call.enqueue(new Callback<TockenReturn>() {
             @Override
@@ -73,6 +77,6 @@ public class SplashPresenter implements SplashInterface.presenter {
             }
         });
     }
-    //   }
+     }
 
 }
