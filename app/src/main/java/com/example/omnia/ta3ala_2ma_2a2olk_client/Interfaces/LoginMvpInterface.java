@@ -10,6 +10,7 @@ public interface LoginMvpInterface {
     interface view {
         void registerStatus(int key);
         void questionActivity(String email);
+        void setCustomerId(String id);
 
     }
 
@@ -17,8 +18,6 @@ public interface LoginMvpInterface {
    interface presenter {
         int checkInput(String email, String password);
         void loadDataFromServer(String username, String password, Context mcontext);
+        void getCustomerId(Context context , String name);
    }
-
-
-
 }

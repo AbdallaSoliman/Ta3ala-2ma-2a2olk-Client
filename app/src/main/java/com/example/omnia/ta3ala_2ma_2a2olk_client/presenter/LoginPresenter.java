@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.LoginMvpInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.CustomerService;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SubCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tauser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
@@ -41,11 +43,12 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
     String type;
     String gender;
     Boolean enabled;
-    String customerService;
+    CustomerService customerService;
     Tauser taaUser;
     //String image;
     User myuser;
     User myuser2;
+    String customername;
 
 
     public LoginPresenter(LoginMvpInterface.view view) {
@@ -108,6 +111,32 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
         });
     }
 
+    @Override
+    public void getCustomerId(Context mcontext , String name) {
+        apiInterface = ApiClient.getApiClient().create(APIService.class);
+        SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = tokenDetails.edit();
+        SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
+        final String token = manager.getString(tokenDetails, "persontoken", "no");
+        Toast.makeText(mcontext,"Shareddddddddddddd "+name,Toast.LENGTH_LONG).show();
+        Call<List<SubCategories>> getAllCategories = apiInterface.getAllCategories("application/json",token , name);
+        getAllCategories.enqueue(new Callback<List<SubCategories>>() {
+            @Override
+            public void onResponse(Call<List<SubCategories>> call, Response<List<SubCategories>> response) {
+                if (response.isSuccessful()){
+                     view.setCustomerId(response.body().get(0).getSubCatId()+"");
+                     Log.e("Ay7aga",response.body()+"");
+                     Log.e("Ay7aga",token);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SubCategories>> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     public boolean validateEmail(String email) {
         Pattern pattern;
@@ -164,6 +193,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                     editor.putString("gender",myuser.getGender());
                     editor.putString("image",myuser.getImage());
                     editor.putString("type",myuser.getType());
+                    editor.putString("cid",customerService.getService());
                     Log.e("Hamada",myuser.getEmail()+"mail");
                     editor.commit();
                     Log.e("userData",pref.getString("email","MFESH"));
@@ -174,6 +204,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                     Log.e("userData",pref.getString("password","MFESH"));
                     Log.e("userData",pref.getString("gender","MFESH"));
                     Log.e("userData",pref.getString("image","MFESH"));
+                    Log.e("userData",pref.getString("cid","MFESH"));
                     if ((pref.getString("first","MFESH").equals("MFESH"))){
                         Toast.makeText(mcontext,pref.getString("first","MFESH"),Toast.LENGTH_LONG).show(); }
                         else {
@@ -184,6 +215,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                     Toast.makeText(mcontext, "Empty Response", Toast.LENGTH_LONG).show();
                 }
 
+
             }
 
             @Override
@@ -191,6 +223,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                 Toast.makeText(mcontext, "Login failed ", Toast.LENGTH_LONG).show();
                 String message = t.getMessage();
                 Log.d("failure", message);
+                Toast.makeText(mcontext, message, Toast.LENGTH_LONG).show();
             }
 
         });
