@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SubCategory;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +49,19 @@ public class CompaniesAdaptor extends ArrayAdapter<SubCategory> {
         convertView=inflater.inflate(R.layout.list_item,parent,false);
 
         viewHolder.companyName = (TextView) convertView.findViewById(R.id.companyName);
+        //abdalla start
+        viewHolder.imageViewCompanyLogo = (ImageView) convertView.findViewById(R.id.imageViewCompanyLogo);
+        Picasso.get().load(companies.get(position).getImgUrl()).placeholder(R.drawable.call_center).into(viewHolder.imageViewCompanyLogo);
+        //abdalla end
         viewHolder.companyName.setText(companies.get(position).getSubCatName());
         return convertView;
        }
 
     public class ViewHolder{
         TextView companyName;
+        //adballa start
+        ImageView imageViewCompanyLogo;
+        //abdalla end
     }
 
 }
