@@ -48,7 +48,7 @@ public class NewsFeedsAdapter extends RecyclerView.Adapter<NewsFeedsAdapter.View
         holder.QACount.setText(questions.get(position).getNumOfAns() + "");
 //abdalla start
         if (questions.get(position).getVerified() != null) {
-            if (questions.get(position).getVerified() == 1) {
+            if (questions.get(position).getVerified() != 0) {
                 holder.QACount.setTextColor(Color.parseColor("#ffffff"));
                 holder.QACount.setBackgroundResource(R.drawable.rounded_rectangle_with_backcolor);
             }
