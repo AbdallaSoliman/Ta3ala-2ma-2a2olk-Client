@@ -47,7 +47,7 @@ public class Tab2CustomerService extends Fragment {
         tSP=new Tab2CustomerServicePresenter(this);
         SharedPreferences pref = this.getActivity().getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         shM = new SharredPreferenceManager(this.getActivity());
-        String token = shM.getString(pref, "persontoken", "error");
+        String token = shM.getString(pref, "persontoken1", "error");
         Log.i("token", token);
         // get data
        // tSP.getCompaniesPresenter(token);
@@ -98,7 +98,7 @@ public class Tab2CustomerService extends Fragment {
 
         SharedPreferences pref = this.getActivity().getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         shM = new SharredPreferenceManager(this.getActivity());
-        String token = shM.getString(pref, "persontoken", "error");
+        String token = shM.getString(pref, "persontoken1", "error");
         tSP.getCompaniesPresenter(token);
     }
 }

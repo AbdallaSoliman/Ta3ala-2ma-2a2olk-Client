@@ -63,7 +63,7 @@ public class PlacesPresenter implements PlacesInterface.presenter, ExpandableLis
         SharedPreferences tokenDetails = mContext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = tokenDetails.edit();
         SharredPreferenceManager manager = new SharredPreferenceManager(mContext.getApplicationContext());
-        String token = manager.getString(tokenDetails, "persontoken", "no");
+        String token = manager.getString(tokenDetails, "persontoken1", "no");
         Log.e("subcat", "sub" + token);
         Call<List<com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategorySpecial>> call = apiInterface.mainCategoriesSpecial(token);
         call.enqueue(new Callback<List<MainCategorySpecial>>() {

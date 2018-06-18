@@ -98,7 +98,7 @@ public class CompanyQuestionsList extends AppCompatActivity implements Test2List
         // get token from sharedpref
         SharedPreferences pref = this.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         shM = new SharredPreferenceManager(this);
-        final String token = shM.getString(pref, "persontoken", "error");
+        final String token = shM.getString(pref, "persontoken1", "error");
         cQPresenter.getCompaniesQuestionsPresenter(id,token);
 
         // recycleview
@@ -122,7 +122,7 @@ public class CompanyQuestionsList extends AppCompatActivity implements Test2List
          // get token from sharedpref
         SharedPreferences pref = this.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         shM = new SharredPreferenceManager(this);
-        final String token = shM.getString(pref, "persontoken", "error");
+        final String token = shM.getString(pref, "persontoken1", "error");
         cQPresenter.getCompaniesQuestionsPresenter(id,token);
 
         // recycleview
