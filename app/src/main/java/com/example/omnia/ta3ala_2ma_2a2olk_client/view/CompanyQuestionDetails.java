@@ -1,6 +1,7 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.view;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.adaptor.QuestionAnswersAdaptoe;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.dialog.MyDialog;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Answer;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.PersonId;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
@@ -50,7 +52,7 @@ public class CompanyQuestionDetails extends AppCompatActivity {
     ImageView upRate, downRate;
     View v1, v2, h3;
     Button addComment;
-
+    MyDialog myDialog;
     // for back button on action bar
     @Override
     public boolean onSupportNavigateUp() {
@@ -78,6 +80,9 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         madaptor.notifyDataSetChanged();
 
         showWhichCompnent(person);
+        //hesham start
+        myDialog.dismiss();
+        // hesham end
     }
 
     public void showWhichCompnent(PersonId personId) {
@@ -181,7 +186,8 @@ public class CompanyQuestionDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_question_details);
-
+        myDialog = new MyDialog();
+        myDialog.show(this);
         Log.i("tokenomnia", getToken());
         // for back arrow
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -190,6 +196,7 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         id = intent.getStringExtra("questionID");
         cQDPresenter = new CompanyQuestionDetailsPresenter(this);
         cQDPresenter.getQuestionDetailsPresenter(id, getToken());
+
 
         questionAnswers = new ArrayList<>();
         titleTextView = (TextView) findViewById(R.id.qTitle);
