@@ -86,6 +86,7 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpInterfac
 
     @Override
     public void questionActivity(String email) {
+        Toast.makeText(getApplicationContext(),"Ahmed Hesham "+email,Toast.LENGTH_LONG).show();
         if (email.equals("user")) {
 
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -93,8 +94,27 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpInterfac
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
-        } else {
+        } else if (email.equals("CustomerService")){
+            //company question list 2b3tlo ID Sherka 2b3tlha ID Sherka
+            SharedPreferences tokenDetails = getApplication().getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = tokenDetails.edit();
+            SharredPreferenceManager manager = new SharredPreferenceManager(getApplication());
+            String tempId = manager.getString(tokenDetails, "cid", "no");
+
+           presenter.getCustomerId(getApplicationContext(),tempId);
+        }
+
+        else{
             Toast.makeText(getApplicationContext(), "Login Error", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void setCustomerId(String id) {
+        Toast.makeText(getApplication(),"Size is "+id+"",Toast.LENGTH_LONG).show();
+       Intent intent = new Intent(this,CompanyQuestionsList.class);
+        intent.putExtra("companyId",id);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

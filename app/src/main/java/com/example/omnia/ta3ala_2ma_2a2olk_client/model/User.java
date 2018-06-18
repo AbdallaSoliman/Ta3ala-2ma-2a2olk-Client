@@ -27,7 +27,7 @@ public class User implements Serializable{
     @SerializedName("enabled")
     private Boolean enabled ;
     @SerializedName("customerService")
-    private String customerService;
+    private CustomerService customerService;
     @SerializedName("taaUser")
     private Tauser taaUser;
     @SerializedName("username")
@@ -62,22 +62,6 @@ public class User implements Serializable{
         this.type = type;
         this.gender = gender;
         this.enabled = enabled;
-        this.username = username;
-    }
-
-    public Tauser getTaaUser() {
-        return taaUser;
-    }
-
-    public void setTaaUser(Tauser taaUser) {
-        this.taaUser = taaUser;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -153,13 +137,27 @@ public class User implements Serializable{
         this.enabled = enabled;
     }
 
-    public String getCustomerService() {
+    public CustomerService getCustomerService() {
         return customerService;
     }
 
-    public void setCustomerService(String customerService) {
+    public void setCustomerService(CustomerService customerService) {
         this.customerService = customerService;
     }
 
+    public Tauser getTaaUser() {
+        return taaUser;
+    }
 
+    public void setTaaUser(Tauser taaUser) {
+        this.taaUser = taaUser;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
