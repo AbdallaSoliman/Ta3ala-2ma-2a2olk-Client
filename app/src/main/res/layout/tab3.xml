@@ -1,9 +1,4 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:fillViewport="true">
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -36,7 +31,7 @@ android:fillViewport="true">
         android:id="@+id/myexpandablelistview"
         android:layout_width="match_parent"
         android:layout_height="471dp"
-
+        android:nestedScrollingEnabled="true"
         android:layout_marginTop="10dp"
         android:divider="@null"
         android:dividerHeight="0dp"
@@ -56,4 +51,3 @@ android:fillViewport="true">
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 </android.support.constraint.ConstraintLayout>
-</ScrollView>

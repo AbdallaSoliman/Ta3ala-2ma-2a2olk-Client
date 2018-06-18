@@ -90,9 +90,9 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
         lastname = findViewById(R.id.lastname);
         gender = findViewById(R.id.gender);
         place = findViewById(R.id.myplace);
-        firstname.setFocusable(false);
-        lastname.setFocusable(false);
-        username.setFocusable(false);
+//        firstname.setFocusable(false);
+//        lastname.setFocusable(false);
+//        username.setFocusable(false);
 
         userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
         manager = new SharredPreferenceManager(getApplicationContext());
@@ -155,6 +155,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
                     username.setTextColor(Color.RED);
                     checkFocus = true;
                 } else if (checkFocus == true) {
+
                     firstname.setFocusable(false);
                     lastname.setFocusable(false);
                     username.setFocusable(false);

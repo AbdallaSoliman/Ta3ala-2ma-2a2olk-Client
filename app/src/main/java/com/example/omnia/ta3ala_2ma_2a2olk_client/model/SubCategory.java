@@ -24,7 +24,7 @@ public class SubCategory implements Serializable {
     private String description;
     @SerializedName("imgUrl")
     @Expose
-    private Object imgUrl;
+    private String imgUrl;
 
     public Integer getSubCatId() {
         return subCatId;
@@ -50,11 +50,11 @@ public class SubCategory implements Serializable {
         this.description = description;
     }
 
-    public Object getImgUrl() {
+    public String getImgUrl() {
         return imgUrl;
     }
 
-    public void setImgUrl(Object imgUrl) {
+    public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 
