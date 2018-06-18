@@ -45,7 +45,6 @@ public class AddAnswer extends AppCompatActivity {
         setTitle("Answer");
         Intent intent=getIntent();
         qId=(Question) intent.getSerializableExtra("questionId");
-
         answerEditText=(EditText)findViewById(R.id.answerId);
         postAnswer=(Button)findViewById(R.id.saveAnswer);
     }
@@ -71,8 +70,9 @@ public class AddAnswer extends AppCompatActivity {
             String currentDate = mdformat.format(calendar.getTime());
             answer.setAnswersDate(currentDate);
             AddAnswerPresenter addAnswerPresenter=new AddAnswerPresenter();
-            addAnswerPresenter.saveAnswerToServerPresenter(answer,getToken());
-            finish();
+            addAnswerPresenter.saveAnswerToServerPresenter(answer,getToken(),this,qId.getQuestionId());
+
+          //  finish();
 
         }
         else{
