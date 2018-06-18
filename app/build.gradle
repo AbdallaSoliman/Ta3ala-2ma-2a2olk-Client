@@ -48,6 +48,8 @@ dependencies {
     //firbase messaging
     compile 'com.google.firebase:firebase-core:11.8.0'
     compile 'com.google.firebase:firebase-messaging:11.8.0'
+
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }
 
 

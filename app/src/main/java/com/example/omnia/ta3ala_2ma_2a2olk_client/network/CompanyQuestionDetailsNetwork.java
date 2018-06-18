@@ -40,10 +40,12 @@ public class CompanyQuestionDetailsNetwork {
             @Override
             public void onResponse(Call<Question> call, Response<Question> response) {
 //abdalla start
-                if(response.body().getAnswersCollection()!=null ) {
-                    Question q = response.body();
-                    List<Answer> s = response.body().getAnswersCollection();
-                    cListPresener.setCompanyQuetionDetailsPresenter(q, s);
+                if(response.isSuccessful()) {
+                    if (response.body().getAnswersCollection() != null) {
+                        Question q = response.body();
+                        List<Answer> s = response.body().getAnswersCollection();
+                        cListPresener.setCompanyQuetionDetailsPresenter(q, s);
+                    }
                 }
 //abdalla end
             }

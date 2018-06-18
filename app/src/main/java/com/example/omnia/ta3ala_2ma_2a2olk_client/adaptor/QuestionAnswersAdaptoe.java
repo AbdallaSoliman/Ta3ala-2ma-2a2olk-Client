@@ -26,6 +26,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.QuestionAnswerAdapotorPresenter;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.view.CompanyQuestionDetails;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -70,8 +71,9 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         final Answer answer = answers.get(position);
         holder.answer.setText(answer.getAnswer());
         holder.personName.setText(answer.getPersonId().getFirst() + " " + answer.getPersonId().getLast());
-        Glide.with(mcContext)
+        Picasso.get()
                 .load(answer.getPersonId().getImage())
+                .placeholder(R.drawable.profile)
                 .into(holder.personImage);
 
         String userEmail = answers.get(position).getPersonId().getEmail();

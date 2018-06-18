@@ -30,6 +30,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.PersonId;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Question;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.CompanyQuestionDetailsPresenter;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -71,8 +72,9 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         if (person!= null) {
             personNameTextView.setText(person.getFirst() + " " + person.getLast());
             questionDateTextView.setText(question.getQuestionDate());
-            Glide.with(this)
+            Picasso.get()
                     .load(person.getImage())
+                    .placeholder(R.drawable.profile)
                     .into(personImageView);
         }
 
