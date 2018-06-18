@@ -131,12 +131,12 @@ public interface APIService {
     @GET("MainCategoriesSpecial?size=1000")
     Call<List<MainCategorySpecial>> mainCategoriesSpecial(@Header("Authorization") String token);
 
-    @GET("Question?size=10")
+    @GET("Question?size=1000")
     Call<List<Question>> getQuestion(@Header("Authorization") String token);
 
-    @GET("QuestionNewsFeed?size=10")
+    @GET("QuestionNewsFeed?size=1000")
     Call<List<NewsFeed>> getNewsFeeds(@Header("Authorization") String token);
-    @GET("QuestionFilterCustomization?size=10&page=0")
+    @GET("QuestionFilterCustomization?size=1000&page=0")
     Call<List<NewsFeed>> search(@Header("Authorization") String token , @Query("search")String query);
 
 
