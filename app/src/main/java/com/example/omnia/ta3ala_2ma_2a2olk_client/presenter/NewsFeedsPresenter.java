@@ -40,7 +40,7 @@ public class NewsFeedsPresenter implements NewsFeeds.presenter {
         SharedPreferences tokenDetails = context.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = tokenDetails.edit();
         SharredPreferenceManager manager = new SharredPreferenceManager(context.getApplicationContext());
-        String token = manager.getString(tokenDetails, "persontoken", "no");
+        String token = manager.getString(tokenDetails, "persontoken1", "no");
         Log.e("subcat", "sub" + token);
         retrofit2.Call<List<NewsFeed>> call = apiInterface.getNewsFeeds(token);
         call.enqueue(new Callback<List<NewsFeed>>() {
