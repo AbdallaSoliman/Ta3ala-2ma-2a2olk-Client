@@ -82,7 +82,10 @@ public class ApiClient {
 
     public static boolean isNetworkAvalaiable(){
         ConnectivityManager connectivityManager = (ConnectivityManager) MyApplication.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+//  NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        if(connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected()){
+            return true;
+        }
+        return false;
     }
 }

@@ -58,7 +58,9 @@
         <activity android:name=".view.AddAnswer" />
         <activity
             android:name=".view.ProfileScreen"
-            android:parentActivityName="com.example.omnia.ta3ala_2ma_2a2olk_client.view.MainActivity">
+            android:parentActivityName="com.example.omnia.ta3ala_2ma_2a2olk_client.view.MainActivity"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.slider">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
