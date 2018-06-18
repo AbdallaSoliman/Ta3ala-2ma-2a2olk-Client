@@ -78,10 +78,10 @@ public class CompanyQuestionDetails extends AppCompatActivity {
 //            String mytime = pref.getString("announcementtime" + count, null);
 
 // it comes out like this 2013-08-31 15:55:22 so adjust the date format
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = df.parse(question.getQuestionDate());
+//            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            Date date = df.parse(question.getQuestionDate());
            // CharSequence timePassedString = DateUtils.getRelativeTimeSpanString (epoch, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
-            questionDateTextView.setText(parseDate((date.getTime())));
+//            questionDateTextView.setText(parseDate((date.getTime())));
             Picasso.get()
                     .load(person.getImage())
                     .placeholder(R.drawable.profile)
