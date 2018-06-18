@@ -323,7 +323,7 @@ public class CompanyQuestionDetails extends AppCompatActivity {
     public String getToken() {
         SharedPreferences pref = this.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         shM = new SharredPreferenceManager(this);
-        final String token = shM.getString(pref, "persontoken1", "error");
+        final String token = shM.getString(pref, "persontoken", "error");
         Log.i("Hesham",token+"");
         return token;
     }
