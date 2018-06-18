@@ -24,18 +24,19 @@
             android:id="@+id/upRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="23dp"
             android:src="@drawable/arrow_up"
+            app:layout_constraintBottom_toTopOf="@+id/rateCount"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/qTitle" />
 
         <TextView
             android:id="@+id/rateCount"
-            android:layout_width="wrap_content"
+            android:layout_width="8dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="14dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.01"
             android:lineSpacingExtra="-5.3sp"
@@ -43,32 +44,31 @@
             android:textColor="#00a88f"
             android:textSize="13.3sp"
             android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/downRate"
+            app:layout_constraintTop_toBottomOf="@+id/upRate"
+            tools:layout_editor_absoluteX="342dp" />
 
         <ImageView
             android:id="@+id/downRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="5dp"
             android:src="@drawable/arrow_down"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/qTitle"
+            app:layout_constraintTop_toBottomOf="@+id/rateCount"
+            tools:layout_editor_absoluteX="341dp" />
 
         <TextView
             android:id="@+id/qTitle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="35dp"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="20dp"
             android:letterSpacing="0.01"
             android:lineSpacingExtra="2.3sp"
             android:text=" لو سمحتم يا جماعة مين أفضل مدرس رياضة في طنطا !!!!!!! ؟"
             android:textColor="#0055a5"
-            app:layout_constraintBottom_toBottomOf="@+id/downRate"
             app:layout_constraintEnd_toStartOf="@+id/rateCount"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -79,12 +79,12 @@
             android:layout_height="1dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="72dp"
+            android:layout_marginTop="19dp"
             android:background="#00a88f"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/qTitle" />
 
         <TextView
             android:id="@+id/qBody"
