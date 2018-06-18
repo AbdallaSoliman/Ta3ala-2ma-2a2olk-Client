@@ -8,6 +8,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.ProfileInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.MainCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResonse;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SpecialUser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SubCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tauser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
@@ -16,6 +17,8 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.rest.ApiClient;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
@@ -145,6 +148,34 @@ public class ProfilePresenter implements ProfileInterface.presenter{
             }
             @Override
             public void onFailure(retrofit2.Call<List<MainCategories>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void getSpecialUser(Context mcontext) {
+        SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = tokenDetails.edit();
+        SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
+        String token = manager.getString(tokenDetails, "persontoken", "no");
+        apiInterface = ApiClient.getApiClient().create(APIService.class);
+        SharedPreferences userDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
+        userDetails = mcontext.getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+        manager = new SharredPreferenceManager(mcontext);
+        String idtemp = manager.getString(userDetails, "id", "no");
+
+        Call<SpecialUser> getSpecial = apiInterface.getSpecial("application/json",token,idtemp);
+        getSpecial.enqueue(new Callback<SpecialUser>() {
+            @Override
+            public void onResponse(Call<SpecialUser> call, Response<SpecialUser> response) {
+                if (response != null){
+                    view.setSpecialUser(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SpecialUser> call, Throwable t) {
 
             }
         });

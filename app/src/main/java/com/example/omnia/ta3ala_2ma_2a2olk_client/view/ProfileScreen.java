@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.ProfileInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SpecialUser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.ProfilePresenter;
 import com.squareup.picasso.Picasso;
 
@@ -77,6 +78,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         presenter = new ProfilePresenter(this);
         presenter.getMyLocations(this);
+        presenter.getSpecialUser(this);
         placeList = new ArrayList<>();
         profile = findViewById(R.id.profileimg);
         profile.setOnClickListener(this);
@@ -326,5 +328,11 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
     public void setPlace(String newPlace) {
         place.setText(newPlace);
         presenter.updateUsername(getApplicationContext(), emails, tempUserName, tempFirstName, tempLastName, genders, id, image, password);
+    }
+
+    @Override
+    public void setSpecialUser(SpecialUser specialUser) {
+        Toast.makeText(getApplicationContext(),"AAAAA" + specialUser.getPersonId(),Toast.LENGTH_LONG).show();
+        firstname.setText(specialUser.getNumOfAskedQuestions()+" ");
     }
 }

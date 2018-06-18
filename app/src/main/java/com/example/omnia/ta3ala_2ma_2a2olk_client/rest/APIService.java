@@ -15,6 +15,7 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Search;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResonse;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResponseId;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SpecialUser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SubCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tauser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
@@ -148,5 +149,9 @@ public interface APIService {
 
     @GET("CategoriesByName/{name}")
     Call<List<SubCategories>> getAllCategories(@Header("Content-Type") String content_type,@Header("Authorization") String token , @Path("name") String name);
+
+    @GET("PersonSpecial/{id}")
+    Call<SpecialUser> getSpecial(@Header("Content-Type") String content_type, @Header("Authorization") String token , @Path("id") String id);
+
 }
 
