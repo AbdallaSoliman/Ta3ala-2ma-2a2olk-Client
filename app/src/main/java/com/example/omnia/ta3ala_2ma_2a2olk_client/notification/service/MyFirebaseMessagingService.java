@@ -93,19 +93,22 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 Intent pushNotification = new Intent(Config.PUSH_NOTIFICATION);
                 pushNotification.putExtra("message", message);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
-
+                Log.e(TAG, "test notifi 1: " + timestamp);
                 // play notification sound
                 NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
                 notificationUtils.playNotificationSound();
             } else {
+                Log.e(TAG, "test notifi 2: " + timestamp);
                 // app is in background, show the notification in notification tray
                 Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
                 resultIntent.putExtra("message", message);
 
                 // check for image attachment
                 if (TextUtils.isEmpty(imageUrl)) {
+                    Log.e(TAG, "test notifi 3: " + timestamp);
                     showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
                 } else {
+                    Log.e(TAG, "test notifi 4: " + timestamp);
                     // image is present, show notification with image
                     showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
                 }

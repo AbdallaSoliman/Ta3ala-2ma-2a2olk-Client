@@ -299,7 +299,12 @@ public class MainActivity extends AppCompatActivity {
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
+        //adballa start
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
+        }
+        //abdalla end
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
