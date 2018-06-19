@@ -21,7 +21,6 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tauser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
-import com.google.firebase.auth.GetTokenResult;
 
 import java.util.List;
 

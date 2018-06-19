@@ -321,9 +321,13 @@ public class CompanyQuestionDetails extends AppCompatActivity {
     }
 
     public String getToken() {
+        String token = null;
         SharedPreferences pref = this.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         shM = new SharredPreferenceManager(this);
-        final String token = shM.getString(pref, "persontoken", "error");
+         token = shM.getString(pref, "persontoken", "error");
+         if (token.equals("error")){
+             token = shM.getString(pref, "persontoken1", "error");
+         }
         Log.i("Hesham",token+"");
         return token;
     }
