@@ -70,7 +70,7 @@ public class SplashPresenter implements SplashInterface.presenter {
                 view.checksharredpreference();
                 view.finishActivity();
             }
- 
+
             @Override
             public void onFailure(Call<TockenReturn> call, Throwable t) {
                 Toast.makeText(mcontext, "Splash Presenter On Failer Method", Toast.LENGTH_LONG).show();

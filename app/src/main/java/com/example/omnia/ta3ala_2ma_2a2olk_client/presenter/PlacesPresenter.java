@@ -77,6 +77,8 @@ public class PlacesPresenter implements PlacesInterface.presenter, ExpandableLis
                         for (int y = 0; y < 2; y++) {
                             if (getCategories.size() > 0) {
                                 MainCategories.clear();
+                                url.clear();
+                                noofquestions.clear();
                                 categories = getCategories.get(y).getSubCatCollection();
                                 HashMap<String, List<String>> hashMap = new HashMap<>();
                                 HashMap<String, List<Integer>> hashId = new HashMap<>();
@@ -90,6 +92,7 @@ public class PlacesPresenter implements PlacesInterface.presenter, ExpandableLis
                                             hashId.get(subCategory.getSubCatName()).add(subCategory.getSubCatId());
                                             MainCategories.add(subCategory.getSubCatName());
                                             url.add((String) subCategory.getImgUrl());
+                                            Log.i("image11",(String) subCategory.getImgUrl()+" "+subCategory.getSubCatName());
                                             noofquestions.add(subCategory.getNumOfQuestion());
                                         }
                                     } else {
