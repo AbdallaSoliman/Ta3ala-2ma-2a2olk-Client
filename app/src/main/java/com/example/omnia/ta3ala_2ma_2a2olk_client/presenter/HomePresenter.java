@@ -89,6 +89,8 @@ public class HomePresenter implements TabHomeInterface.presenter , ExpandableLis
                                             MainCategories.add(subCategory.getSubCatName());
                                             LogoUrl.add((String) subCategory.getImgUrl());
                                             noofquestions.add(subCategory.getNumOfQuestion());
+                                            Log.i("image11",(String) subCategory.getImgUrl()+" "+subCategory.getSubCatName());
+
                                         }
                                     } else {
                                         if (subCategory.getDescription() != null) {
