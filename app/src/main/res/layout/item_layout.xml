@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/subLineSeparator "
     android:layout_width="match_parent"
     android:layout_height="30dp"
     android:background="#ffffff">
@@ -47,7 +46,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/viewLineSupSeparator "
+        android:id="@+id/viewLineSupSeparator"
         android:layout_width="0dp"
         android:layout_height="0.3dp"
         android:layout_marginEnd="18dp"

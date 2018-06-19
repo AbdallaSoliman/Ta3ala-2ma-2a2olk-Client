@@ -279,6 +279,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+        mViewPager.setCurrentItem(0);
         //Ahmed Hesham
         finish();
     }
@@ -381,5 +382,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }    /*click alt+insert key */
+//abdalla start
+@Override
+protected void onResume() {
+    super.onResume();
 
+    searchView.setQuery("", false);
+    mViewPager.requestFocus();
+}
+    //abdalla end
 }

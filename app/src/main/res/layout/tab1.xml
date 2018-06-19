@@ -6,6 +6,10 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:allowBackup="true"
+    android:hardwareAccelerated="false"
+    android:largeHeap="true"
+    android:supportsRtl="true"
     tools:context="com.example.omnia.ta3ala_2ma_2a2olk_client.view.Tab1NewsFeeds">
 
     <!--<TextView-->
