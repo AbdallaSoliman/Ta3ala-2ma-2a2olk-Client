@@ -37,7 +37,22 @@ public class CompanyQuestionsList extends AppCompatActivity implements Test2List
     // for back button on action bar
     @Override
     public boolean onSupportNavigateUp(){
-        finish();
+        SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = userDetails.edit();
+        SharredPreferenceManager manager1 = new SharredPreferenceManager(getApplicationContext());
+        String type = manager1.getString(userDetails,"type","null");
+        Log.e("TbEhh","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        if (type.equals("CustomerService")){
+            Log.e("TbEhh",type);
+            SharedPreferences preferences = getSharedPreferences("LoginPref", 0);
+            SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
+            manager.remove(preferences, "email");
+            manager.remove(preferences, "id");
+            manager.remove(preferences,"type");
+            Intent myIntent = new Intent(this, MainActivity.class);
+            myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getApplication().startActivity(myIntent);
+        }
         return true;
     }
 
@@ -56,7 +71,13 @@ public class CompanyQuestionsList extends AppCompatActivity implements Test2List
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-
+        SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = userDetails.edit();
+        SharredPreferenceManager manager1 = new SharredPreferenceManager(getApplicationContext());
+        String type = manager1.getString(userDetails,"type","null");
+        if (type.equals("CustomerService")) {
+        fab.setVisibility(View.INVISIBLE);
+        }
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,6 +162,27 @@ public class CompanyQuestionsList extends AppCompatActivity implements Test2List
         Intent intent2=new Intent(CompanyQuestionsList.this,CompanyQuestionDetails.class);
         intent2.putExtra("questionID",String.valueOf(questionForTitlesList.get(po).getQuestionId()));
         startActivity(intent2);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = userDetails.edit();
+        SharredPreferenceManager manager1 = new SharredPreferenceManager(getApplicationContext());
+        String type = manager1.getString(userDetails,"type","null");
+        Log.e("TbEhh","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        if (type.equals("CustomerService")){
+            Log.e("TbEhh",type);
+            SharedPreferences preferences = getSharedPreferences("LoginPref", 0);
+            SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
+            manager.remove(preferences, "email");
+            manager.remove(preferences, "id");
+            manager.remove(preferences,"type");
+            Intent myIntent = new Intent(this, MainActivity.class);
+            myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getApplication().startActivity(myIntent);
+        }
     }
 }
 

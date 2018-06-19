@@ -81,6 +81,8 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
         SharedPreferences.Editor editor = tokenDetails.edit();
         SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
         String token = manager.getString(tokenDetails, "persontoken1", "no");
+        Log.e("HAMADA",token);
+
         Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
         apiInterface = ApiClient.getApiClient().create(APIService.class);
         final Tocken user = new Tocken(password, username);
@@ -112,7 +114,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
     }
 
     @Override
-    public void getCustomerId(Context mcontext , String name) {
+    public void getCustomerId(final Context mcontext , String name) {
         apiInterface = ApiClient.getApiClient().create(APIService.class);
         SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = tokenDetails.edit();
@@ -120,11 +122,16 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
         final String token = manager.getString(tokenDetails, "persontoken", "no");
         Toast.makeText(mcontext,"Shareddddddddddddd "+name,Toast.LENGTH_LONG).show();
         Call<List<SubCategories>> getAllCategories = apiInterface.getAllCategories("application/json",token , name);
+        Log.e("Mtshouf",token);
         getAllCategories.enqueue(new Callback<List<SubCategories>>() {
             @Override
             public void onResponse(Call<List<SubCategories>> call, Response<List<SubCategories>> response) {
                 if (response.isSuccessful()){
                      view.setCustomerId(response.body().get(0).getSubCatId()+"");
+                    SharedPreferences pref = mcontext.getSharedPreferences("LoginPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("csid", String.valueOf(response.body().get(0).getSubCatId()));
+                    editor.commit();
                      Log.e("Ay7aga",response.body()+"");
                      Log.e("Ay7aga",token);
                 }
@@ -159,9 +166,16 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
             public void onResponse(Call<User> call, Response<User> response) {
                 Toast.makeText(mcontext, "success", Toast.LENGTH_LONG).show();
                 if (response.body().getCustomerService() != null) {
+                    Log.e("HAMADA11",response.body().getCustomerService().getPersonId()+"");
+                    Log.e("HAMADA11",response.body().getCustomerService().getJoinDate()+"");
+                    Log.e("HAMADA11",response.body().getCustomerService().getExpDate()+"");
+                    Log.e("HAMADA11",response.body().getCustomerService().getService()+"");
+                    customerService = response.body().getCustomerService();
+                    Log.e("HAMADA11",response.body().getCustomerService()+"");
                     SharedPreferences pref = mcontext.getSharedPreferences("LoginPref", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("cid", customerService.getService()+"");
+                   SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("cid", response.body().getCustomerService().getService());
+                    editor.commit();
                 }
                     myuser = response.body();
                     Log.e("testData", response.body().toString());
@@ -208,7 +222,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                     Log.e("userData",pref.getString("password","MFESH"));
                     Log.e("userData",pref.getString("gender","MFESH"));
                     Log.e("userData",pref.getString("image","MFESH"));
-                    Log.e("userData",pref.getString("cid","MFESH"));
+                    Log.e("userData",pref.getString("cid","MFESHAY7aga"));
                     if ((pref.getString("first","MFESH").equals("MFESH"))){
                         Toast.makeText(mcontext,pref.getString("first","MFESH"),Toast.LENGTH_LONG).show(); }
                         else {

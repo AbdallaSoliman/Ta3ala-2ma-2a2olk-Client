@@ -1,8 +1,5 @@
 package com.example.omnia.ta3ala_2ma_2a2olk_client.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 
 /**
@@ -11,17 +8,9 @@ import java.io.Serializable;
 
 public class CustomerService implements Serializable {
 
-    @SerializedName("service")
-    @Expose
     private String service;
-    @SerializedName("joinDate")
-    @Expose
     private String joinDate;
-    @SerializedName("expDate")
-    @Expose
     private String expDate;
-    @SerializedName("personId")
-    @Expose
     private Integer personId;
 
     public String getService() {

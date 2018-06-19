@@ -244,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
                 SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
                 manager.remove(preferences, "email");
                 manager.remove(preferences, "id");
+                manager.remove(preferences,"type");
                 Toast.makeText(getApplicationContext(), "Log out Successful", Toast.LENGTH_LONG).show();
                 Intent myIntent = new Intent(MainActivity.this, MainActivity.class);
                 myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
