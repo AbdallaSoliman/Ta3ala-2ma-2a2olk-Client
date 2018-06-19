@@ -85,7 +85,7 @@
                 android:textSize="14sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toEndOf="@+id/imageView6"
-                app:layout_constraintTop_toBottomOf="@+id/lastname" />
+                app:layout_constraintTop_toBottomOf="@+id/spinner1" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -106,7 +106,7 @@
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="21dp"
                 android:fontFamily="sans-serif"
                 android:letterSpacing="0.01"
@@ -116,7 +116,7 @@
                 android:textSize="14sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/firstname" />
 
             <TextView
                 android:id="@+id/myplace"
@@ -159,7 +159,7 @@
                 android:textSize="14sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toEndOf="@+id/imageView5"
-                app:layout_constraintTop_toBottomOf="@+id/spinner1" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/firstname"
@@ -191,7 +191,7 @@
                 android:textSize="14sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="@+id/spinner2"
-                app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/lastname"
@@ -235,7 +235,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/editpassword"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/editpassword"
-                app:srcCompat="@drawable/copy_17" />
+                app:srcCompat="@drawable/star_copy_13" />
 
             <ImageView
                 android:id="@+id/imageView8"

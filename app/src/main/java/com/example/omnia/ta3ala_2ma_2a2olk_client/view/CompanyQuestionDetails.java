@@ -80,8 +80,8 @@ public class CompanyQuestionDetails extends AppCompatActivity {
 // it comes out like this 2013-08-31 15:55:22 so adjust the date format
 //            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //            Date date = df.parse(question.getQuestionDate());
-           // CharSequence timePassedString = DateUtils.getRelativeTimeSpanString (epoch, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
-//            questionDateTextView.setText(parseDate((date.getTime())));
+//            CharSequence timePassedString = DateUtils.getRelativeTimeSpanString (epoch, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
+            questionDateTextView.setText(question.getQuestionDate());
             Picasso.get()
                     .load(person.getImage())
                     .placeholder(R.drawable.profile)
@@ -321,9 +321,13 @@ public class CompanyQuestionDetails extends AppCompatActivity {
     }
 
     public String getToken() {
+        String token = null;
         SharedPreferences pref = this.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         shM = new SharredPreferenceManager(this);
-        final String token = shM.getString(pref, "persontoken1", "error");
+         token = shM.getString(pref, "persontoken", "error");
+         if (token.equals("error")){
+             token = shM.getString(pref, "persontoken1", "error");
+         }
         Log.i("Hesham",token+"");
         return token;
     }
