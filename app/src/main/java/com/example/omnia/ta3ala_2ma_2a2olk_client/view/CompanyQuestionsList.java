@@ -53,6 +53,7 @@ public class CompanyQuestionsList extends AppCompatActivity implements Test2List
             myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getApplication().startActivity(myIntent);
         }
+        finish();
         return true;
     }
 

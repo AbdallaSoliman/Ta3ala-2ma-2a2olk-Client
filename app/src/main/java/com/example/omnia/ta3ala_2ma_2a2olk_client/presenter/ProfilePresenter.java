@@ -52,7 +52,7 @@ public class ProfilePresenter implements ProfileInterface.presenter{
                     if (response.body() != null) {
                         String result = response.body().getMessage().toString();
                         if (result.length() > 0) {
-                            Toast.makeText(mContext, result + " 2333", Toast.LENGTH_LONG).show();
+//                            Toast.makeText(mContext, result + " 2333", Toast.LENGTH_LONG).show();
                             view.setNames(firstname,lastname,username);
                         }
                     }
@@ -61,9 +61,9 @@ public class ProfilePresenter implements ProfileInterface.presenter{
 
             @Override
             public void onFailure(retrofit2.Call<ServerResonse> call, Throwable t) {
-                Toast.makeText(mContext,"Error",Toast.LENGTH_LONG).show();
+//                Toast.makeText(mContext,"Error",Toast.LENGTH_LONG).show();
                 String message = t.getMessage();
-                Toast.makeText(mContext,"Hesham 111",Toast.LENGTH_LONG).show();
+//                Toast.makeText(mContext,"Hesham 111",Toast.LENGTH_LONG).show();
                 Log.d("failuress", message);
             }
         });
@@ -86,18 +86,18 @@ public class ProfilePresenter implements ProfileInterface.presenter{
             @Override
             public void onResponse(retrofit2.Call<ServerResonse> call, Response<ServerResonse> response) {
                 if (response.isSuccessful()){
-                    Toast.makeText(mContext,"Updated Successful",Toast.LENGTH_LONG).show();
+//                    Toast.makeText(mContext,"Updated Successful",Toast.LENGTH_LONG).show();
                     Log.i("user response" ,response.body().getMessage().toString()+"");
                     view.setPlace(city+"/"+district);
                 }
                 else{
-                    Toast.makeText(mContext,"Updated Fail",Toast.LENGTH_LONG).show();
+//                    Toast.makeText(mContext,"Updated Fail",Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(retrofit2.Call<ServerResonse> call, Throwable t) {
-                Toast.makeText(mContext,"Hesham 222",Toast.LENGTH_LONG).show();
+//                Toast.makeText(mContext,"Hesham 222",Toast.LENGTH_LONG).show();
                 Log.i("user response" ,"failed");
 
             }

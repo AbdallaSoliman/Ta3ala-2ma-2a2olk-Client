@@ -308,7 +308,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
     @Override
     public void setPlaces(HashMap<String, List<String>> placesMap) {
         this.placesMap = placesMap;
-        Toast.makeText(getApplicationContext(), "Size is " + placesMap.size() + "", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), "Size is " + placesMap.size() + "", Toast.LENGTH_LONG).show();
         for (String key : placesMap.keySet()) {
             placeList.add(key);
         }
@@ -334,7 +334,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void setSpecialUser(SpecialUser specialUser) {
-        Toast.makeText(getApplicationContext(),"AAAAA" + specialUser.getPersonId(),Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(),"AAAAA" + specialUser.getPersonId(),Toast.LENGTH_LONG).show();
         numberOfQuestions.setText(specialUser.getNumOfAskedQuestions()+" ");
         gender.setText(specialUser.getGender());
         firstname.setText(specialUser.getFirst());

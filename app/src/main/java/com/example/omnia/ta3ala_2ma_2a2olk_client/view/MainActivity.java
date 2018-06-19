@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 } else if(!ApiClient.isNetworkAvalaiable()){
-                    Toast.makeText(getApplicationContext(), "no network connection Avalaiabl", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "no network connection Avalaiabl", Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 // presenter.loadSearchResults(s,getApplicationContext(),MainActivity.this);
-                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+//                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
 //                Bundle bundle = new Bundle();
 //                bundle.putString("query", s);
 //// set Fragmentclass Arguments
@@ -350,7 +350,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT).show();
                 Log.e("search", query);
                 return false;
             }

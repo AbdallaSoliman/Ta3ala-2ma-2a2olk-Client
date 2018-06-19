@@ -176,7 +176,7 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         final Question qq = ii.getQuestion();
         if (qq.getPersonId().getPersonId() == getUserId()) {
             // queestion is mine
-            Toast.makeText(mcContext, "==v", Toast.LENGTH_LONG).show();
+//            Toast.makeText(mcContext, "==v", Toast.LENGTH_LONG).show();
 
             // check if question is verified
             if (qq.getVerified() == 0) {// question is not verified

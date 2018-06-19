@@ -120,7 +120,7 @@ public class PlacesPresenter implements PlacesInterface.presenter, ExpandableLis
 //abdalla end
             @Override
             public void onFailure(Call<List<MainCategorySpecial>> call, Throwable t) {
-                Toast.makeText(mContext.getApplicationContext(), "Register failed ", Toast.LENGTH_LONG).show();
+//                Toast.makeText(mContext.getApplicationContext(), "Register failed ", Toast.LENGTH_LONG).show();
                 String message = t.getMessage();
                 Log.d("failuress", message);
             }

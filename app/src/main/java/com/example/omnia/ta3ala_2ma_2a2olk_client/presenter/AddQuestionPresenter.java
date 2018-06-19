@@ -138,7 +138,7 @@ public class AddQuestionPresenter implements MVPInterface.Presenter {
                             Toast.makeText(context, result + "Question Addedd", Toast.LENGTH_LONG).show();
                         }
                     }else{
-                        Toast.makeText(context,  "Question response.body empty", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(context,  "Question response.body empty", Toast.LENGTH_LONG).show();
 
                     }
                 }
@@ -147,7 +147,7 @@ public class AddQuestionPresenter implements MVPInterface.Presenter {
 
             @Override
             public void onFailure(Call<ServerResponseId> call, Throwable t) {
-                Toast.makeText(context,  "Question fail", Toast.LENGTH_LONG).show();
+//                Toast.makeText(context,  "Question fail", Toast.LENGTH_LONG).show();
 
                 view.isAdded("Please Try Again Later");
                 view.isAdded(t.getMessage().toString());

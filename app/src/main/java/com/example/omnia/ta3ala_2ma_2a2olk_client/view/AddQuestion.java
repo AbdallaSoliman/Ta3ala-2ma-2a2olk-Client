@@ -129,7 +129,7 @@ public class AddQuestion extends AppCompatActivity implements MVPInterface.View 
                                     SubCategory subCategory = new SubCategory();
                                     subCategory.setSubCatId(index2);
                                     subCatCollection.add(subCategory);
-                                    Toast.makeText(getApplicationContext(), "ID is  " + index2, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(getApplicationContext(), "ID is  " + index2, Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {
 
@@ -141,7 +141,7 @@ public class AddQuestion extends AppCompatActivity implements MVPInterface.View 
                                     SubCategory subCategory = new SubCategory();
                                     subCategory.setSubCatId(index2);
                                     subCatCollection.add(subCategory);
-                                    Toast.makeText(getApplicationContext(), "ID is  " + index2, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(getApplicationContext(), "ID is  " + index2, Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {
 
@@ -170,7 +170,7 @@ public class AddQuestion extends AppCompatActivity implements MVPInterface.View 
                     String currentDate = mdformat.format(calendar.getTime());
 
                     question.setQuestionDate(currentDate);
-                    Toast.makeText(getApplicationContext(), "Addedd", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "Addedd", Toast.LENGTH_LONG).show();
                     presenter.AddQuestion(question);
                     finish();
                 }
@@ -389,7 +389,7 @@ public class AddQuestion extends AppCompatActivity implements MVPInterface.View 
 
     @Override
     public void isAdded(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
         finish();
     }
 

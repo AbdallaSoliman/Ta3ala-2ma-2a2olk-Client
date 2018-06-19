@@ -29,8 +29,9 @@ public class MyDialog {
             @Override
             public void onFinish() {
                 progressDialog.dismiss();
-                if (state == false)
+                if (state == false){
                     Toast.makeText(context, "Error While Loading Data Please Try Again Later", Toast.LENGTH_LONG).show();
+                }
             }
         }.start();
     }

@@ -63,7 +63,7 @@ public class NewsFeedsPresenter implements NewsFeeds.presenter {
 
             @Override
             public void onFailure(retrofit2.Call<List<NewsFeed>> call, Throwable t) {
-                Toast.makeText(context, "errooooooooooooooooooooooor", Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, "errooooooooooooooooooooooor", Toast.LENGTH_LONG).show();
                 String message = t.getMessage();
                 Log.d("failuress", message);
             }
@@ -74,7 +74,7 @@ public class NewsFeedsPresenter implements NewsFeeds.presenter {
     @Override
     public void loadSearchResults(String query, final Context context, Activity activity) {
         apiInterface = ApiClient.getApiClient().create(APIService.class);
-        Toast.makeText(context,query+"from presenter", Toast.LENGTH_LONG).show();
+//        Toast.makeText(context,query+"from presenter", Toast.LENGTH_LONG).show();
         SharedPreferences tokenDetails = context.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = tokenDetails.edit();
         SharredPreferenceManager manager = new SharredPreferenceManager(context.getApplicationContext());
@@ -85,7 +85,7 @@ public class NewsFeedsPresenter implements NewsFeeds.presenter {
             @Override
             public void onResponse(Call<List<NewsFeed>> call, Response<List<NewsFeed>> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(context,"response success from presenter", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(context,"response success from presenter", Toast.LENGTH_LONG).show();
                     data = response.body();
                     Log.i("datas", data.get(0).getTitle() + "hii");
                     view.setAdapter(data);

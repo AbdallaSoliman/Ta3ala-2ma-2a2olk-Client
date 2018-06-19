@@ -76,14 +76,14 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
         myuser2 = new User(password ,username);
         Log.e("myuser2name", password);
         Log.e("myuser2Password",username);
-        Toast.makeText(mcontext, "logging in", Toast.LENGTH_LONG).show();
+//        Toast.makeText(mcontext, "logging in", Toast.LENGTH_LONG).show();
         SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = tokenDetails.edit();
         SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
         String token = manager.getString(tokenDetails, "persontoken1", "no");
         Log.e("HAMADA",token);
 
-        Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
+//        Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
         apiInterface = ApiClient.getApiClient().create(APIService.class);
         final Tocken user = new Tocken(password, username);
         Call<TockenReturn> call = apiInterface.loginUser("application/json", token, user);
@@ -91,7 +91,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
             @Override
             public void onResponse(Call<TockenReturn> call, Response<TockenReturn> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(mcontext, "response" + response.body().getTocken().toString(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(mcontext, "response" + response.body().getTocken().toString(), Toast.LENGTH_LONG).show();
                     SharedPreferences pref = mcontext.getSharedPreferences("PersonToken", 0); // 0 - for private mode
                     SharedPreferences.Editor editor = pref.edit();
                     SharredPreferenceManager m1 = new SharredPreferenceManager(mcontext);
@@ -99,16 +99,16 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                     m1.setString(pref, "persontoken", tokenvalue);
                     User user = new User(username,password);
                     loadUser(mcontext,tokenvalue,user);
-                    Toast.makeText(mcontext, tokenvalue, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(mcontext, tokenvalue, Toast.LENGTH_LONG).show();
 
                 } else {
-                    Toast.makeText(mcontext, "no response ....", Toast.LENGTH_LONG).show();
-                    Toast.makeText(mcontext, "FAILED TO LOGIN", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(mcontext, "no response ....", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(mcontext, "FAILED TO LOGIN", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
             public void onFailure(Call<TockenReturn> call, Throwable t) {
-                Toast.makeText(mcontext, "failed", Toast.LENGTH_LONG).show();
+//                Toast.makeText(mcontext, "failed", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -120,7 +120,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
         SharedPreferences.Editor editor = tokenDetails.edit();
         SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
         final String token = manager.getString(tokenDetails, "persontoken", "no");
-        Toast.makeText(mcontext,"Shareddddddddddddd "+name,Toast.LENGTH_LONG).show();
+//        Toast.makeText(mcontext,"Shareddddddddddddd "+name,Toast.LENGTH_LONG).show();
         Call<List<SubCategories>> getAllCategories = apiInterface.getAllCategories("application/json",token , name);
         Log.e("Mtshouf",token);
         getAllCategories.enqueue(new Callback<List<SubCategories>>() {
@@ -157,14 +157,14 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
     public User loadUser(final Context mcontext , String token , final User user) {
         customerService = new CustomerService();
         apiInterface = ApiClient.getApiClient().create(APIService.class);
-         Toast.makeText(mcontext , user.getPassword()+"username" , Toast.LENGTH_LONG).show();
+//         Toast.makeText(mcontext , user.getPassword()+"username" , Toast.LENGTH_LONG).show();
          Log.e("username" , user.getPassword());
          Log.i("tocken",token);
         Call<User> call = apiInterface.loginUserWithMail("application/json" ,token , user);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(mcontext, "success", Toast.LENGTH_LONG).show();
+//                Toast.makeText(mcontext, "success", Toast.LENGTH_LONG).show();
                 if (response.body().getCustomerService() != null) {
                     Log.e("HAMADA11",response.body().getCustomerService().getPersonId()+"");
                     Log.e("HAMADA11",response.body().getCustomerService().getJoinDate()+"");
@@ -224,10 +224,11 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                     Log.e("userData",pref.getString("image","MFESH"));
                     Log.e("userData",pref.getString("cid","MFESHAY7aga"));
                     if ((pref.getString("first","MFESH").equals("MFESH"))){
-                        Toast.makeText(mcontext,pref.getString("first","MFESH"),Toast.LENGTH_LONG).show(); }
+                        //Toast.makeText(mcontext,pref.getString("first","MFESH"),Toast.LENGTH_LONG).show();
+                    }
                         else {
                         view.questionActivity(myuser.getType());
-                        Toast.makeText(mcontext,pref.getString("first","MFESH")+"login",Toast.LENGTH_LONG).show();
+                    //    Toast.makeText(mcontext,pref.getString("first","MFESH")+"login",Toast.LENGTH_LONG).show();
                     }
 //                else {
 //                    Toast.makeText(mcontext, "Empty Response", Toast.LENGTH_LONG).show();
@@ -238,10 +239,10 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(mcontext, "Login failed ", Toast.LENGTH_LONG).show();
+//                Toast.makeText(mcontext, "Login failed ", Toast.LENGTH_LONG).show();
                 String message = t.getMessage();
                 Log.d("failure", message);
-                Toast.makeText(mcontext, message, Toast.LENGTH_LONG).show();
+//                Toast.makeText(mcontext, message, Toast.LENGTH_LONG).show();
             }
 
         });
