@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f0fcff"
+    android:background="@drawable/add_your_question_and_you_get_your_question_s_answer_now"
     tools:context="com.example.omnia.ta3ala_2ma_2a2olk_client.view.Tab2CustomerService">
 
     <ListView

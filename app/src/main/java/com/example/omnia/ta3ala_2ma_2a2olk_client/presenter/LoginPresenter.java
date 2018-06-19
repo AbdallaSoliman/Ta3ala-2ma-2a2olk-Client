@@ -63,7 +63,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
 //            view.registerStatus(1);
 //            return 0;
 //        }
-  if (email.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty()) {
             view.registerStatus(2);
             return 0;
         }
@@ -73,9 +73,9 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
 
     @Override
     public void loadDataFromServer(final String username, final String password, final Context mcontext) {
-        myuser2 = new User(password ,username);
+        myuser2 = new User(password, username);
         Log.e("myuser2name", password);
-        Log.e("myuser2Password",username);
+        Log.e("myuser2Password", username);
         Toast.makeText(mcontext, "logging in", Toast.LENGTH_LONG).show();
         SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = tokenDetails.edit();
@@ -95,8 +95,8 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                     SharredPreferenceManager m1 = new SharredPreferenceManager(mcontext);
                     String tokenvalue = "Bearer " + response.body().getTocken().toString();
                     m1.setString(pref, "persontoken", tokenvalue);
-                    User user = new User(username,password);
-                    loadUser(mcontext,tokenvalue,user);
+                    User user = new User(username, password);
+                    loadUser(mcontext, tokenvalue, user);
                     Toast.makeText(mcontext, tokenvalue, Toast.LENGTH_LONG).show();
 
                 } else {
@@ -104,6 +104,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                     Toast.makeText(mcontext, "FAILED TO LOGIN", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<TockenReturn> call, Throwable t) {
                 Toast.makeText(mcontext, "failed", Toast.LENGTH_LONG).show();
@@ -112,21 +113,21 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
     }
 
     @Override
-    public void getCustomerId(Context mcontext , String name) {
+    public void getCustomerId(Context mcontext, String name) {
         apiInterface = ApiClient.getApiClient().create(APIService.class);
         SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = tokenDetails.edit();
         SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
         final String token = manager.getString(tokenDetails, "persontoken", "no");
-        Toast.makeText(mcontext,"Shareddddddddddddd "+name,Toast.LENGTH_LONG).show();
-        Call<List<SubCategories>> getAllCategories = apiInterface.getAllCategories("application/json",token , name);
+        Toast.makeText(mcontext, "Shareddddddddddddd " + name, Toast.LENGTH_LONG).show();
+        Call<List<SubCategories>> getAllCategories = apiInterface.getAllCategories("application/json", token, name);
         getAllCategories.enqueue(new Callback<List<SubCategories>>() {
             @Override
             public void onResponse(Call<List<SubCategories>> call, Response<List<SubCategories>> response) {
-                if (response.isSuccessful()){
-                     view.setCustomerId(response.body().get(0).getSubCatId()+"");
-                     Log.e("Ay7aga",response.body()+"");
-                     Log.e("Ay7aga",token);
+                if (response.isSuccessful()) {
+                    view.setCustomerId(response.body().get(0).getSubCatId() + "");
+                    Log.e("Ay7aga", response.body() + "");
+                    Log.e("Ay7aga", token);
                 }
             }
 
@@ -147,26 +148,28 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
         matcher = pattern.matcher(email);
         return matcher.matches();
     }
-    public User loadUser(final Context mcontext , String token , final User user) {
+
+    public User loadUser(final Context mcontext, String token, final User user) {
         customerService = new CustomerService();
         apiInterface = ApiClient.getApiClient().create(APIService.class);
-         Toast.makeText(mcontext , user.getPassword()+"username" , Toast.LENGTH_LONG).show();
-         Log.e("username" , user.getPassword());
-         Log.i("tocken",token);
-        Call<User> call = apiInterface.loginUserWithMail("application/json" ,token , user);
+        Toast.makeText(mcontext, user.getPassword() + "username", Toast.LENGTH_LONG).show();
+        Log.e("username", user.getPassword());
+        Log.i("tocken", token);
+        Call<User> call = apiInterface.loginUserWithMail("application/json", token, user);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Toast.makeText(mcontext, "success", Toast.LENGTH_LONG).show();
                 if (response.body().getCustomerService() != null) {
+                    customerService = response.body().getCustomerService();
                     SharedPreferences pref = mcontext.getSharedPreferences("LoginPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("cid", customerService.getService()+"");
+                    editor.putString("cid", customerService.getService() + "");
                 }
-                    myuser = response.body();
-                    Log.e("testData", response.body().toString());
-                    Log.e("testUser", "user"+user.getEmail());
-                    personId = response.body().getPersonId();
+                myuser = response.body();
+                Log.e("testData", response.body().toString());
+                Log.e("testUser", "user" + user.getEmail());
+                personId = response.body().getPersonId();
                 first = response.body().getFirst();
                 last = response.body().getLast();
                 password1 = response.body().getPassword();
@@ -175,7 +178,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                 gender = response.body().getGender();
                 enabled = response.body().getEnabled();
                 image = response.body().getImage();
-                customerService = response.body().getCustomerService();
+//                customerService = response.body().getCustomerService();
                 taaUser = response.body().getTaaUser();
                 myuser.setCustomerService(customerService);
                 myuser.setEnabled(enabled);
@@ -185,36 +188,36 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
                 myuser.setType(type);
                 myuser.setGender(gender);
                 myuser.setImage(image);
-             //   myuser.setTaaUser(taaUser);
-              Log.e("Test","email"+ myuser.getEmail());
-                    SharedPreferences pref = mcontext.getSharedPreferences("LoginPref", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("email",myuser.getEmail());
-                    editor.putString("id" ,String.valueOf( myuser.getPersonId()));
-                    editor.putString("first",myuser.getFirst());
-                    editor.putString("last",myuser.getLast());
-                    editor.putString("username" ,myuser.getUsername());
-                    editor.putString("password",myuser.getPassword());
-                    editor.putString("gender",myuser.getGender());
-                    editor.putString("image",myuser.getImage());
-                    editor.putString("type",myuser.getType());
-                    Log.e("Hamada",myuser.getEmail()+"mail");
-                    editor.commit();
-                    Log.e("userData",pref.getString("email","MFESH"));
-                    Log.e("userData", pref.getString("id","MFEESH"));
-                    Log.e("userData",pref.getString("first","MFESH"));
-                    Log.e("userData",pref.getString("last","MFESH"));
-                    Log.e("userData",pref.getString("username","MFESH"));
-                    Log.e("userData",pref.getString("password","MFESH"));
-                    Log.e("userData",pref.getString("gender","MFESH"));
-                    Log.e("userData",pref.getString("image","MFESH"));
-                    Log.e("userData",pref.getString("cid","MFESH"));
-                    if ((pref.getString("first","MFESH").equals("MFESH"))){
-                        Toast.makeText(mcontext,pref.getString("first","MFESH"),Toast.LENGTH_LONG).show(); }
-                        else {
-                        view.questionActivity(myuser.getType());
-                        Toast.makeText(mcontext,pref.getString("first","MFESH")+"login",Toast.LENGTH_LONG).show();
-                    }
+                //   myuser.setTaaUser(taaUser);
+                Log.e("Test", "email" + myuser.getEmail());
+                SharedPreferences pref = mcontext.getSharedPreferences("LoginPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("email", myuser.getEmail());
+                editor.putString("id", String.valueOf(myuser.getPersonId()));
+                editor.putString("first", myuser.getFirst());
+                editor.putString("last", myuser.getLast());
+                editor.putString("username", myuser.getUsername());
+                editor.putString("password", myuser.getPassword());
+                editor.putString("gender", myuser.getGender());
+                editor.putString("image", myuser.getImage());
+                editor.putString("type", myuser.getType());
+                Log.e("Hamada", myuser.getEmail() + "mail");
+                editor.commit();
+                Log.e("userData", pref.getString("email", "MFESH"));
+                Log.e("userData", pref.getString("id", "MFEESH"));
+                Log.e("userData", pref.getString("first", "MFESH"));
+                Log.e("userData", pref.getString("last", "MFESH"));
+                Log.e("userData", pref.getString("username", "MFESH"));
+                Log.e("userData", pref.getString("password", "MFESH"));
+                Log.e("userData", pref.getString("gender", "MFESH"));
+                Log.e("userData", pref.getString("image", "MFESH"));
+                Log.e("userData", pref.getString("cid", "MFESHCID"));
+                if ((pref.getString("first", "MFESH").equals("MFESH"))) {
+                    Toast.makeText(mcontext, pref.getString("first", "MFESH"), Toast.LENGTH_LONG).show();
+                } else {
+                    view.questionActivity(myuser.getType());
+                    Toast.makeText(mcontext, pref.getString("first", "MFESH") + "login", Toast.LENGTH_LONG).show();
+                }
 //                else {
 //                    Toast.makeText(mcontext, "Empty Response", Toast.LENGTH_LONG).show();
 //                }
