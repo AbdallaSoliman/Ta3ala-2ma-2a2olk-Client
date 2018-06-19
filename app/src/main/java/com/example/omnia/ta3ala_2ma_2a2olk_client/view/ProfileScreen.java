@@ -335,7 +335,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
     @Override
     public void setSpecialUser(SpecialUser specialUser) {
 //        Toast.makeText(getApplicationContext(),"AAAAA" + specialUser.getPersonId(),Toast.LENGTH_LONG).show();
-        numberOfQuestions.setText(specialUser.getNumOfAskedQuestions()+" ");
+        numberOfQuestions.setText(specialUser.getNumOfAskedQuestions()+" Questions");
         gender.setText(specialUser.getGender());
         firstname.setText(specialUser.getFirst());
         email.setText(specialUser.getEmail());

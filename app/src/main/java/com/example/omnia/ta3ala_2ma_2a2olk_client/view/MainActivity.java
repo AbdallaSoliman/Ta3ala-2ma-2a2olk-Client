@@ -204,6 +204,9 @@ public class MainActivity extends AppCompatActivity {
 //                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //                fragmentTransaction.replace(R.id.container,fragobj);
 //                fragmentTransaction.commit();
+                //abdalla start
+mViewPager.setCurrentItem(0);
+                //abdalla end
                 Intent i = new Intent(MainActivity.this, SearchActivity.class);
                 i.putExtra("query", s);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -62,6 +62,7 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="5dp"
         android:background="#ffffff"
+        android:fontFamily="@font/al_jazeera_arabic_regular"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="6sp"
         android:paddingBottom="11dp"
@@ -69,8 +70,8 @@
         android:paddingRight="9dp"
         android:paddingTop="11dp"
         android:text=" "
-        android:textColor="#00a88f"
-        android:textSize="10sp"
+        android:textColor="#0055a5"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -104,22 +105,12 @@
         android:layout_width="264dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
+        android:fontFamily="@font/roboto_light"
         android:text="2018/13/6"
-        android:textColor="#00a88f"
+        android:textColor="#86a5ff"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/personName" />
-
-    <TextView
-        android:id="@+id/personeRate"
-        android:layout_width="264dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:text="4.7 / 5.0"
-        android:textColor="#00a88f"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personeDate" />
 
     <View
         android:id="@+id/h2"

@@ -71,7 +71,10 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         final Answer answer = answers.get(position);
         holder.answer.setText(answer.getAnswer());
 
-        holder.personRate.setText(answer.getRate()+"");
+//        holder.personRate.setText(answer.getRate()+"");
+        //abdalla start
+
+        //abdalla end
         holder.personDate.setText(answer.getAnswersDate());
         holder.personName.setText(answer.getPersonId().getFirst() + " " + answer.getPersonId().getLast());
         Picasso.get()
@@ -235,7 +238,7 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
             super(view);
             answer = (TextView) view.findViewById(R.id.answerId);
             personName = (TextView) view.findViewById(R.id.personName);
-            personRate = (TextView) view.findViewById(R.id.personeRate);
+//            personRate = (TextView) view.findViewById(R.id.personeRate);
             personDate = view.findViewById(R.id.personeDate);
             personImage = (ImageView) view.findViewById(R.id.personImage);
             editImageView = (ImageView) view.findViewById(R.id.editimage);
