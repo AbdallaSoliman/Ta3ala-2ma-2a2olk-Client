@@ -220,12 +220,14 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences userDetails = getSharedPreferences("LoginPref", Context.MODE_PRIVATE);
         SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
         String id = manager.getString(userDetails, "id", "0");
+        MenuItem profile = menu.findItem(R.id.action_profile);
         if (id.equals("0")) {
             logout.setVisible(false);
+            profile.setVisible(false);
         }
 
         searchView.setMenuItem(item);
-        MenuItem profile = menu.findItem(R.id.action_profile);
+
         profile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {

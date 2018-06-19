@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +33,11 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.CompanyQuestionDetailsPresenter;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CompanyQuestionDetails extends AppCompatActivity {
@@ -61,7 +64,7 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         return true;
     }
 
-    public void setQuestionDetails(Question q, List<Answer> answers) {
+    public void setQuestionDetails(Question q, List<Answer> answers) throws ParseException {
 
         this.question = q;
         questionAnswers.addAll(answers);
@@ -71,6 +74,13 @@ public class CompanyQuestionDetails extends AppCompatActivity {
         bodyTextView.setText(question.getBody());
         if (person!= null) {
             personNameTextView.setText(person.getFirst() + " " + person.getLast());
+            //abdalla start
+//            String mytime = pref.getString("announcementtime" + count, null);
+
+// it comes out like this 2013-08-31 15:55:22 so adjust the date format
+//            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            Date date = df.parse(question.getQuestionDate());
+//            CharSequence timePassedString = DateUtils.getRelativeTimeSpanString (epoch, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
             questionDateTextView.setText(question.getQuestionDate());
             Picasso.get()
                     .load(person.getImage())
@@ -311,9 +321,13 @@ public class CompanyQuestionDetails extends AppCompatActivity {
     }
 
     public String getToken() {
+        String token = null;
         SharedPreferences pref = this.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         shM = new SharredPreferenceManager(this);
-        final String token = shM.getString(pref, "persontoken1", "error");
+         token = shM.getString(pref, "persontoken", "error");
+         if (token.equals("error")){
+             token = shM.getString(pref, "persontoken1", "error");
+         }
         Log.i("Hesham",token+"");
         return token;
     }
@@ -455,6 +469,122 @@ public class CompanyQuestionDetails extends AppCompatActivity {
             }
         });
     }
+//adballa start
+    public static String parseDate(long timeAtMiliseconds) {
+        if (timeAtMiliseconds==0) {
+            return "";
+        }
+        //API.log("Day Ago "+dayago);
+        String result = "now";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String todayDate = formatter.format(new Date());
+        Calendar calendar = Calendar.getInstance();
 
+        long dayagolong = timeAtMiliseconds * 1000;
 
+        String agoformater = formatter.format(calendar.getTime());
+
+        Date CurrentDate = null;
+        Date CreateDate = null;
+
+        try {
+            CurrentDate = formatter.parse(todayDate);
+            CreateDate = formatter.parse(agoformater);
+
+            long different = Math.abs(CurrentDate.getTime() - CreateDate.getTime());
+
+            long secondsInMilli = 1000;
+            long minutesInMilli = secondsInMilli * 60;
+            long hoursInMilli = minutesInMilli * 60;
+            long daysInMilli = hoursInMilli * 24;
+
+            long elapsedDays = different / daysInMilli;
+            different = different % daysInMilli;
+
+            long elapsedHours = different / hoursInMilli;
+            different = different % hoursInMilli;
+
+            long elapsedMinutes = different / minutesInMilli;
+            different = different % minutesInMilli;
+
+            long elapsedSeconds = different / secondsInMilli;
+
+            different = different % secondsInMilli;
+            if (elapsedDays == 0) {
+                if (elapsedHours == 0) {
+                    if (elapsedMinutes == 0) {
+                        if (elapsedSeconds < 0) {
+                            return "0" + " s";
+                        } else {
+                            if (elapsedDays > 0 && elapsedSeconds < 59) {
+                                return "now";
+                            }
+                        }
+                    } else {
+                        return String.valueOf(elapsedMinutes) + "m ago";
+                    }
+                } else {
+                    return String.valueOf(elapsedHours) + "h ago";
+                }
+
+            } else {
+                if (elapsedDays <= 29) {
+                    return String.valueOf(elapsedDays) + "d ago";
+                }
+                if (elapsedDays > 29 && elapsedDays <= 58) {
+                    return "1Mth ago";
+                }
+                if (elapsedDays > 58 && elapsedDays <= 87) {
+                    return "2Mth ago";
+                }
+                if (elapsedDays > 87 && elapsedDays <= 116) {
+                    return "3Mth ago";
+                }
+                if (elapsedDays > 116 && elapsedDays <= 145) {
+                    return "4Mth ago";
+                }
+                if (elapsedDays > 145 && elapsedDays <= 174) {
+                    return "5Mth ago";
+                }
+                if (elapsedDays > 174 && elapsedDays <= 203) {
+                    return "6Mth ago";
+                }
+                if (elapsedDays > 203 && elapsedDays <= 232) {
+                    return "7Mth ago";
+                }
+                if (elapsedDays > 232 && elapsedDays <= 261) {
+                    return "8Mth ago";
+                }
+                if (elapsedDays > 261 && elapsedDays <= 290) {
+                    return "9Mth ago";
+                }
+                if (elapsedDays > 290 && elapsedDays <= 319) {
+                    return "10Mth ago";
+                }
+                if (elapsedDays > 319 && elapsedDays <= 348) {
+                    return "11Mth ago";
+                }
+                if (elapsedDays > 348 && elapsedDays <= 360) {
+                    return "12Mth ago";
+                }
+
+                if (elapsedDays > 360 && elapsedDays <= 720) {
+                    return "1 year ago";
+                }
+
+                if (elapsedDays > 720) {
+                    SimpleDateFormat formatterYear = new SimpleDateFormat("MM/dd/yyyy");
+                    Calendar calendarYear = Calendar.getInstance();
+                    calendarYear.setTime(new Date(timeAtMiliseconds));
+                    return formatterYear.format(calendarYear.getTime()) + "";
+                }
+
+            }
+
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    //abdalla end
 }

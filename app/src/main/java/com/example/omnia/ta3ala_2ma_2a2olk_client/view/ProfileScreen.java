@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.Interfaces.ProfileInterface;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.R;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.SharredPreference.SharredPreferenceManager;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SpecialUser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.presenter.ProfilePresenter;
 import com.squareup.picasso.Picasso;
 
@@ -46,6 +47,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
     ImageView profile, editusername;
     TextView email, gender;
     TextView editpassword;
+    TextView numberOfQuestions;
     EditText username, firstname, lastname;
     TextView place;
     SharedPreferences userDetails;
@@ -77,6 +79,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         presenter = new ProfilePresenter(this);
         presenter.getMyLocations(this);
+        presenter.getSpecialUser(this);
         placeList = new ArrayList<>();
         profile = findViewById(R.id.profileimg);
         profile.setOnClickListener(this);
@@ -84,6 +87,7 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
         spinner2 = findViewById(R.id.spinner2);
         editusername = findViewById(R.id.editusername);
         editpassword = findViewById(R.id.editpassword);
+        numberOfQuestions = findViewById(R.id.textView6);
         email = findViewById(R.id.email);
         username = findViewById(R.id.username);
         firstname = findViewById(R.id.firstname);
@@ -326,5 +330,17 @@ public class ProfileScreen extends AppCompatActivity implements View.OnClickList
     public void setPlace(String newPlace) {
         place.setText(newPlace);
         presenter.updateUsername(getApplicationContext(), emails, tempUserName, tempFirstName, tempLastName, genders, id, image, password);
+    }
+
+    @Override
+    public void setSpecialUser(SpecialUser specialUser) {
+        Toast.makeText(getApplicationContext(),"AAAAA" + specialUser.getPersonId(),Toast.LENGTH_LONG).show();
+        numberOfQuestions.setText(specialUser.getNumOfAskedQuestions()+" ");
+        gender.setText(specialUser.getGender());
+        firstname.setText(specialUser.getFirst());
+        email.setText(specialUser.getEmail());
+        lastname.setText(specialUser.getLast());
+        username.setText(specialUser.getUsername());
+        place.setText(specialUser.getTaaUser().getCity()+"/"+specialUser.getTaaUser().getDistrict());
     }
 }

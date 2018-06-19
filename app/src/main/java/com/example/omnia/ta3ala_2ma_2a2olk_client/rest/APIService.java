@@ -15,12 +15,12 @@ import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Report;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Search;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResonse;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.ServerResponseId;
+import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SpecialUser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.SubCategories;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tauser;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.Tocken;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.TockenReturn;
 import com.example.omnia.ta3ala_2ma_2a2olk_client.model.User;
-import com.google.firebase.auth.GetTokenResult;
 
 import java.util.List;
 
@@ -130,7 +130,7 @@ public interface APIService {
     @GET("MainCategoriesSpecial?size=1000")
     Call<List<MainCategorySpecial>> mainCategoriesSpecial(@Header("Authorization") String token);
 
-    @GET("Question?size=10")
+    @GET("Question?size=1000")
     Call<List<Question>> getQuestion(@Header("Authorization") String token);
 
     @GET("QuestionNewsFeed?size=10")
@@ -148,5 +148,9 @@ public interface APIService {
 
     @GET("CategoriesByName/{name}")
     Call<List<SubCategories>> getAllCategories(@Header("Content-Type") String content_type,@Header("Authorization") String token , @Path("name") String name);
+
+    @GET("PersonSpecial/{id}")
+    Call<SpecialUser> getSpecial(@Header("Content-Type") String content_type, @Header("Authorization") String token , @Path("id") String id);
+
 }
 

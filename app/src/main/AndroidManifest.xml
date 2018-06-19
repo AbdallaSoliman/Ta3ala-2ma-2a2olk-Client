@@ -21,14 +21,17 @@
         <activity
             android:name=".view.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
             android:name=".view.LoginActivity"
-            android:parentActivityName="com.example.omnia.ta3ala_2ma_2a2olk_client.view.MainActivity">
+            android:parentActivityName="com.example.omnia.ta3ala_2ma_2a2olk_client.view.MainActivity"
+            android:screenOrientation="portrait">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -48,21 +51,26 @@
         <activity
             android:name=".view.SplashScreen"
             android:label="@string/title_activity_splash_screen"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.CompanyQuestionsList" />
-        <activity android:name=".view.CompanyQuestionDetails" />
-        <activity android:name=".view.AddAnswer" />
+        <activity android:name=".view.CompanyQuestionsList"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.CompanyQuestionDetails"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.AddAnswer"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.ProfileScreen"
             android:parentActivityName="com.example.omnia.ta3ala_2ma_2a2olk_client.view.MainActivity"
             android:fitsSystemWindows="true"
-            android:theme="@style/AppTheme.slider">
+            android:theme="@style/AppTheme.slider"
+            android:screenOrientation="portrait">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -71,7 +79,8 @@
         />
         <activity
             android:name=".view.SliderMainActivity"
-            android:theme="@style/AppTheme.slider"></activity>
+            android:theme="@style/AppTheme.slider"
+            android:screenOrientation="portrait"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
@@ -91,7 +100,8 @@
 
         <activity
             android:name=".view.SearchActivity"
-            android:parentActivityName="com.example.omnia.ta3ala_2ma_2a2olk_client.view.MainActivity">
+            android:parentActivityName="com.example.omnia.ta3ala_2ma_2a2olk_client.view.MainActivity"
+            android:screenOrientation="portrait">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -130,7 +130,7 @@
             app:layout_constraintTop_toBottomOf="@+id/personeName" />
 
         <TextView
-            android:id="@+id/personeRate"
+            android:id="@+id/numberQuestionProfileDetails"
             android:layout_width="wrap_content"
             android:layout_height="11dp"
             android:layout_marginStart="4dp"
