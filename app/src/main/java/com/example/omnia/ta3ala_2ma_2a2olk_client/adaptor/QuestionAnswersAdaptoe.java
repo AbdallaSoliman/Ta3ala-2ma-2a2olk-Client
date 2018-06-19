@@ -263,6 +263,11 @@ public class QuestionAnswersAdaptoe extends RecyclerView.Adapter<QuestionAnswers
         final String token = getToken();
         // send request to delete data
         qAAPresenter.deleteAnswerPresenter(answerId, token);
+        if(answerId==ii.getQuestion().getVerified()){
+            Question question=ii.getQuestion();
+            question.setVerified(0);
+            qAAPresenter.verifyAnswerPresenter(question,getToken());
+        }
         notifyDataSetChanged();
     }
 

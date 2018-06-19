@@ -37,4 +37,6 @@ public class QuestionAnswerAdapotorPresenter {
     public void verifyAnswerPresenter(Question question, String token) {
         qAAnetwork.verifyAnswerNetwork(question,token);
     }
+
+
 }
