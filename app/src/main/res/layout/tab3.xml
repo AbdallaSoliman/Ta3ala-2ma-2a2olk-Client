@@ -7,6 +7,10 @@
     android:background="@drawable/add_your_question_and_you_get_your_question_s_answer_now"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:allowBackup="true"
+    android:hardwareAccelerated="false"
+    android:largeHeap="true"
+    android:supportsRtl="true"
     tools:context="com.example.omnia.ta3ala_2ma_2a2olk_client.view.Tab3Categories">
 
     <TextView

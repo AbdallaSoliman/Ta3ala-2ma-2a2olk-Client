@@ -5,6 +5,10 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="#f0fcff"
+    android:allowBackup="true"
+    android:hardwareAccelerated="false"
+    android:largeHeap="true"
+    android:supportsRtl="true"
     android:orientation="vertical">
 
 
