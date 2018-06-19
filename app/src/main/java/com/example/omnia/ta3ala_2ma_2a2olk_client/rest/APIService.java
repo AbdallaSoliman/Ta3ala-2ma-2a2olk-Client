@@ -134,9 +134,9 @@ public interface APIService {
     @GET("Question?size=1000")
     Call<List<Question>> getQuestion(@Header("Authorization") String token);
 
-    @GET("QuestionNewsFeed?size=1000")
+    @GET("QuestionNewsFeed?size=10")
     Call<List<NewsFeed>> getNewsFeeds(@Header("Authorization") String token);
-    @GET("QuestionFilterCustomization?size=1000&page=0")
+    @GET("QuestionFilterCustomization?size=10&page=0")
     Call<List<NewsFeed>> search(@Header("Authorization") String token , @Query("search")String query);
 
 

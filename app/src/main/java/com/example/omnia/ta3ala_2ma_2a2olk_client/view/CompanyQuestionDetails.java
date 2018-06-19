@@ -80,8 +80,8 @@ public class CompanyQuestionDetails extends AppCompatActivity {
 // it comes out like this 2013-08-31 15:55:22 so adjust the date format
 //            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //            Date date = df.parse(question.getQuestionDate());
-           // CharSequence timePassedString = DateUtils.getRelativeTimeSpanString (epoch, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
-//            questionDateTextView.setText(parseDate((date.getTime())));
+//            CharSequence timePassedString = DateUtils.getRelativeTimeSpanString (epoch, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
+            questionDateTextView.setText(question.getQuestionDate());
             Picasso.get()
                     .load(person.getImage())
                     .placeholder(R.drawable.profile)
