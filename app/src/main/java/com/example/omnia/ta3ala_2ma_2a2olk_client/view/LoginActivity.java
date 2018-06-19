@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpInterfac
                     SharedPreferences.Editor editor = tokenDetails.edit();
                     SharredPreferenceManager manager = new SharredPreferenceManager(getApplicationContext());
                     String token = manager.getString(tokenDetails, "persontoken", "no");
-                    Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
                     User user = new User(username.getText().toString(), password.getText().toString());
                     Log.e("usernameA", user.getUsername());
                     Log.e("passwordA", user.getPassword());
@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpInterfac
 
     @Override
     public void questionActivity(String email) {
-        Toast.makeText(getApplicationContext(),"Ahmed Hesham "+email,Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(),"Ahmed Hesham "+email,Toast.LENGTH_LONG).show();
         if (email.equals("user")) {
 
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -111,7 +111,7 @@ public class LoginActivity extends AppCompatActivity implements LoginMvpInterfac
 
     @Override
     public void setCustomerId(String id) {
-        Toast.makeText(getApplication(),"Size is "+id+"",Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplication(),"Size is "+id+"",Toast.LENGTH_LONG).show();
        Intent intent = new Intent(this,CompanyQuestionsList.class);
         intent.putExtra("companyId",id);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

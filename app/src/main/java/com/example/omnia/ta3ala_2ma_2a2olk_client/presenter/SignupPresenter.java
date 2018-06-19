@@ -53,13 +53,13 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
 
     @Override
     public void loadDataFromServer(String username, String email, String password, String first, String last, String gender, final Context mcontext) {
-        Toast.makeText(mcontext, "Signing up", Toast.LENGTH_LONG).show();
+//        Toast.makeText(mcontext, "Signing up", Toast.LENGTH_LONG).show();
         final User user = new User(first, last, password, email, "user", gender, true, username);
 
         SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharredPreferenceManager manager = new SharredPreferenceManager(mcontext);
         String token = manager.getString(tokenDetails, "persontoken1", "no");
-        Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
+//        Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
 
         apiInterface = ApiClient.getApiClient().create(APIService.class);
         Call<User> call = apiInterface.registerUser("application/json", token, user);
@@ -67,14 +67,14 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(mcontext, "Register succesful ", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(mcontext, "Register succesful ", Toast.LENGTH_LONG).show();
                     int id = response.body().getPersonId();
                     registerTaUser(id, mcontext);
                     if (response.body().getEmail() == null || response.body().getUsername() == null) {
                         Toast.makeText(mcontext, "Username or E-mail already exist ", Toast.LENGTH_LONG).show();
 
                     }
-                    Toast.makeText(mcontext, response.body().getEmail(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(mcontext, response.body().getEmail(), Toast.LENGTH_LONG).show();
                     //  int id = response.body().getPersonId();
                     Log.i("id", id + "");
                 }
@@ -82,7 +82,7 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(mcontext, "Register failed ", Toast.LENGTH_LONG).show();
+//                Toast.makeText(mcontext, "Register failed ", Toast.LENGTH_LONG).show();
                 String message = t.getMessage();
                 Log.d("failure", message);
 

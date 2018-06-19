@@ -30,7 +30,7 @@ public class SearchPresenter implements Search.presenter {
     @Override
     public void loadSearchResults(final String query, final Context context, Activity activity) {
         apiInterface = ApiClient.getApiClient().create(APIService.class);
-        Toast.makeText(context,query+"from presenter", Toast.LENGTH_LONG).show();
+//        Toast.makeText(context,query+"from presenter", Toast.LENGTH_LONG).show();
         SharedPreferences tokenDetails = context.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = tokenDetails.edit();
         SharredPreferenceManager manager = new SharredPreferenceManager(context.getApplicationContext());
@@ -41,7 +41,7 @@ public class SearchPresenter implements Search.presenter {
             @Override
             public void onResponse(Call<List<NewsFeed>> call, Response<List<NewsFeed>> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(context,"response success from presenter", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(context,"response success from presenter", Toast.LENGTH_LONG).show();
                     data = response.body();
 //                    Log.i("datas", data.get(0).getTitle() + "hii");
                     view.showSearchResults(data);

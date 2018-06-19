@@ -32,7 +32,7 @@ public class Tab4Places extends Fragment implements PlacesInterface.view {
         View rootView = inflater.inflate(R.layout.tab4, container, false);
         myExpandableListView = (ExpandableListView) rootView.findViewById(R.id.myexpandablelistview2);
         presenter = new PlacesPresenter(this , getActivity(), getContext());
-        Toast.makeText(getContext(), "Places !!! ", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "Places !!! ", Toast.LENGTH_SHORT).show();
         presenter.initData(getActivity());
         return rootView;
     }

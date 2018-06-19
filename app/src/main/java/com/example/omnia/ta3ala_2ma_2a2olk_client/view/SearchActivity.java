@@ -37,7 +37,7 @@ public class SearchActivity extends AppCompatActivity implements Search.view{
         presenter = new SearchPresenter(this);
         Intent intent = getIntent();
         query = intent.getStringExtra("query");
-        Toast.makeText(getApplicationContext(),query,Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(),query,Toast.LENGTH_LONG).show();
         recyclerView = (RecyclerView) findViewById(R.id.card_recycler_view1);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());

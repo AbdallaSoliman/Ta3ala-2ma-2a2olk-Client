@@ -35,7 +35,7 @@ public class SplashPresenter implements SplashInterface.presenter {
 
     @Override
     public void loadTockenFromServer(final Context mcontext) {
-        Toast.makeText(mcontext, "Loading Tocken.......", Toast.LENGTH_LONG).show();
+//        Toast.makeText(mcontext, "Loading Tocken.......", Toast.LENGTH_LONG).show();
         final Tocken tocken1 = new Tocken("user", "user");
         service = ApiClient.getApiClient().create(APIService.class);
         SharedPreferences tokenDetails = mcontext.getSharedPreferences("PersonToken", Context.MODE_PRIVATE);
@@ -46,7 +46,7 @@ public class SplashPresenter implements SplashInterface.presenter {
         String token = manager.getString(tokenDetails, "persontoken", "no");
         String id = manager1.getString(pref,"id","no");
         if (id != "no") {
-            Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
+//            Toast.makeText(mcontext, token, Toast.LENGTH_LONG).show();
            view.checksharredpreference();
             view.finishActivity();
         } else {
@@ -54,13 +54,13 @@ public class SplashPresenter implements SplashInterface.presenter {
         call.enqueue(new Callback<TockenReturn>() {
             @Override
             public void onResponse(Call<TockenReturn> call, Response<TockenReturn> response) {
-                Toast.makeText(mcontext, " success ", Toast.LENGTH_LONG).show();
+//                Toast.makeText(mcontext, " success ", Toast.LENGTH_LONG).show();
                 String tocken = "";
                 if (response.body() != null) {
                     tocken = response.body().getTocken();
                     Log.i("tocken", tocken);
                 } else {
-                    Toast.makeText(mcontext, "Please Connect To The Internet To Get Last Posts", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(mcontext, "Please Connect To The Internet To Get Last Posts", Toast.LENGTH_LONG).show();
                 }
                 SharedPreferences pref = mcontext.getSharedPreferences("PersonToken", 0); // 0 - for private mode
                 SharedPreferences.Editor editor = pref.edit();
@@ -73,7 +73,7 @@ public class SplashPresenter implements SplashInterface.presenter {
 
             @Override
             public void onFailure(Call<TockenReturn> call, Throwable t) {
-                Toast.makeText(mcontext, "Splash Presenter On Failer Method", Toast.LENGTH_LONG).show();
+//                Toast.makeText(mcontext, "Splash Presenter On Failer Method", Toast.LENGTH_LONG).show();
             }
         });
     }
