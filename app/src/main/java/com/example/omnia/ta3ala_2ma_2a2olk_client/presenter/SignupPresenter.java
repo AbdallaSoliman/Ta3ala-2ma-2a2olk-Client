@@ -67,7 +67,7 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-//                    Toast.makeText(mcontext, "Register succesful ", Toast.LENGTH_LONG).show();
+                   Toast.makeText(mcontext, "Register succesful ", Toast.LENGTH_LONG).show();
                     int id = response.body().getPersonId();
                     registerTaUser(id, mcontext);
                     if (response.body().getEmail() == null || response.body().getUsername() == null) {
@@ -82,7 +82,7 @@ public class SignupPresenter implements RegisterMvpInterface.presenter {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-//                Toast.makeText(mcontext, "Register failed ", Toast.LENGTH_LONG).show();
+                Toast.makeText(mcontext, "Register failed ", Toast.LENGTH_LONG).show();
                 String message = t.getMessage();
                 Log.d("failure", message);
 

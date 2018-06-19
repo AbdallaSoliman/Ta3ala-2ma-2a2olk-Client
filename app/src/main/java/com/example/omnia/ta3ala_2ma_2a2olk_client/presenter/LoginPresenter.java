@@ -103,7 +103,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
 
                 } else {
 //                    Toast.makeText(mcontext, "no response ....", Toast.LENGTH_LONG).show();
-//                    Toast.makeText(mcontext, "FAILED TO LOGIN", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mcontext, "FAILED TO LOGIN", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -239,7 +239,7 @@ public class LoginPresenter implements LoginMvpInterface.presenter {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-//                Toast.makeText(mcontext, "Login failed ", Toast.LENGTH_LONG).show();
+                Toast.makeText(mcontext, "FAILED TO LOGIN ", Toast.LENGTH_LONG).show();
                 String message = t.getMessage();
                 Log.d("failure", message);
 //                Toast.makeText(mcontext, message, Toast.LENGTH_LONG).show();
