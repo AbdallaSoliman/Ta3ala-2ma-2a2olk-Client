@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -80,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        //abdalla start
+        mViewPager.setCurrentItem(0);
+        //abdalla end
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -393,5 +397,19 @@ protected void onResume() {
     searchView.setQuery("", false);
     mViewPager.requestFocus();
 }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //abdalla start
+        mViewPager.setCurrentItem(0);
+        //abdalla end
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mViewPager.setCurrentItem(0);
+    }
     //abdalla end
 }
